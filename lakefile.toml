@@ -1,0 +1,42 @@
+name = "elementary_number_theory_lean"
+version = "0.1.0"
+defaultTargets = ["NTKB", "Challenge_HardyWright", "Solution_HardyWright", "Challenge_IrelandRosen",
+  "Solution_IrelandRosen", "Challenge_SpecialValues", "Solution_SpecialValues"]
+
+[leanOptions]
+pp.unicode.fun = true
+autoImplicit = false
+
+# Mathlib only, prebuilt from its cache. Pinned to the Mathlib commit of Tau Ceti's main branch at 2026-11-07
+# (the commit of modular-forms-lean v0.1.0), so that short Tau Ceti arguments could be ported with credit.
+[[require]]
+name = "mathlib"
+git = "https://github.com/leanprover-community/mathlib4"
+rev = "1b1ccf4b088b32fa3f23f2de1127433254a81e1e"
+
+[[lean_lib]]
+name = "NTKB"
+
+[[lean_lib]]
+name = "Challenge_HardyWright"
+roots = ["Challenge_HardyWright"]
+
+[[lean_lib]]
+name = "Solution_HardyWright"
+roots = ["Solution_HardyWright"]
+
+[[lean_lib]]
+name = "Challenge_IrelandRosen"
+roots = ["Challenge_IrelandRosen"]
+
+[[lean_lib]]
+name = "Solution_IrelandRosen"
+roots = ["Solution_IrelandRosen"]
+
+[[lean_lib]]
+name = "Challenge_SpecialValues"
+roots = ["Challenge_SpecialValues"]
+
+[[lean_lib]]
+name = "Solution_SpecialValues"
+roots = ["Solution_SpecialValues"]

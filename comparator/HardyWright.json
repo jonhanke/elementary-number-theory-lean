@@ -1,0 +1,21 @@
+{
+  "challenge_module": "Challenge_HardyWright",
+  "solution_module": "Solution_HardyWright",
+  "theorem_names": [
+    "NTKB.Headlines.HardyWright.complex_euclidean_quadratic_fields",
+    "NTKB.Headlines.HardyWright.cube_add_cube_eq_three_mul_cube",
+    "NTKB.Headlines.HardyWright.jacobi_triple_product",
+    "NTKB.Headlines.HardyWright.ramanujan_five",
+    "NTKB.Headlines.HardyWright.ramanujan_seven",
+    "NTKB.Headlines.HardyWright.rogers_ramanujan_one",
+    "NTKB.Headlines.HardyWright.rogers_ramanujan_two",
+    "NTKB.Headlines.HardyWright.jacobi_four_squares"
+  ],
+  "definition_names": [],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "enable_nanoda": true
+}
