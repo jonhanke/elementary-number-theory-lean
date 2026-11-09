@@ -1,0 +1,18 @@
+{
+  "challenge_module": "Challenge_IrelandRosen",
+  "solution_module": "Solution_IrelandRosen",
+  "theorem_names": [
+    "NTKB.Headlines.IrelandRosen.hasse_davenport",
+    "NTKB.Headlines.IrelandRosen.biquadratic_reciprocity",
+    "NTKB.Headlines.IrelandRosen.gauss_last_entry",
+    "NTKB.Headlines.IrelandRosen.legendre",
+    "NTKB.Headlines.IrelandRosen.sophie_germain"
+  ],
+  "definition_names": [],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "enable_nanoda": true
+}

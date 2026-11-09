@@ -1,0 +1,31 @@
+{
+  "description": "One lake comparator check per book (a combined check of all headlines needs far more memory). Run one book with: ./scripts/verify-comparator.sh <book>. Each entry's config is a complete lake comparator configuration.",
+  "books": [
+    {
+      "book": "HardyWright",
+      "config": "comparator/HardyWright.json",
+      "challenge_module": "Challenge_HardyWright",
+      "solution_module": "Solution_HardyWright",
+      "theorems": 8
+    },
+    {
+      "book": "IrelandRosen",
+      "config": "comparator/IrelandRosen.json",
+      "challenge_module": "Challenge_IrelandRosen",
+      "solution_module": "Solution_IrelandRosen",
+      "theorems": 5
+    },
+    {
+      "book": "SpecialValues",
+      "config": "comparator/SpecialValues.json",
+      "challenge_module": "Challenge_SpecialValues",
+      "solution_module": "Solution_SpecialValues",
+      "theorems": 3
+    }
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ]
+}

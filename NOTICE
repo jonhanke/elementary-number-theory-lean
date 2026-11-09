@@ -1,0 +1,14 @@
+Copyright 2026 Jonathan Hanke
+
+This product is licensed under the Apache License, Version 2.0 (see LICENSE).
+
+It depends on Mathlib (https://github.com/leanprover-community/mathlib4), licensed under the Apache License,
+Version 2.0, as a Lake dependency.
+
+It contains code copied or adapted, with credit, from:
+- Tau Ceti (https://github.com/TauCetiProject/TauCeti, main d2083f0f), Apache License 2.0: NTKB/Port/
+  (QuarticJacobiSum.lean), and lemmas in NTKB/Elementary/SpecialValues/GeneralizedBernoulli.lean and
+  NTKB/Elementary/SpecialValues/QuadraticGaussSum.lean;
+- Mathlib, Apache License 2.0: the descent step of NTKB/Elementary/HardyWright/QuadraticFields/CubeDescent.lean is
+  adapted from Mathlib/NumberTheory/FLT/Three.lean.
+Each such file's header names its source, its authors and the changes made.

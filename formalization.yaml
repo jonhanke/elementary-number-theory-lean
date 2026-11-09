@@ -1,0 +1,197 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+version: "v0.4"
+
+project:
+  name: "elementary-number-theory-lean (NTKB): elementary number theory"
+  description: >-
+    A Lean 4 + Mathlib formalization of two texts of elementary number theory, item by item: Hardy and Wright's An
+    Introduction to the Theory of Numbers (6th edition) and Ireland and Rosen's A Classical Introduction to Modern
+    Number Theory (Chapters 1 to 11, 15 and 16, and part of Chapter 17), with the special values of Dirichlet
+    L-functions at the integers. Principal results: the five complex Euclidean quadratic fields; x^3 + y^3 = 3z^3;
+    Jacobi's triple product, Ramanujan's congruences modulo 5 and 7 and the Rogers-Ramanujan identities; Jacobi's
+    four-square theorem; the Hasse-Davenport relation; biquadratic reciprocity; Gauss's last entry; Legendre's
+    theorem on ax^2 + by^2 + cz^2 = 0; Sophie Germain's theorem; L(1 - k, chi) = -B_{k,chi}/k for every Dirichlet
+    character and L(k, chi) through Gauss sums; Gauss's sign of the quadratic Gauss sum for every fundamental
+    discriminant. Each result of the books is mapped to its Lean declaration and status in docs/results/books/,
+    which also credits the results proved here that Mathlib, Tau Ceti or PrimeNumberTheoremAnd also prove.
+  authors:
+    - "Jonathan Hanke"
+  license: "Apache-2.0"
+  responsible_maintainers:
+    - "Jonathan Hanke"
+
+classification:
+  arxiv: ["math.NT"]
+  # 11-XX number theory: 11A elementary number theory; 11P partitions; 11E25 sums of squares; 11T24 Gauss and Jacobi
+  # sums; 11A15 power residues and reciprocity; 11M06 Dirichlet L-functions; 11B68 Bernoulli numbers;
+  # 11D Diophantine equations; 11R11 quadratic fields; 03B35 mechanization of proofs and logical operations.
+  msc2020: ["11A15", "11P83", "11E25", "11T24", "11M06", "11B68", "11D25", "11R11", "03B35"]
+
+sources:
+  - title: "An Introduction to the Theory of Numbers (6th edition)"
+    authors:
+      - "G. H. Hardy"
+      - "E. M. Wright"
+    type: "book"
+    location: "Oxford University Press, 2008 (revised by D. R. Heath-Brown and J. H. Silverman); every result mapped in docs/results/books/hardy-wright.md"
+    relationship: "formalizes"
+    author_endorsement: "n/a"
+  - title: "A Classical Introduction to Modern Number Theory (2nd edition)"
+    authors:
+      - "Kenneth Ireland"
+      - "Michael Rosen"
+    type: "book"
+    location: "Springer, 1990; Chapters 1-11, 15, 16 and the results of Chapter 17 proved here, mapped in docs/results/books/ireland-rosen.md"
+    relationship: "formalizes"
+    author_endorsement: "n/a"
+  - title: "Introduction to Cyclotomic Fields (2nd edition), Chapter 4"
+    authors:
+      - "Lawrence C. Washington"
+    type: "book"
+    location: "Springer, 1997; the values of Dirichlet L-functions, docs/results/books/special-values.md [locators of Chapter 4 unverified]"
+    relationship: "formalizes"
+    author_endorsement: "n/a"
+  - title: "Further references"
+    type: "bibliography"
+    location: "references.bib in this repository; each result is tagged with @[kb \"<key>\" \"<locator>\"]"
+    relationship: "background"
+
+related_formalizations:
+  - id: "https://github.com/leanprover-community/mathlib4"
+    relationship: "builds-on"
+    note: "Built on Mathlib at commit 1b1ccf4. docs/results/comparison.md says what each headline adds to Mathlib master (df6966d, 2026-11-07)."
+  - id: "https://github.com/TauCetiProject/TauCeti"
+    relationship: "related"
+    note: >-
+      Not a dependency. A few files are ported from Tau Ceti with credit (NTKB/Port/ and parts of
+      NTKB/Elementary/SpecialValues/: generalized Bernoulli numbers, the Gauss sum identities of primitive
+      characters, the evaluation of the quadratic Gauss sum by theta functions, the Jacobi sum of a quartic
+      character). docs/results/comparison.md compares each headline with Tau Ceti main (d2083f0f).
+  - id: "https://github.com/AlexKontorovich/PrimeNumberTheoremAnd"
+    relationship: "related"
+    note: "Not a dependency. It proves the prime number theorem analytically; this library proves it by the elementary method of Hardy-Wright, Chapter XXII (not a headline)."
+  - id: "https://github.com/jonhanke/algebraic-number-theory-lean"
+    relationship: "related"
+    note: "Independent (different Mathlib). It proves Eisenstein reciprocity (Ireland-Rosen, Chapter 14, outside this release)."
+
+status:
+  scope: >-
+    Formalized (the 16 statements of the Challenge_<book>.lean files, proved in the Solution_<book>.lean files):
+    Hardy-Wright 8 (Theorems 246, 232, 352, 359, 360, 362, 363, 386), Ireland-Rosen 5 (Chapter 11 section 3
+    Theorem 1, Chapter 9 section 9 Theorem 2, the theorem of Chapter 11 section 5, Propositions 17.3.1 and 17.4.1),
+    special values 3. The book maps give the status of every result. One named statement is assumed in one theorem
+    (the abc conjecture, in the notes to Chapter XIII of Hardy-Wright); no headline depends on it.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  # No custom axioms; the standard axioms used (checked by scripts/check_axioms.lean and lake comparator):
+  axioms: ["propext", "Classical.choice", "Quot.sound"]
+
+automation:
+  methods:
+    - method: "agent"
+      models: ["Claude Opus 5.5", "Claude Sonnet 5.5"]
+      framework: "Claude Code"
+      tool_setup: >-
+        Claude Code orchestrating parallel agents, each in its own git branch, with Lean kernel builds (lake build)
+        as the check and pull requests merged into the main branch; human direction throughout.
+      prompting_notes: >-
+        Human-chosen books and results; agents worked item by item from coverage tables of each book, with
+        written notes passed between sessions. Cited results that are not proved are named Lean structures, never
+        assumed silently; a kernel-level audit decides which are proved.
+  notes: >-
+    Jonathan Hanke designed and directed the project; the Lean code was written almost entirely by Claude Opus 5.5,
+    with a share by Claude Sonnet 5.5, in October and November 2026. All proofs are checked by the Lean kernel; the
+    headline statements are collected in the Challenge_<book>.lean files for human review.
+
+fidelity:
+  divergences: >-
+    (1) Five statements of Hardy-Wright are false as printed (Theorems 20, 268, 269, the identity (13.7.11) and the
+    abc conjecture in the notes to Chapter XIII); the library refutes the printed form and proves the corrected
+    one (README, Corrections to the books). (2) Series and products identities (Theorems 352, 362, 363) are stated
+    for complex x with |x| < 1, as HasProd and tsum. (3) Theorem 246 is stated with Hardy-Wright's property (E)
+    (norm-Euclidean), for squarefree m < 0, in Mathlib's QuadraticAlgebra Q m 0. (4) L(s, chi) is Mathlib's
+    DirichletCharacter.LFunction, the L-function at the level N of chi (Euler factors at p dividing N removed for
+    imprimitive chi); B_{n,chi} uses Washington's convention (B_1 = +1/2 for the character modulo 1).
+    (5) Literature locators marked "locator unverified" have not been checked against the sources; the book maps'
+    one-line statements are paraphrases.
+
+review:
+  status: "not yet reviewed: the 16 headline statements of the Challenge_<book>.lean files and the definitions they use have not yet been reviewed by a human"
+  reviewers: []
+  notes: >-
+    The headline statements and the definitions they use have not yet been reviewed by a human; that review is
+    planned. The rest of the library has not been reviewed by a human, and there has been no external review. Lean
+    checks the proofs; lake comparator checks, one book at a time, that each Solution_<book>.lean proves exactly
+    the Challenge_<book>.lean statements using only the standard axioms.
+
+alignment:
+  namespace: "NTKB"
+  statements:
+    - source: "Hardy-Wright, Theorem 246"
+      lean: "NTKB.Headlines.HardyWright.complex_euclidean_quadratic_fields"
+      module: "Challenge_HardyWright / Solution_HardyWright"
+      status: "proved"
+    - source: "Hardy-Wright, Theorem 232"
+      lean: "NTKB.Headlines.HardyWright.cube_add_cube_eq_three_mul_cube"
+      module: "Challenge_HardyWright / Solution_HardyWright"
+      status: "proved"
+    - source: "Hardy-Wright, Theorem 352"
+      lean: "NTKB.Headlines.HardyWright.jacobi_triple_product"
+      module: "Challenge_HardyWright / Solution_HardyWright"
+      status: "proved"
+    - source: "Hardy-Wright, Theorem 359"
+      lean: "NTKB.Headlines.HardyWright.ramanujan_five"
+      module: "Challenge_HardyWright / Solution_HardyWright"
+      status: "proved"
+    - source: "Hardy-Wright, Theorem 360"
+      lean: "NTKB.Headlines.HardyWright.ramanujan_seven"
+      module: "Challenge_HardyWright / Solution_HardyWright"
+      status: "proved"
+    - source: "Hardy-Wright, Theorem 362"
+      lean: "NTKB.Headlines.HardyWright.rogers_ramanujan_one"
+      module: "Challenge_HardyWright / Solution_HardyWright"
+      status: "proved"
+    - source: "Hardy-Wright, Theorem 363"
+      lean: "NTKB.Headlines.HardyWright.rogers_ramanujan_two"
+      module: "Challenge_HardyWright / Solution_HardyWright"
+      status: "proved"
+    - source: "Hardy-Wright, Theorem 386"
+      lean: "NTKB.Headlines.HardyWright.jacobi_four_squares"
+      module: "Challenge_HardyWright / Solution_HardyWright"
+      status: "proved"
+    - source: "Ireland-Rosen, Chapter 11, section 3, Theorem 1 (Hasse-Davenport)"
+      lean: "NTKB.Headlines.IrelandRosen.hasse_davenport"
+      module: "Challenge_IrelandRosen / Solution_IrelandRosen"
+      status: "proved"
+    - source: "Ireland-Rosen, Chapter 9, section 9, Theorem 2 (biquadratic reciprocity)"
+      lean: "NTKB.Headlines.IrelandRosen.biquadratic_reciprocity"
+      module: "Challenge_IrelandRosen / Solution_IrelandRosen"
+      status: "proved"
+    - source: "Ireland-Rosen, Chapter 11, section 5 (Gauss's last entry)"
+      lean: "NTKB.Headlines.IrelandRosen.gauss_last_entry"
+      module: "Challenge_IrelandRosen / Solution_IrelandRosen"
+      status: "proved"
+    - source: "Ireland-Rosen, Proposition 17.3.1 (Legendre)"
+      lean: "NTKB.Headlines.IrelandRosen.legendre"
+      module: "Challenge_IrelandRosen / Solution_IrelandRosen"
+      status: "proved"
+    - source: "Ireland-Rosen, Proposition 17.4.1 (Sophie Germain)"
+      lean: "NTKB.Headlines.IrelandRosen.sophie_germain"
+      module: "Challenge_IrelandRosen / Solution_IrelandRosen"
+      status: "proved"
+    - source: "Washington, Theorem 4.2"
+      lean: "NTKB.Headlines.SpecialValues.LFunction_one_sub_nat"
+      module: "Challenge_SpecialValues / Solution_SpecialValues"
+      status: "proved"
+    - source: "Washington, Chapter 4 (L(k, chi) for primitive chi) [locator unverified]"
+      lean: "NTKB.Headlines.SpecialValues.LFunction_natCast"
+      module: "Challenge_SpecialValues / Solution_SpecialValues"
+      status: "proved"
+    - source: "Ireland-Rosen, Chapter 6, section 4 and Chapter 16 (Gauss sums of quadratic characters)"
+      lean: "NTKB.Headlines.SpecialValues.gaussSum_kroneckerChar"
+      module: "Challenge_SpecialValues / Solution_SpecialValues"
+      status: "proved"
+
+acknowledgements: >-
+  Mathlib and its contributors; the Tau Ceti contributors, some of whose proofs are ported here with credit; the
+  Lean FRO for Lean, Lake and lake comparator; Claude Code (Anthropic).

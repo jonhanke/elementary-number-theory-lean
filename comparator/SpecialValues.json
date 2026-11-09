@@ -1,0 +1,16 @@
+{
+  "challenge_module": "Challenge_SpecialValues",
+  "solution_module": "Solution_SpecialValues",
+  "theorem_names": [
+    "NTKB.Headlines.SpecialValues.LFunction_one_sub_nat",
+    "NTKB.Headlines.SpecialValues.LFunction_natCast",
+    "NTKB.Headlines.SpecialValues.gaussSum_kroneckerChar"
+  ],
+  "definition_names": [],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "enable_nanoda": true
+}
