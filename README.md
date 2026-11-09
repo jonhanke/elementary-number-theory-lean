@@ -1,5 +1,7 @@
 # Elementary number theory in Lean 4
 
+[![Lean build](https://github.com/jonhanke/elementary-number-theory-lean/actions/workflows/build.yml/badge.svg)](https://github.com/jonhanke/elementary-number-theory-lean/actions/workflows/build.yml) [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24088043.svg)](https://doi.org/10.5281/zenodo.24088043)
+
 A Lean 4 library (built on Mathlib) that formalizes two texts of elementary number theory item by item: Hardy and
 Wright's *An Introduction to the Theory of Numbers* (6th edition) and Ireland and Rosen's *A Classical Introduction
 to Modern Number Theory* (Chapters 1 to 11, 15 and 16, and part of Chapter 17), together with the special values of
@@ -214,9 +216,9 @@ mis-formalizations are very welcome.
 
 ## Releases
 
-Releases are tagged with semantic versions; `main` continues to develop.
+Releases are tagged with semantic versions; `main` continues to develop. The DOI [10.5281/zenodo.24088043](https://doi.org/10.5281/zenodo.24088043) always resolves to the latest release. To cite a specific version, use its release page or the "Cite this repository" button.
 
-- **v0.1.0** (Lean v4.36.0-rc2, Mathlib `1b1ccf4`): the first release: the book maps of Hardy–Wright and
+- **[v0.1.0](https://github.com/jonhanke/elementary-number-theory-lean/releases/tag/v0.1.0)** (Lean v4.36.0-rc2, Mathlib `1b1ccf4`), archived on Zenodo as [doi:10.5281/zenodo.24088044](https://doi.org/10.5281/zenodo.24088044): the first release: the book maps of Hardy–Wright and
   Ireland–Rosen, the special values of Dirichlet $`L`$-functions, and the 16 headline statements above.
 
 **Not in this release** (planned for later releases): Niven, Zuckerman and Montgomery's *An Introduction to the
