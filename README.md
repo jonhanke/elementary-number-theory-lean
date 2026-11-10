@@ -260,7 +260,7 @@ Releases are tagged with semantic versions; `main` continues to develop. The DOI
 - **[v0.1.0](https://github.com/jonhanke/elementary-number-theory-lean/releases/tag/v0.1.0)** (Lean v4.36.0-rc2, Mathlib `1b1ccf4`), archived on Zenodo as [doi:10.5281/zenodo.24088044](https://doi.org/10.5281/zenodo.24088044): the first release: the book maps of Hardy–Wright and
   Ireland–Rosen, the special values of Dirichlet $`L`$-functions, and 16 headline statements (those of Hardy–Wright,
   Ireland–Rosen and the special values above).
-- **v0.2.0** (Lean v4.36.0-rc2, Mathlib `1b1ccf4`): Niven, Zuckerman and Montgomery's *An Introduction to the
+- **[v0.2.0](https://github.com/jonhanke/elementary-number-theory-lean/releases/tag/v0.2.0)** (Lean v4.36.0-rc2, Mathlib `1b1ccf4`), archived on Zenodo as [doi:10.5281/zenodo.24117540](https://doi.org/10.5281/zenodo.24117540): Niven, Zuckerman and Montgomery's *An Introduction to the
   Theory of Numbers* as the third book: its book map (406 results: 194 proved, 4 proved in part, 191 in Mathlib) and 10 new headline statements
   (`Challenge_NivenZuckermanMontgomery.lean`); refreshed maps of Hardy–Wright and Ireland–Rosen
   (32 more rows linked to theorems of the library: Hardy–Wright 279 proved and 14 in part, was 266 and 9;
