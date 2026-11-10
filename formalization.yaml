@@ -4,15 +4,19 @@ version: "v0.4"
 project:
   name: "elementary-number-theory-lean (NTKB): elementary number theory"
   description: >-
-    A Lean 4 + Mathlib formalization of two texts of elementary number theory, item by item: Hardy and Wright's An
-    Introduction to the Theory of Numbers (6th edition) and Ireland and Rosen's A Classical Introduction to Modern
-    Number Theory (Chapters 1 to 11, 15 and 16, and part of Chapter 17), with the special values of Dirichlet
-    L-functions at the integers. Principal results: the five complex Euclidean quadratic fields; x^3 + y^3 = 3z^3;
+    A Lean 4 + Mathlib formalization of three texts of elementary number theory, item by item: Hardy and Wright's An
+    Introduction to the Theory of Numbers (6th edition), Ireland and Rosen's A Classical Introduction to Modern
+    Number Theory (Chapters 1 to 11, 15 and 16, and part of Chapter 17) and Niven, Zuckerman and Montgomery's An
+    Introduction to the Theory of Numbers (5th edition), with the special values of Dirichlet L-functions at the
+    integers. Principal results: the five complex Euclidean quadratic fields; x^3 + y^3 = 3z^3;
     Jacobi's triple product, Ramanujan's congruences modulo 5 and 7 and the Rogers-Ramanujan identities; Jacobi's
     four-square theorem; the Hasse-Davenport relation; biquadratic reciprocity; Gauss's last entry; Legendre's
     theorem on ax^2 + by^2 + cz^2 = 0; Sophie Germain's theorem; L(1 - k, chi) = -B_{k,chi}/k for every Dirichlet
     character and L(k, chi) through Gauss sums; Gauss's sign of the quadratic Gauss sum for every fundamental
-    discriminant. Each result of the books is mapped to its Lean declaration and status in docs/results/books/,
+    discriminant; proper representations by binary quadratic forms; the local-global principle for linear systems;
+    the integral points of x^4 + x^3 + x^2 + x + 1 = y^2 and the rational points of y^2 = x^3 - 4x; Galois's theorem
+    on purely periodic continued fractions; the convergents and x^2 - dy^2 = N; the maximal order of omega(n);
+    bounds for the partition function; sums of two squarefree numbers; Mann's alpha + beta theorem. Each result of the books is mapped to its Lean declaration and status in docs/results/books/,
     which also credits the results proved here that Mathlib, Tau Ceti or PrimeNumberTheoremAnd also prove.
   authors:
     - "Jonathan Hanke"
@@ -24,8 +28,9 @@ classification:
   arxiv: ["math.NT"]
   # 11-XX number theory: 11A elementary number theory; 11P partitions; 11E25 sums of squares; 11T24 Gauss and Jacobi
   # sums; 11A15 power residues and reciprocity; 11M06 Dirichlet L-functions; 11B68 Bernoulli numbers;
-  # 11D Diophantine equations; 11R11 quadratic fields; 03B35 mechanization of proofs and logical operations.
-  msc2020: ["11A15", "11P83", "11E25", "11T24", "11M06", "11B68", "11D25", "11R11", "03B35"]
+  # 11D Diophantine equations; 11R11 quadratic fields; 11A55 continued fractions; 11B13 additive bases
+  # (Schnirelmann density); 11E16 binary quadratic forms; 11N37 asymptotic results on arithmetic functions; 03B35 mechanization of proofs and logical operations.
+  msc2020: ["11A15", "11P83", "11E25", "11T24", "11M06", "11B68", "11D25", "11R11", "11A55", "11B13", "11E16", "11N37", "03B35"]
 
 sources:
   - title: "An Introduction to the Theory of Numbers (6th edition)"
@@ -42,6 +47,15 @@ sources:
       - "Michael Rosen"
     type: "book"
     location: "Springer, 1990; Chapters 1-11, 15, 16 and the results of Chapter 17 proved here, mapped in docs/results/books/ireland-rosen.md"
+    relationship: "formalizes"
+    author_endorsement: "n/a"
+  - title: "An Introduction to the Theory of Numbers (5th edition)"
+    authors:
+      - "Ivan Niven"
+      - "Herbert S. Zuckerman"
+      - "Hugh L. Montgomery"
+    type: "book"
+    location: "Wiley, 1991; every result mapped in docs/results/books/niven-zuckerman-montgomery.md"
     relationship: "formalizes"
     author_endorsement: "n/a"
   - title: "Introduction to Cyclotomic Fields (2nd edition), Chapter 4"
@@ -76,9 +90,10 @@ related_formalizations:
 
 status:
   scope: >-
-    Formalized (the 16 statements of the Challenge_<book>.lean files, proved in the Solution_<book>.lean files):
+    Formalized (the 26 statements of the Challenge_<book>.lean files, proved in the Solution_<book>.lean files):
     Hardy-Wright 8 (Theorems 246, 232, 352, 359, 360, 362, 363, 386), Ireland-Rosen 5 (Chapter 11 section 3
     Theorem 1, Chapter 9 section 9 Theorem 2, the theorem of Chapter 11 section 5, Propositions 17.3.1 and 17.4.1),
+    Niven-Zuckerman-Montgomery 10 (Theorems 3.13, 5.2, 5.9, 5.24, 7.20, 7.24, 8.30, 10.12, 11.2, 11.10),
     special values 3. The book maps give the status of every result. One named statement is assumed in one theorem
     (the abc conjecture, in the notes to Chapter XIII of Hardy-Wright); no headline depends on it.
   sorry_count: 0
@@ -112,11 +127,12 @@ fidelity:
     (norm-Euclidean), for squarefree m < 0, in Mathlib's QuadraticAlgebra Q m 0. (4) L(s, chi) is Mathlib's
     DirichletCharacter.LFunction, the L-function at the level N of chi (Euler factors at p dividing N removed for
     imprimitive chi); B_{n,chi} uses Washington's convention (B_1 = +1/2 for the character modulo 1).
-    (5) Literature locators marked "locator unverified" have not been checked against the sources; the book maps'
+    (5) Niven-Zuckerman-Montgomery Theorem 3.13 is stated with the form written out by its coefficients, and the two
+    halves of Theorem 8.30 as one statement; Theorem 10.12 is stated for n >= 4. (6) Literature locators marked "locator unverified" have not been checked against the sources; the book maps'
     one-line statements are paraphrases.
 
 review:
-  status: "not yet reviewed: the 16 headline statements of the Challenge_<book>.lean files and the definitions they use have not yet been reviewed by a human"
+  status: "not yet reviewed: the 26 headline statements of the Challenge_<book>.lean files and the definitions they use have not yet been reviewed by a human"
   reviewers: []
   notes: >-
     The headline statements and the definitions they use have not yet been reviewed by a human; that review is
@@ -178,6 +194,46 @@ alignment:
     - source: "Ireland-Rosen, Proposition 17.4.1 (Sophie Germain)"
       lean: "NTKB.Headlines.IrelandRosen.sophie_germain"
       module: "Challenge_IrelandRosen / Solution_IrelandRosen"
+      status: "proved"
+    - source: "Niven-Zuckerman-Montgomery, Theorem 3.13"
+      lean: "NTKB.Headlines.NivenZuckermanMontgomery.proper_representation_iff"
+      module: "Challenge_NivenZuckermanMontgomery / Solution_NivenZuckermanMontgomery"
+      status: "proved"
+    - source: "Niven-Zuckerman-Montgomery, Theorem 5.2"
+      lean: "NTKB.Headlines.NivenZuckermanMontgomery.linear_system_local_global"
+      module: "Challenge_NivenZuckermanMontgomery / Solution_NivenZuckermanMontgomery"
+      status: "proved"
+    - source: "Niven-Zuckerman-Montgomery, Theorem 5.9"
+      lean: "NTKB.Headlines.NivenZuckermanMontgomery.quartic_eq_square"
+      module: "Challenge_NivenZuckermanMontgomery / Solution_NivenZuckermanMontgomery"
+      status: "proved"
+    - source: "Niven-Zuckerman-Montgomery, Theorem 5.24"
+      lean: "NTKB.Headlines.NivenZuckermanMontgomery.rational_points_y_sq_eq_x_cube_sub_four_x"
+      module: "Challenge_NivenZuckermanMontgomery / Solution_NivenZuckermanMontgomery"
+      status: "proved"
+    - source: "Niven-Zuckerman-Montgomery, Theorem 7.20 (Galois)"
+      lean: "NTKB.Headlines.NivenZuckermanMontgomery.galois_purely_periodic"
+      module: "Challenge_NivenZuckermanMontgomery / Solution_NivenZuckermanMontgomery"
+      status: "proved"
+    - source: "Niven-Zuckerman-Montgomery, Theorem 7.24"
+      lean: "NTKB.Headlines.NivenZuckermanMontgomery.eq_convergent_of_sq_sub_mul_sq"
+      module: "Challenge_NivenZuckermanMontgomery / Solution_NivenZuckermanMontgomery"
+      status: "proved"
+    - source: "Niven-Zuckerman-Montgomery, Theorem 8.30"
+      lean: "NTKB.Headlines.NivenZuckermanMontgomery.omega_maximal_order"
+      module: "Challenge_NivenZuckermanMontgomery / Solution_NivenZuckermanMontgomery"
+      status: "proved"
+    - source: "Niven-Zuckerman-Montgomery, Theorem 10.12"
+      lean: "NTKB.Headlines.NivenZuckermanMontgomery.partition_bounds"
+      module: "Challenge_NivenZuckermanMontgomery / Solution_NivenZuckermanMontgomery"
+      status: "proved"
+    - source: "Niven-Zuckerman-Montgomery, Theorem 11.2"
+      lean: "NTKB.Headlines.NivenZuckermanMontgomery.exists_squarefree_add"
+      module: "Challenge_NivenZuckermanMontgomery / Solution_NivenZuckermanMontgomery"
+      status: "proved"
+    - source: "Niven-Zuckerman-Montgomery, Theorem 11.10 (Mann)"
+      lean: "NTKB.Headlines.NivenZuckermanMontgomery.mann_alpha_beta"
+      module: "Challenge_NivenZuckermanMontgomery / Solution_NivenZuckermanMontgomery"
       status: "proved"
     - source: "Washington, Theorem 4.2"
       lean: "NTKB.Headlines.SpecialValues.LFunction_one_sub_nat"

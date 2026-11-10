@@ -21,6 +21,13 @@
       "challenge_module": "Challenge_SpecialValues",
       "solution_module": "Solution_SpecialValues",
       "theorems": 3
+    },
+    {
+      "book": "NivenZuckermanMontgomery",
+      "config": "comparator/NivenZuckermanMontgomery.json",
+      "challenge_module": "Challenge_NivenZuckermanMontgomery",
+      "solution_module": "Solution_NivenZuckermanMontgomery",
+      "theorems": 10
     }
   ],
   "permitted_axioms": [

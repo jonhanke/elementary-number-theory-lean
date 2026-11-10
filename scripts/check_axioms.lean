@@ -1,6 +1,7 @@
 import Solution_HardyWright
 import Solution_IrelandRosen
 import Solution_SpecialValues
+import Solution_NivenZuckermanMontgomery
 
 /-! Axioms of the headline theorems (run in CI): each must depend only on `propext`, `Classical.choice` and
 `Quot.sound`. -/
@@ -21,3 +22,13 @@ import Solution_SpecialValues
 #print axioms NTKB.Headlines.SpecialValues.LFunction_one_sub_nat
 #print axioms NTKB.Headlines.SpecialValues.LFunction_natCast
 #print axioms NTKB.Headlines.SpecialValues.gaussSum_kroneckerChar
+#print axioms NTKB.Headlines.NivenZuckermanMontgomery.proper_representation_iff
+#print axioms NTKB.Headlines.NivenZuckermanMontgomery.linear_system_local_global
+#print axioms NTKB.Headlines.NivenZuckermanMontgomery.quartic_eq_square
+#print axioms NTKB.Headlines.NivenZuckermanMontgomery.rational_points_y_sq_eq_x_cube_sub_four_x
+#print axioms NTKB.Headlines.NivenZuckermanMontgomery.galois_purely_periodic
+#print axioms NTKB.Headlines.NivenZuckermanMontgomery.eq_convergent_of_sq_sub_mul_sq
+#print axioms NTKB.Headlines.NivenZuckermanMontgomery.omega_maximal_order
+#print axioms NTKB.Headlines.NivenZuckermanMontgomery.partition_bounds
+#print axioms NTKB.Headlines.NivenZuckermanMontgomery.exists_squarefree_add
+#print axioms NTKB.Headlines.NivenZuckermanMontgomery.mann_alpha_beta

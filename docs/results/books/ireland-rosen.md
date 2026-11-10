@@ -2,7 +2,7 @@
 
 Each row is a result of the book, the Lean declarations that formalize it, and its status, computed from the Lean kernel (an audit of the axioms and hypotheses of every declaration): *proved* means proved with only the standard axioms and no unproved input; *proved in part* that a part, a special case or one instance is proved; *proved, conditional* that an unproved input (a named statement) is assumed; *refuted as stated in the book* that the library proves the printed statement false and proves a corrected form (see the errata in the README); *in Mathlib* that Mathlib (a dependency) has the result and the Lean name is Mathlib's. Results that are only in Tau Ceti or PrimeNumberTheoremAnd (which this library does not depend on) are marked so. The statements in the third column are short descriptions, not quotations; read the book for the exact wording. The column *Also in* credits other libraries: Mathlib, Tau Ceti or PrimeNumberTheoremAnd declarations that prove the result, a part of it, or a closely related statement (as recorded by the coverage audit). Pages are pages of the pdf file. This release maps Chapters 1 to 11, 15 and 16, and the results of Chapter 17 proved here; Chapters 12 to 14 and 18 to 20 are outside it.
 
-Rows: 401. in Mathlib: 178; proved: 109; not formalized: 54; partly in other libraries; not proved here: 42; in Tau Ceti only (not a dependency): 13; proved in part: 3; in PrimeNumberTheoremAnd only (not a dependency): 2. Proved here and also in another library: 42.
+Rows: 401. in Mathlib: 178; proved: 120; not formalized: 52; partly in other libraries; not proved here: 34; in Tau Ceti only (not a dependency): 11; proved in part: 5; in PrimeNumberTheoremAnd only (not a dependency): 1. Proved here and also in another library: 53.
 
 
 ## Chapter 1: Unique Factorization
@@ -50,7 +50,7 @@ Rows: 401. in Mathlib: 178; proved: 109; not formalized: 54; partly in other lib
 | Theorem 3 | 23 | In a PID with a chosen set S of representatives of primes up to associates, every nonzero a is a unit times prod p^e(p), uniquely, e(p) = ord_p a | `UniqueFactorizationMonoid.factors_unique`, `PrincipalIdealRing.to_uniqueFactorizationMonoid`, `UniqueFactorizationMonoid.factorization` | in Mathlib |  |
 | Proposition 1.4.1 | 23 | Z[i] is a Euclidean domain (norm a^2 + b^2) | `GaussianInt` | in Mathlib |  |
 | unnumbered, ring of Gaussian integers | 24 | Z[i] is called the ring of Gaussian integers (Notes) | `GaussianInt` | in Mathlib |  |
-| Proposition 1.4.2 | 24 | Z[omega] (omega a primitive cube root of unity) is a Euclidean domain with norm a^2 - ab + b^2 | `IsCyclotomicExtension.Rat.three_pid` | partly in other libraries; not proved here |  |
+| Proposition 1.4.2 | 24 | Z[omega] (omega a primitive cube root of unity) is a Euclidean domain with norm a^2 - ab + b^2 | `NTKB.HardyWright.isNormEuclidean_iff_of_neg`, `NTKB.HardyWright.rho_round`, `NTKB.HardyWright.instEuclideanDomainRho` | proved | Mathlib: `IsCyclotomicExtension.Rat.three_pid` |
 | unnumbered, unique factorization domains | 24 | Rings with unique factorization into irreducibles are called UFD; PID implies UFD, the converse is false | `UniqueFactorizationMonoid`, `PrincipalIdealRing.to_uniqueFactorizationMonoid`, `Polynomial.uniqueFactorizationMonoid` | in Mathlib |  |
 
 ## Chapter 2: Applications of Unique Factorization
@@ -65,7 +65,7 @@ Rows: 401. in Mathlib: 178; proved: 109; not formalized: 54; partly in other lib
 | unnumbered, second proof of infinitely many primes via squarefree count | 29 | At most 2^l sqrt N integers up to N with finitely many primes, contradiction | `NTKB.IrelandRosen.infinite_setOf_prime_of_squarefree_count` | proved |  |
 | Proposition 2.2.2 | 30 | (a) nu(n) = prod (a_i + 1), (b) sigma(n) = prod (p_i^(a_i+1) - 1)/(p_i - 1) | `Nat.card_divisors`, `Nat.sum_divisors`, `ArithmeticFunction.sigma_one_apply_prime_pow`, `ArithmeticFunction.isMultiplicative_sigma`, `ArithmeticFunction.sigma_apply_prime_pow` | in Mathlib |  |
 | unnumbered, definition of perfect number | 30 | n is perfect if sigma(n) = 2n | `Nat.Perfect`, `Nat.perfect_iff_sum_divisors_eq_two_mul` | in Mathlib |  |
-| unnumbered, Euclid-Euler theorem on even perfect numbers | 30 | If 2^(m+1) - 1 is prime then 2^m(2^(m+1) - 1) is perfect; every even perfect number has this form (Euler) | — | not formalized |  |
+| unnumbered, Euclid-Euler theorem on even perfect numbers | 30 | If 2^(m+1) - 1 is prime then 2^m(2^(m+1) - 1) is perfect; every even perfect number has this form (Euler) | `NTKB.HardyWright.perfect_two_pow_mul_mersenne`, `NTKB.HardyWright.eq_two_pow_mul_mersenne_of_even_perfect` | proved |  |
 | unnumbered, Mersenne and Fermat primes | 30 | Primes 2^p - 1 are Mersenne primes; primes 2^(2^t) + 1 are Fermat primes | — | in Mathlib |  |
 | unnumbered, definition of multiplicatively perfect number | 30 | n is multiplicatively perfect if the product of its positive divisors is n^2; these are exactly p^3 and pq (p, q distinct primes) | — | not formalized |  |
 | unnumbered, definition of the Mobius function | 30 | mu(1) = 1, mu(n) = 0 if n not square-free, mu(p_1...p_r) = (-1)^r | `ArithmeticFunction.moebius`, `ArithmeticFunction.moebius_apply_of_squarefree` | in Mathlib |  |
@@ -78,12 +78,12 @@ Rows: 401. in Mathlib: 178; proved: 109; not formalized: 54; partly in other lib
 | Proposition 2.2.5 | 31 | phi(n) = n prod over p dividing n of (1 - 1/p) | `Nat.totient_eq_prod_factorization`, `Nat.totient_eq_div_primeFactors_mul` | in Mathlib |  |
 | unnumbered, Theorem 3 of Chapter 2 (divergence of sum 1/p) | 32 | The sum of 1/p over primes diverges | `Nat.Primes.not_summable_one_div`, `not_summable_one_div_on_primes` | in Mathlib |  |
 | Theorem 4 | 33 | Over a finite field with q elements the sum of q^(-deg p) over monic irreducibles p diverges | `NTKB.IrelandRosen.not_summable_card_pow_natDegree_inv` | proved |  |
-| Proposition 2.4.1 | 33 | pi(x) > log(log x) for x >= 2 | `Chebyshev.pi_ge'`, `Chebyshev.pi_ge_of_four_le` | partly in other libraries; not proved here |  |
+| Proposition 2.4.1 | 33 | pi(x) > log(log x) for x >= 2 | `NTKB.HardyWright.log_log_lt_primeCounting` | proved in part | Mathlib: `Chebyshev.pi_ge'`, `Chebyshev.pi_ge_of_four_le` |
 | Proposition 2.4.2 | 33 | pi(x) >= log x / (2 log 2) | `Chebyshev.pi_ge'`, `Chebyshev.pi_ge_of_four_le` | partly in other libraries; not proved here |  |
 | unnumbered, definition of theta(x) | 34 | theta(x) = sum of log p over primes p <= x | `Chebyshev.theta` | in Mathlib |  |
 | Proposition 2.4.3 | 34 | theta(x) < (4 log 2) x | `Chebyshev.theta_le_log4_mul_x` | in Mathlib |  |
 | unnumbered, Corollary 1 of Proposition 2.4.3 | 35 | pi(x) < c_1 x / log x for x >= 2 | `Chebyshev.pi_le_log4_mul_div`, `Chebyshev.eventually_primeCounting_le` | partly in other libraries; not proved here |  |
-| unnumbered, Corollary 2 of Proposition 2.4.3 | 35 | pi(x)/x tends to 0 as x tends to infinity | `tendsto_primeCounting_div_id_zero` | in PrimeNumberTheoremAnd only (not a dependency) |  |
+| unnumbered, Corollary 2 of Proposition 2.4.3 | 35 | pi(x)/x tends to 0 as x tends to infinity | `NTKB.HardyWright.tendsto_primeCounting_div_self` | proved | `tendsto_primeCounting_div_id_zero` |
 | Proposition 2.4.4 | 35 | pi(x) > c_2 x / log x for some c_2 > 0 | `Chebyshev.pi_ge_of_four_le`, `Chebyshev.pi_ge'`, `Chebyshev.pi_ge` | in Mathlib |  |
 | unnumbered, theta(x)/x tends to 1 is equivalent to the prime number theorem | 36 | The prime number theorem pi(x) log x / x tends to 1 is equivalent to theta(x)/x tends to 1 | `chebyshev_asymptotic`, `WeakPNT''`, `MediumPNT`, `StrongPNT` | in PrimeNumberTheoremAnd only (not a dependency) |  |
 | unnumbered, definition of the Riemann zeta function | 38 | zeta(s) = sum of 1/n^s for s > 1 (Chapter 2 Exercise 25) | `riemannZeta_eulerProduct_hasProd` | in Mathlib |  |
@@ -104,11 +104,11 @@ Rows: 401. in Mathlib: 178; proved: 109; not formalized: 54; partly in other lib
 | Proposition 3.2.3 | 41 | a = c and b = d mod m implies a+b = c+d and ab = cd mod m | `Int.ModEq.add`, `Int.ModEq.mul`, `Int.ModEq.pow`, `Nat.ModEq.add`, `Nat.ModEq.mul` | in Mathlib |  |
 | unnumbered, polynomial parity criterion | 42 | If p(x) in Z[x] has p(0) and p(1) odd then p has no integer root | — | not formalized |  |
 | unnumbered, definition of the number of solutions of a congruence | 42 | Number of solutions of f(x_1..x_n) = 0 (m) is the number of inequivalent solutions (equivalently, solutions in Z/mZ) | — | not formalized |  |
-| Proposition 3.3.1 | 43 | ax = b (m) is solvable iff d = (a,m) divides b; then there are exactly d solutions x_0 + k m/d | `Int.gcd_dvd_iff`, `Nat.chineseRemainder'`, `Int.ModEq.cancel_left_div_gcd`, `Nat.ModEq.cancel_left_div_gcd` | partly in other libraries; not proved here |  |
+| Proposition 3.3.1 | 43 | ax = b (m) is solvable iff d = (a,m) divides b; then there are exactly d solutions x_0 + k m/d | `NTKB.HardyWright.exists_mul_modEq_iff_and_card` | proved | Mathlib: `Int.gcd_dvd_iff`, `Nat.chineseRemainder'`, `Int.ModEq.cancel_left_div_gcd`, `Nat.ModEq.cancel_left_div_gcd` |
 | unnumbered, Corollary 1 of Proposition 3.3.1 | 43 | If a and m are relatively prime then ax = b (m) has exactly one solution | `ZMod.unitOfCoprime`, `ZMod.isUnit_iff_coprime`, `Nat.ModEq.cancel_left_of_coprime` | in Mathlib |  |
 | unnumbered, Corollary 2 of Proposition 3.3.1 | 44 | If p is prime and a not 0 mod p then ax = b (p) has exactly one solution | — | in Mathlib |  |
 | unnumbered, PID generalization of the linear congruence | 44 | In a PID, ax = b (m) solvable iff d divides b; R/(m) is a field iff m is prime | `PrincipalIdealRing.isMaximal_of_irreducible`, `Ideal.span_singleton_prime` | partly in other libraries; not proved here |  |
-| Proposition 3.3.2 | 44 | a in Z/mZ is a unit iff (a,m) = 1; there are phi(m) units; Z/mZ is a field iff m is prime | `ZMod.isUnit_iff_coprime`, `ZMod.card_units_eq_totient` | partly in other libraries; not proved here |  |
+| Proposition 3.3.2 | 44 | a in Z/mZ is a unit iff (a,m) = 1; there are phi(m) units; Z/mZ is a field iff m is prime | `NTKB.NZM.zmod_isField_iff_prime` | proved | `ZMod.isUnit_iff_coprime`, `ZMod.card_units_eq_totient` |
 | unnumbered, Corollary 1 of Proposition 3.3.2 (Euler's theorem) | 44 | If (a,m) = 1 then a^phi(m) = 1 (m) | `Nat.ModEq.pow_totient`, `ZMod.pow_totient` | in Mathlib |  |
 | unnumbered, Corollary 2 of Proposition 3.3.2 (Fermat's little theorem) | 44 | If p is prime and p does not divide a then a^(p-1) = 1 (p) | `ZMod.pow_card_sub_one_eq_one`, `Int.ModEq.pow_card_sub_one_eq_one`, `Nat.ModEq.pow_card_sub_one_eq_one` | in Mathlib |  |
 | unnumbered, Lemma 1 of 3.4 | 45 | If a_1..a_t are relatively prime to m then so is their product | `IsCoprime.prod_left`, `Nat.coprime_prod_left_iff`, `IsCoprime.mul_left` | in Mathlib |  |
@@ -127,7 +127,7 @@ Rows: 401. in Mathlib: 178; proved: 109; not formalized: 54; partly in other lib
 |---|---|---|---|---|---|
 | unnumbered, Lemma 1 (roots of a polynomial over a field) | 50 | A nonzero polynomial of degree n over a field has at most n distinct roots | `Polynomial.card_roots'`, `Polynomial.card_roots`, `Polynomial.card_le_degree_of_subset_roots` | in Mathlib |  |
 | unnumbered, Corollary of Lemma 1 | 50 | Polynomials of degree n over a field agreeing at n+1 distinct points are equal | `Polynomial.eq_of_natDegree_lt_card_of_eval_eq`, `Polynomial.eq_of_natDegree_lt_card_of_eval_eq'` | in Mathlib |  |
-| Proposition 4.1.1 | 51 | x^(p-1) - 1 = (x-1)(x-2)...(x-(p-1)) in (Z/pZ)[x] | `FiniteField.roots_X_pow_card_sub_X`, `FiniteField.splits_X_pow_card_sub_X` | partly in other libraries; not proved here |  |
+| Proposition 4.1.1 | 51 | x^(p-1) - 1 = (x-1)(x-2)...(x-(p-1)) in (Z/pZ)[x] | `NTKB.HardyWright.prod_X_sub_C_Icc_eq` | proved | Mathlib: `FiniteField.roots_X_pow_card_sub_X`, `FiniteField.splits_X_pow_card_sub_X` |
 | unnumbered, Corollary of Proposition 4.1.1 (Wilson's theorem) | 51 | (p-1)! = -1 (p) | `ZMod.wilsons_lemma`, `Nat.prime_iff_fac_equiv_neg_one` | in Mathlib |  |
 | Proposition 4.1.2 | 51 | If d divides p-1 then x^d = 1 (p) has exactly d solutions | `NTKB.IrelandRosen.card_pow_eq_one_zmod` | proved | Mathlib: `IsCyclic.card_pow_eq_one_le`, `ZMod.isCyclic_units_prime`, `Polynomial.card_nthRoots`, `IsPrimitiveRoot.card_nthRoots_one` |
 | unnumbered, Theorem 1 (U(Z/pZ) is cyclic) | 51 | The unit group of Z/pZ is cyclic | `ZMod.isCyclic_units_prime` | in Mathlib |  |
@@ -155,7 +155,7 @@ Rows: 401. in Mathlib: 178; proved: 109; not formalized: 54; partly in other lib
 |---|---|---|---|---|---|
 | Proposition 5.1.1 | 61 | For m = 2^e p1^f1...pr^fr and (a,m)=1, x^2 = a (m) is solvable iff a = 1 (4) when e=2, a = 1 (8) when e>=3, and a^((pi-1)/2) = 1 (pi) for each i | `ZMod.euler_criterion`, `ZMod.euler_criterion_units` | partly in other libraries; not proved here |  |
 | Proposition 5.1.2 | 62 | For odd prime p: (a) a^((p-1)/2) = (a/p) (p); (b) (ab/p) = (a/p)(b/p); (c) a = b (p) implies (a/p) = (b/p) | `legendreSym.eq_pow`, `legendreSym.mul`, `legendreSym.mod` | in Mathlib |  |
-| unnumbered, Corollary 1 to Prop 5.1.2 | 62 | There are as many quadratic residues as nonresidues mod p | `quadraticChar_sum_zero`, `legendreSym.card_sqrts` | partly in other libraries; not proved here |  |
+| unnumbered, Corollary 1 to Prop 5.1.2 | 62 | There are as many quadratic residues as nonresidues mod p | `NTKB.HardyWright.card_residues_and_nonresidues` | proved | `quadraticChar_sum_zero`, `legendreSym.card_sqrts` |
 | unnumbered, Corollary 2 to Prop 5.1.2 | 62 | Product of two residues is a residue, of two nonresidues is a residue, of a residue and a nonresidue is a nonresidue | `legendreSym.mul`, `legendreSym.eq_one_iff`, `legendreSym.eq_neg_one_iff` | in Mathlib |  |
 | Corollary 3 | 63 | (-1/p) = (-1)^((p-1)/2) | `legendreSym.at_neg_one`, `ZMod.χ₄`, `ZMod.exists_sq_eq_neg_one_iff` | in Mathlib |  |
 | unnumbered, infinitely many primes 4k+1 | 63 | There are infinitely many primes of the form 4k+1 | `Nat.infinite_setOfPred_prime_modEq_one`, `Nat.infinite_setOfPred_prime_and_eq_mod` | in Mathlib |  |
@@ -198,8 +198,8 @@ Rows: 401. in Mathlib: 178; proved: 109; not formalized: 54; partly in other lib
 | Proposition 6.4.1 | 84 | 1 + x + ... + x^(p-1) is irreducible in Q[x] | `Polynomial.cyclotomic.irreducible_rat`, `Polynomial.cyclotomic_prime` | in Mathlib |  |
 | Proposition 6.4.2 | 85 | prod_{k=1}^{(p-1)/2} (zeta^(2k-1) - zeta^(-(2k-1)))^2 = (-1)^((p-1)/2) p | `NTKB.IrelandRosen.prod_zeta_sub_inv_sq` | proved |  |
 | Proposition 6.4.3 | 85 | prod_{k=1}^{(p-1)/2} (zeta^(2k-1) - zeta^(-(2k-1))) is sqrt(p) if p = 1 (4), i sqrt(p) if p = 3 (4) | `NTKB.IrelandRosen.prod_zeta_sub_inv` | proved |  |
-| Proposition 6.4.4 | 85 | Kronecker: the sign B in g = B prod (zeta^(2k-1) - zeta^(-(2k-1))) equals +1 | `TauCeti.sum_range_cexp_two_pi_I_sq_div` | partly in other libraries; not proved here |  |
-| unnumbered, Theorem 1 (value of the quadratic Gauss sum) | 86 | g(chi) = sqrt(p) if p = 1 (4), i sqrt(p) if p = 3 (4) | `TauCeti.sum_range_cexp_two_pi_I_sq_div` | partly in other libraries; not proved here |  |
+| Proposition 6.4.4 | 85 | Kronecker: the sign B in g = B prod (zeta^(2k-1) - zeta^(-(2k-1))) equals +1 | `NTKB.gaussSum_legendreChar`, `NTKB.IrelandRosen.prod_zeta_sub_inv` | proved | `TauCeti.sum_range_cexp_two_pi_I_sq_div` |
+| unnumbered, Theorem 1 (value of the quadratic Gauss sum) | 86 | g(chi) = sqrt(p) if p = 1 (4), i sqrt(p) if p = 3 (4) | `NTKB.gaussSum_legendreChar` | proved | `TauCeti.sum_range_cexp_two_pi_I_sq_div` |
 | exercise 6.4 (Gauss' lemma on primitive polynomials) | 88 | Exercise 4 of Chapter 6: the product of primitive polynomials in Z[x] is primitive | — | not formalized |  |
 | exercise 6.16 (minimal polynomial has no repeated roots) | 88 | Exercise 16 of Chapter 6: the minimal polynomial of an algebraic number has no repeated roots in C | — | not formalized |  |
 | exercise 6.21 (divisibility of coefficients in products of exponential-type series) | 89 | Exercise 21 of Chapter 6: for f = sum a_n x^n/n!, g = sum b_n x^n/n! with integer a_n, b_n and p dividing a_i, i<p, the coefficients c_t of fg, t<p, equal p(A/B) with p not dividing B | — | not formalized |  |
@@ -242,12 +242,12 @@ Rows: 401. in Mathlib: 178; proved: 109; not formalized: 54; partly in other lib
 | Proposition 8.2.2 | 103 | If chi nontrivial then \ \\| g(chi)\ \\| ^2 = p, and g(chi) g(conj chi) = chi(-1) p | `gaussSum_mul_gaussSum_eq_card`, `star_gaussSum_eq`, `gaussSum_inv_eq_conj` | in Mathlib |  |
 | unnumbered, Theorem 1 (a)-(d) | 104 | J(delta,delta)=p, J(delta,chi)=0, J(chi,chi^-1) = -chi(-1), J(chi,lambda) = g(chi)g(lambda)/g(chi lambda) when chi lambda != delta | `jacobiSum_trivial_trivial`, `jacobiSum_one_one`, `jacobiSum_one_nontrivial`, `jacobiSum_nontrivial_inv`, `jacobiSum_mul_nontrivial`, `jacobiSum_eq_gaussSum_mul_gaussSum_div_gaussSum`, `jacobiSum_comm` | in Mathlib |  |
 | unnumbered, corollary to Theorem 1 | 105 | If chi, lambda, chi lambda are nontrivial then \ \\| J(chi,lambda)\ \\| = sqrt p | `NTKB.IrelandRosen.norm_multiJacobiSum` | proved | `jacobiSum_mul_jacobiSum_inv`, `TauCeti.norm_jacobiSum_eq_card_of_orderOf_eq_four` |
-| unnumbered, N(x^2+y^2=1) | 103-105 | The number of solutions of x^2+y^2=1 in F_p is p - (-1)^((p-1)/2) | `TauCeti.card_sum_mul_sq_eq_of_card_eq_two_mul_add_two` | in Tau Ceti only (not a dependency) |  |
+| unnumbered, N(x^2+y^2=1) | 103-105 | The number of solutions of x^2+y^2=1 in F_p is p - (-1)^((p-1)/2) | `NTKB.IrelandRosen.numSolDiag_sum_sq_even` | proved | `TauCeti.card_sum_mul_sq_eq_of_card_eq_two_mul_add_two` |
 | unnumbered, N(x^3+y^3=1) formula and estimate | 104-106 | For p = 1 mod 3, N(x^3+y^3=1) = p - 2 + 2 Re J(chi,chi), hence \ \\| N - p + 2\ \\| < 2 sqrt p | `NTKB.IrelandRosen.numSolDiag_cubic`, `NTKB.IrelandRosen.abs_numSolDiag_cubic_sub_le` | proved |  |
 | Proposition 8.3.1 | 106 | p = 1 mod 4 gives p = a^2+b^2; p = 1 mod 3 gives p = a^2 - ab + b^2 | `NTKB.IrelandRosen.exists_eq_sq_sub_mul_add_sq` | proved | `Nat.Prime.sq_add_sq` |
 | Proposition 8.3.2 | 107 | For p = 1 mod 3, 4p = A^2 + 27 B^2 with A, B unique up to sign | `NTKB.IrelandRosen.exists_four_mul_eq` | proved |  |
 | Proposition 8.3.3 | 107 | For chi of order n > 2, g(chi)^n = chi(-1) p J(chi,chi) J(chi,chi^2) ... J(chi,chi^(n-2)) | `gaussSum_pow_eq_prod_jacobiSum`, `gaussSum_pow_eq_prod_jacobiSum_aux` | in Mathlib |  |
-| unnumbered, corollary to 8.3.3 | 107 | For a cubic character, g(chi)^3 = p J(chi,chi) | `TauCeti.gaussSum_pow_three_eq_card_mul_jacobiSum` | in Tau Ceti only (not a dependency) |  |
+| unnumbered, corollary to 8.3.3 | 107 | For a cubic character, g(chi)^3 = p J(chi,chi) | `NTKB.IrelandRosen.gaussSum_cube` | proved | `TauCeti.gaussSum_pow_three_eq_card_mul_jacobiSum` |
 | Proposition 8.3.4 | 107 | For cubic chi, J(chi,chi) = a + b omega with b = 0 mod 3 and a = -1 mod 3 | `NTKB.IrelandRosen.cubic_jacobiSum_eq` | proved | `TauCeti.isPrimaryEisenstein_jacobiSum`, `TauCeti.three_dvd_jacobiSum_add_one`, `IsPrimitiveRoot.isPrimaryEisenstein_add_mul_iff` |
 | unnumbered, corollary to 8.3.4 | 108 | With A = 2a-b, B = b/3: A = 1 mod 3 and 4p = A^2+27B^2 | `NTKB.IrelandRosen.cubic_four_mul_card_eq` | proved |  |
 | unnumbered, Theorem 2 (Gauss) | 108 | For p = 1 mod 3, 4p = A^2+27B^2 with A = 1 mod 3 unique, and N(x^3+y^3=1) = p - 2 + A | `NTKB.IrelandRosen.gauss_cubic` | proved |  |
@@ -268,7 +268,7 @@ Rows: 401. in Mathlib: 178; proved: 109; not formalized: 54; partly in other lib
 | Item | Page | Statement | Lean declaration | Status | Also in |
 |---|---|---|---|---|---|
 | Proposition 9.1.1 | 120 | alpha in Z[omega] is a unit iff N(alpha)=1; units are +-1, +-omega, +-omega^2 | `NumberField.isUnit_iff_norm`, `IsCyclotomicExtension.Rat.Three.Units.mem` | in Mathlib |  |
-| Proposition 9.1.2 | 121 | A prime pi of D has N(pi) = p or p^2; the latter iff pi is associate to p | — | not formalized |  |
+| Proposition 9.1.2 | 121 | A prime pi of D has N(pi) = p or p^2; the latter iff pi is associate to p | `NTKB.HardyWright.qa_prime_cases` | proved in part |  |
 | Proposition 9.1.3 | 121 | If N(pi) is a rational prime then pi is prime in D | `Ideal.prime_of_irreducible_absNorm_span`, `Ideal.absNorm_span_singleton` | in Mathlib |  |
 | Proposition 9.1.4 | 121 | q = 2 mod 3 is prime in D; p = 1 mod 3 splits as pi pi-bar; 3 = -omega^2 (1-omega)^2 with 1-omega prime | `IsPrimitiveRoot.zeta_sub_one_prime'`, `IsPrimitiveRoot.toInteger_sub_one_sq_dvd_three` | partly in other libraries; not proved here |  |
 | Proposition 9.2.1 | 122 | For a prime pi of D, D/piD is a finite field with N(pi) elements | `Ideal.Quotient.field`, `Ideal.absNorm_apply`, `Ideal.absNorm_span_singleton` | in Mathlib |  |

@@ -22,6 +22,16 @@ found, not a proof of absence.
 | `IrelandRosen.gauss_last_entry` (Chapter 11, § 5) | not found | not found | — |
 | `IrelandRosen.legendre` (Proposition 17.3.1) | not found | isotropy of quadratic forms over number fields place by place (`NumberTheory/QuadraticForm/Global/`), not this criterion | — |
 | `IrelandRosen.sophie_germain` (Proposition 17.4.1) | Fermat's last theorem for the exponents 3 and 4; Sophie Germain's identity (`pow_four_add_four_mul_pow_four`) | not found | — |
+| `NivenZuckermanMontgomery.proper_representation_iff` (Theorem 3.13) | not found | binary quadratic forms, their discriminants and proper equivalence (`BinaryQuadraticForm`); a primitive form properly represents an integer prime to a given one (`United.lean`); not this criterion | — |
+| `NivenZuckermanMontgomery.linear_system_local_global` (Theorem 5.2) | the Smith normal form of submodules over a principal ideal domain (`Submodule.smithNormalForm`, used in the proof); not this theorem | not found | — |
+| `NivenZuckermanMontgomery.quartic_eq_square` (Theorem 5.9) | not found | not found | — |
+| `NivenZuckermanMontgomery.rational_points_y_sq_eq_x_cube_sub_four_x` (Theorem 5.24) | Weierstrass curves and their group law; Fermat's last theorem for exponent 4 (`not_fermat_42`, used in the proof); no congruent numbers | not found | — |
+| `NivenZuckermanMontgomery.galois_purely_periodic` (Theorem 7.20) | generalized continued fractions (`GenContFract`) and the continued fraction of a real number; no periodicity | not found | — |
+| `NivenZuckermanMontgomery.eq_convergent_of_sq_sub_mul_sq` (Theorem 7.24) | Pell's equation (`Pell.Solution₁`, `Pell.exists_of_not_isSquare`); not its relation to convergents | not found | — |
+| `NivenZuckermanMontgomery.omega_maximal_order` (Theorem 8.30) | `ω` (`ArithmeticFunction.cardDistinctFactors`) and Chebyshev's bounds | not found | `ω` in its sieve files, without this order |
+| `NivenZuckermanMontgomery.partition_bounds` (Theorem 10.12) | partitions (`Nat.Partition`) and their generating function; no growth bound | not found | not found |
+| `NivenZuckermanMontgomery.exists_squarefree_add` (Theorem 11.2) | squarefree numbers (`Squarefree`); not this | not found | not found |
+| `NivenZuckermanMontgomery.mann_alpha_beta` (Theorem 11.10) | Schnirelmann density (`schnirelmannDensity`) and the case `d(A) + d(B) ≥ 1` (`add_eq_univ_of_one_le_schirelmannDensity_add_schnirelmannDensity`); Mann's theorem is listed as a to-do in `Mathlib/Combinatorics/Schnirelmann.lean` | not found | — |
 | `SpecialValues.LFunction_one_sub_nat` | `ζ(-k)` and `hurwitzZeta_neg_nat` (`k ≥ 1`); the value of `L(0, χ)` for even `χ` (`ZMod.LFunction_apply_zero_of_even`) | the generalized Bernoulli numbers (`DirichletCharacter.generalizedBernoulli`, ported here) | — |
 | `SpecialValues.LFunction_natCast` | the functional equation of `L(s, χ)` (`ZMod.LFunction_one_sub`) | `τ(χ) ∑_{n ∈ ℤ} χ̄(n) n^{-k} = -(2πi)^k B_{k,χ}/(k! N^{k-1})` for `k ≥ 2` (`DirichletCharacter.gaussSum_mul_tsum_inv_pow_eq_generalizedBernoulli`, ported here); not `k = 1` nor `L(k, χ)` | — |
 | `SpecialValues.gaussSum_kroneckerChar` | `τ(χ)² = χ(-1) p` (`gaussSum_sq`) | `∑_{r mod N} e^{2πi r²/N}` for every `N` (`sum_range_cexp_two_pi_I_sq_div`, ported here); Gauss sums of lattices; not the Gauss sums of Jacobi or Kronecker characters | — |
@@ -35,6 +45,9 @@ found, not a proof of absence.
 | Eisenstein reciprocity (Ireland–Rosen, Chapter 14) | not in this library (Chapter 14 is outside this release); proved in algebraic-number-theory-lean (`NumberFieldKB.MilneCFT.Ch8.Eisenstein.eisensteinReciprocity`). |
 | Mordell equations (Ireland–Rosen, Propositions 17.10.1 and 17.10.2; Hardy–Wright, Theorems 478 and 479) | not proved: 17.10.1 needs Mordell's theorem (no proof in the book), 17.10.2 the class group of `ℤ[√-d]`, Theorem 479 unique factorization in `ℤ[√-2]` applied to `y² = x³ - 2`; Theorem 478 (`y² = x³ + 7`) is elementary but not done. |
 | Ramanujan's congruence modulo 11 (Hardy–Wright, Theorem 361) | not proved; the book gives no proof. |
+| Simultaneous Diophantine approximation (Niven–Zuckerman–Montgomery, Theorem 6.25; `NTKB.NZM.simultaneous_approximation_general`) | proved here; Tau Ceti has Dirichlet's simultaneous approximation theorem (`TauCeti.simultaneous_dirichlet`, with `≤` in place of `<`), so not a headline. |
+| The number of representations by a positive definite binary form, `r_f(n) = w(f) H_f(n)` (Niven–Zuckerman–Montgomery, Theorem 3.27) | proved here; not chosen as a headline because its statement needs several definitions of the library (automorphs, the count `H_f`); a candidate for a later release. |
+| The splitting of rational primes in a quadratic field with unique factorization (Niven–Zuckerman–Montgomery, Theorem 9.29) | only part (a) proved; parts (b) to (e) stated, not proved. |
 
 ## Results proved here that the other libraries also prove
 
