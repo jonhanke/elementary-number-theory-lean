@@ -1,7 +1,8 @@
 name = "elementary_number_theory_lean"
-version = "0.1.0"
+version = "0.2.0"
 defaultTargets = ["NTKB", "Challenge_HardyWright", "Solution_HardyWright", "Challenge_IrelandRosen",
-  "Solution_IrelandRosen", "Challenge_SpecialValues", "Solution_SpecialValues"]
+  "Solution_IrelandRosen", "Challenge_SpecialValues", "Solution_SpecialValues", "Challenge_NivenZuckermanMontgomery",
+  "Solution_NivenZuckermanMontgomery"]
 
 [leanOptions]
 pp.unicode.fun = true
@@ -39,4 +40,13 @@ roots = ["Challenge_SpecialValues"]
 
 [[lean_lib]]
 name = "Solution_SpecialValues"
-roots = ["Solution_SpecialValues"]
+roots = ["Solution_SpecialValues", "Challenge_NivenZuckermanMontgomery",
+  "Solution_NivenZuckermanMontgomery"]
+
+[[lean_lib]]
+name = "Challenge_NivenZuckermanMontgomery"
+roots = ["Challenge_NivenZuckermanMontgomery"]
+
+[[lean_lib]]
+name = "Solution_NivenZuckermanMontgomery"
+roots = ["Solution_NivenZuckermanMontgomery"]

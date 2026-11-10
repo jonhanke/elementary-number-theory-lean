@@ -2,7 +2,7 @@
 
 Each row is a result of the book, the Lean declarations that formalize it, and its status, computed from the Lean kernel (an audit of the axioms and hypotheses of every declaration): *proved* means proved with only the standard axioms and no unproved input; *proved in part* that a part, a special case or one instance is proved; *proved, conditional* that an unproved input (a named statement) is assumed; *refuted as stated in the book* that the library proves the printed statement false and proves a corrected form (see the errata in the README); *in Mathlib* that Mathlib (a dependency) has the result and the Lean name is Mathlib's. Results that are only in Tau Ceti or PrimeNumberTheoremAnd (which this library does not depend on) are marked so. The statements in the third column are short descriptions, not quotations; read the book for the exact wording. The column *Also in* credits other libraries: Mathlib, Tau Ceti or PrimeNumberTheoremAnd declarations that prove the result, a part of it, or a closely related statement (as recorded by the coverage audit). Pages are pages of the pdf file of the 6th edition; theorems are numbered globally, as in the book.
 
-Rows: 626. proved: 266; in Mathlib: 178; not formalized: 105; partly in other libraries; not proved here: 40; in Tau Ceti only (not a dependency): 14; proved in part: 9; in PrimeNumberTheoremAnd only (not a dependency): 9; refuted as stated in the book; corrected form proved: 4; proved, conditional: 1. Proved here and also in another library: 70.
+Rows: 626. proved: 279; in Mathlib: 178; not formalized: 96; partly in other libraries; not proved here: 36; proved in part: 14; in Tau Ceti only (not a dependency): 12; in PrimeNumberTheoremAnd only (not a dependency): 6; refuted as stated in the book; corrected form proved: 4; proved, conditional: 1. Proved here and also in another library: 79.
 
 
 ## Chapter I. The series of primes (1)
@@ -46,14 +46,14 @@ Rows: 626. proved: 266; in Mathlib: 178; not formalized: 105; partly in other li
 
 | Item | Page | Statement | Lean declaration | Status | Also in |
 |---|---|---|---|---|---|
-| Theorem 28 | 47 | Successive Farey fractions h/k < h'/k' of order n satisfy kh' - hk' = 1. | — | not formalized |  |
+| Theorem 28 | 47 | Successive Farey fractions h/k < h'/k' of order n satisfy kh' - hk' = 1. | `NTKB.NZM.farey_adjacent` | proved |  |
 | Theorem 29 | 47 | For three successive Farey fractions the middle one is the mediant (h+h')/(k+k') up to the stated form h''/k'' = (h+h')/(k+k'). | — | not formalized |  |
-| Theorem 30 | 47 | Successive Farey fractions of order n have k + k' > n. | — | not formalized |  |
+| Theorem 30 | 47 | Successive Farey fractions of order n have k + k' > n. | `NTKB.NZM.farey_adjacent` | proved |  |
 | Theorem 31 | 48 | For n > 1 no two successive Farey fractions of order n share a denominator. | — | not formalized |  |
 | Section 3.2 (equivalence of Theorems 28 and 29) | 48 | Each of Theorems 28 and 29 implies the other. | — | not formalized |  |
 | Section 3.4 (successor rule) | 50 | The successor of h/k in the Farey series of order n is x/y with kx - hy = 1 and n-k < y <= n (worked example 4/9 -> 5/11 for n=13). | — | not formalized |  |
-| Theorem 32 | 53 | The map (x,y) -> (ax+by, cx+dy) with integer coefficients and nonzero determinant sends Z^2 onto itself iff the determinant is +-1. | `Matrix.isUnit_iff_isUnit_det`, `Int.isUnit_iff` | partly in other libraries; not proved here |  |
-| Theorem 33 | 53 | The lattice based on points OP, OQ is equivalent to the integer lattice iff the parallelogram OPQ has area 1. | — | not formalized |  |
+| Theorem 32 | 53 | The map (x,y) -> (ax+by, cx+dy) with integer coefficients and nonzero determinant sends Z^2 onto itself iff the determinant is +-1. | `NTKB.NZM.matrixLattice_eq_iff` | proved | Mathlib: `Matrix.isUnit_iff_isUnit_det`, Mathlib: `Int.isUnit_iff` |
+| Theorem 33 | 53 | The lattice based on points OP, OQ is equivalent to the integer lattice iff the parallelogram OPQ has area 1. | `NTKB.NZM.matrixLattice_eq_iff`, `NTKB.NZM.matrixLattice_subset_iff` | proved in part |  |
 | Section 3.6 (visible points) | 53 | A lattice point (x,y) is visible from the origin iff (x,y) = 1. | — | not formalized |  |
 | Theorem 34 | 54 | For visible P, Q with parallelogram area S: no lattice point inside iff S = 1; if S > 1 there is at least one inside, and two unless it is the centre. | — | not formalized |  |
 | Theorem 35 | 56 | In the Farey dissection of order n > 1 each half-arc around h/k has length between 1/(k(2n-1)) and 1/(k(n+1)). | — | not formalized |  |
@@ -62,7 +62,7 @@ Rows: 626. proved: 266; in Mathlib: 178; not formalized: 105; partly in other li
 | Theorem 37 | 58 | Minkowski: a convex region symmetric about 0 of area > 4 contains a nonzero integer lattice point. | `MeasureTheory.exists_ne_zero_mem_lattice_of_measure_mul_two_pow_lt_measure`, `MeasureTheory.exists_ne_zero_mem_lattice_of_measure_mul_two_pow_le_measure` | in Mathlib |  |
 | Theorem 38 | 58 | If translates of an open region R0 by the lattice points are pairwise disjoint then area(R0) <= 1. | `MeasureTheory.exists_pair_mem_lattice_not_disjoint_vadd` | in Mathlib |  |
 | Theorem 39 | 60 | The map (3.6.1) preserves a general lattice iff its determinant is +-1 (same statement as Theorem 32, in oblique coordinates). | `Matrix.isUnit_iff_isUnit_det`, `Int.isUnit_iff` | partly in other libraries; not proved here |  |
-| Theorem 40 | 60 | For lattice points P, Q the lattice based on OP, OQ equals the lattice iff the area of OPQ equals the fundamental parallelogram area. | — | not formalized |  |
+| Theorem 40 | 60 | For lattice points P, Q the lattice based on OP, OQ equals the lattice iff the area of OPQ equals the fundamental parallelogram area. | `NTKB.NZM.matrixLattice_eq_iff`, `NTKB.NZM.matrixLattice_subset_iff` | proved in part |  |
 | Theorem 41 | 61 | For any lattice with disjoint translates of R0, area(R0) is at most that of the fundamental parallelogram. | `MeasureTheory.exists_pair_mem_lattice_not_disjoint_vadd` | in Mathlib |  |
 | Theorem 42 | 62 | If a parallelogram R0 has area equal to the fundamental parallelogram and no two equivalent interior points, translates of its closure cover the plane. | — | not formalized |  |
 | Section 3.11 (n-dimensional remark) | 62 | Minkowski's theorem holds in n dimensions with volume bound 2^n. | `MeasureTheory.exists_ne_zero_mem_lattice_of_measure_mul_two_pow_lt_measure` | in Mathlib |  |
@@ -78,7 +78,7 @@ Rows: 626. proved: 266; in Mathlib: 178; not formalized: 105; partly in other li
 | Section 4.7 (sqrt 2 + sqrt 3 irrational) | 72 | sqrt 2 + sqrt 3 is irrational since it is a non-integer root of x^4 - 10x^2 + 1. | — | not formalized |  |
 | Theorem 46 | 72 | log_10 2 is irrational (more generally log_n m when one of m, n has a prime factor the other lacks). | — | not formalized |  |
 | Theorem 47 | 72 | e is irrational. | — | not formalized |  |
-| Section 4.7 (integrality lemma for f(x) = x^n(1-x)^n/n!) | 72 | f and all its derivatives take integer values at 0 and 1 and 0 < f < 1/n! on (0,1). | — | not formalized |  |
+| Section 4.7 (integrality lemma for f(x) = x^n(1-x)^n/n!) | 72 | f and all its derivatives take integer values at 0 and 1 and 0 < f < 1/n! on (0,1). | `NTKB.NZM.factorial_dvd_iterate_derivative_X_pow_mul` | proved in part |  |
 | Theorem 48 | 73 | e^y is irrational for every nonzero rational y. | — | not formalized |  |
 | Theorem 49 | 73 | pi and pi^2 are irrational. | `irrational_pi` | partly in other libraries; not proved here |  |
 | Section 4.7 notes (zeta(2) irrational) | 74 | zeta(2) = pi^2/6 is irrational by Theorem 49, and zeta(m) for even m (Theorem 205). | — | not formalized |  |
@@ -109,7 +109,7 @@ Rows: 626. proved: 266; in Mathlib: 178; not formalized: 105; partly in other li
 | Theorem 67 | 87 | Ramanujan sum c_q(m) is multiplicative in q | `NTKB.HardyWright.ramanujanSum_mul` | proved |  |
 | Theorem 68 | 87 | Kloosterman sum multiplicativity S(u,v,n)S(u,v',n') = S(u,V,nn') | `NTKB.HardyWright.kloostermanSum_mul` | proved |  |
 | Theorem 69 | 89 | if P is closed under sums and differences and r is least with P(r), then P holds exactly on multiples of r | `NTKB.HardyWright.general_principle` | proved | Mathlib: `orderOf_dvd_iff_pow_eq_one` |
-| Section 5.8 (Gauss: regular p-gon, Fermat primes) | 90 | regular n-gon is constructible iff n is a product of a power of 2 and distinct Fermat primes (quoted from Gauss) | — | not formalized |  |
+| Section 5.8 (Gauss: regular p-gon, Fermat primes) | 90 | regular n-gon is constructible iff n is a product of a power of 2 and distinct Fermat primes (quoted from Gauss) | `NTKB.IrelandRosen.Constructible.isConstructible_exp_of_fermat` | proved in part |  |
 | Section 5.8 (explicit 17-gon) | 91 | periods x1,x2,y1..y4 solve nested quadratics; closed form for 2 cos(2 pi/17) | — | not formalized |  |
 | Section 5.8 notes (cyclotomic irreducibility) | 96 | the polynomial whose roots are the primitive n-th roots of unity is irreducible over Q | `Polynomial.cyclotomic.irreducible` | in Mathlib |  |
 
@@ -243,7 +243,7 @@ Rows: 626. proved: 266; in Mathlib: 178; not formalized: 105; partly in other li
 | Theorem 156 | 188 | q_n >= n, strictly for n > 3 | `NTKB.HardyWright.cf_le_dens` | proved | Mathlib: `GenContFract.succ_nth_fib_le_of_nth_den`, Tau Ceti: `Real.fib_succ_le_den_convergent` |
 | Theorem 157 | 188 | Convergents of a simple continued fraction are in lowest terms | `NTKB.HardyWright.cf_isCoprime_nums_dens` | proved | Tau Ceti: `Real.den_convergent`, Tau Ceti: `Real.num_convergent` |
 | Theorem 158 | 189 | A number with a simple continued fraction of odd (even) number of convergents has one with even (odd) number (last quotient 1 trick) | `NTKB.HardyWright.cf_exists_other_parity` | proved |  |
-| Section 10.5 (complete quotients and formula 10.5.1) | 189 | x = (alpha_n p_(n-1) + p_(n-2))/(alpha_n q_(n-1) + q_(n-2)) with alpha_n the n-th complete quotient | `GenContFract.compExactValue_correctness_of_stream_eq_some` | partly in other libraries; not proved here |  |
+| Section 10.5 (complete quotients and formula 10.5.1) | 189 | x = (alpha_n p_(n-1) + p_(n-2))/(alpha_n q_(n-1) + q_(n-2)) with alpha_n the n-th complete quotient | `NTKB.HardyWright.cf_value_eq_completeQuotient`, `NTKB.NZM.finite_cf_value` | proved | Mathlib: `GenContFract.compExactValue_correctness_of_stream_eq_some` |
 | Theorem 159 | 190 | The n-th complete quotient has integer part a_n, except a_(N-1) = [alpha_(N-1)] - 1 when a_N = 1 | `NTKB.HardyWright.cf_floor_completeQuotient` | proved |  |
 | Theorem 160 | 190 | Two finite simple continued fractions with equal value and last quotient > 1 are identical | `NTKB.HardyWright.cf_eq_of_value_eq` | proved |  |
 | Section 10.6 (continued fraction algorithm and Euclid's algorithm) | 191 | The continued fraction algorithm on h/k is exactly Euclid's algorithm; the last quotient a_N >= 2 | `GenContFract.of` | partly in other libraries; not proved here |  |
@@ -297,7 +297,7 @@ Rows: 626. proved: 266; in Mathlib: 178; not formalized: 105; partly in other li
 | Theorem 198 | 235 | If sum 1/chi(q) converges then \\|xi-p/q\\|<1/(q chi(q)) holds for infinitely many q only on a null set | `NTKB.HardyWright.volume_infinite_approx_eq_zero` | proved | Mathlib: `ae_not_liouvilleWith` |
 | Theorem 199* | 235 | If chi(q)/q increases and sum 1/chi(q) diverges, then \\|xi-p/q\\|<1/(q chi(q)) infinitely often for almost all xi (Khinchin) | — | not formalized |  |
 | Theorem 200 | 236 | For any k reals the system \\|xi_i-p_i/q\\|<1/q^(1+1/k) has a solution; infinitely many if some xi_i irrational | `TauCeti.simultaneous_dirichlet` | partly in other libraries; not proved here |  |
-| Theorem 201 | 237 | For any xi_1..xi_k and eps>0 there is a positive integer q with every q xi_i within eps of an integer | `TauCeti.simultaneous_dirichlet` | in Tau Ceti only (not a dependency) |  |
+| Theorem 201 | 237 | For any xi_1..xi_k and eps>0 there is a positive integer q with every q xi_i within eps of an integer | `NTKB.NZM.simultaneous_approximation_general` | proved | Tau Ceti: `TauCeti.simultaneous_dirichlet` |
 | Theorem 202 | 238 | For polynomial phi, e^x phi(h)=Phi(x+h)+eps(x)e^\\|x\\| (identity for the transcendence proof) | `NTKB.HardyWright.exp_mul_hEval`, `NTKB.HardyWright.abs_epsR_lt_one` | proved |  |
 | Theorem 203 | 239 | For integral polynomial f, F1(h) and F2(h) are integers with F1(h)=f(0), F2(h)=0 mod m (Hermite-type lemma) | `NTKB.HardyWright.hEval_integral` | proved |  |
 | Theorem 204 | 240 | e is transcendental | `TauCeti.linearIndependent_exp` | in Tau Ceti only (not a dependency) |  |
@@ -313,7 +313,7 @@ Rows: 626. proved: 266; in Mathlib: 178; not formalized: 105; partly in other li
 | Theorem 209 | 252 | If (a,b)=1 and b divides ac then b divides c | `IsCoprime.dvd_of_dvd_mul_right` | in Mathlib |  |
 | Theorem 210 | 254 | The norm of a unity is 1, and an integer of norm 1 is a unity | `Zsqrtd.norm_eq_one_iff'` | in Mathlib |  |
 | Theorem 211 | 255 | The unities of k(i) are i^s, s=0..3 (i.e. +-1, +-i) | `Zsqrtd.norm_eq_one_iff'` | partly in other libraries; not proved here |  |
-| Theorem 212 | 255 | A Gaussian integer whose norm is a rational prime is prime | `Ideal.prime_of_irreducible_absNorm_span` | partly in other libraries; not proved here |  |
+| Theorem 212 | 255 | A Gaussian integer whose norm is a rational prime is prime | `NTKB.HardyWright.gauss_prime_of_natAbs_norm_prime` | proved | Mathlib: `Ideal.prime_of_irreducible_absNorm_span` |
 | Theorem 213 | 256 | Every Gaussian integer not 0 or a unity is divisible by a prime | `WfDvdMonoid.exists_irreducible_factor` | in Mathlib |  |
 | Theorem 214 | 257 | Every Gaussian integer not 0 or a unity is a product of primes | `UniqueFactorizationMonoid.exists_prime_factors` | in Mathlib |  |
 | Theorem 215 | 257 | Fundamental theorem for Gaussian integers: factorization into primes is unique up to order, units, associates | `UniqueFactorizationMonoid.factors_unique` | in Mathlib |  |
@@ -321,7 +321,7 @@ Rows: 626. proved: 266; in Mathlib: 178; not formalized: 105; partly in other li
 | Theorem 217 | 260 | If (y,y1)=1 and y1 divides beta y then y1 divides beta (Gaussian analogue of Theorem 209) | `IsCoprime.dvd_of_dvd_mul_right` | in Mathlib |  |
 | Theorem 218 | 260 | If a Gaussian prime pi divides beta gamma then pi divides beta or gamma | `Irreducible.prime` | in Mathlib |  |
 | Section 12.9 (integers of k(rho), norm a^2-ab+b^2) | 260 | k(rho) integers a+b rho have norm a^2-ab+b^2, divisibility etc. as for k(i) | `IsPrimitiveRoot.norm_intCast_add_intCast_mul_toInteger_of_three` | partly in other libraries; not proved here |  |
-| Theorem 219 | 262 | Division with remainder in k(rho): y=kappa y1+y2 with N(y2)<N(y1) | — | not formalized |  |
+| Theorem 219 | 262 | Division with remainder in k(rho): y=kappa y1+y2 with N(y2)<N(y1) | `NTKB.HardyWright.isNormEuclidean_iff_of_neg`, `NTKB.HardyWright.rho_round` | proved |  |
 | Theorem 220 | 262 | Fundamental theorem for k(rho): unique factorization into primes up to order, units, associates | `IsCyclotomicExtension.Rat.three_pid` | in Mathlib |  |
 | Theorem 221 | 262 | lambda = 1-rho is prime in k(rho) | `IsPrimitiveRoot.zeta_sub_one_prime'` | in Mathlib |  |
 | Theorem 222 | 263 | Every integer of k(rho) is congruent to 0, 1 or -1 mod lambda (three classes) | `IsCyclotomicExtension.Rat.Three.lambda_dvd_or_dvd_sub_one_or_dvd_add_one` | in Mathlib |  |
@@ -453,7 +453,7 @@ Rows: 626. proved: 266; in Mathlib: 178; not formalized: 105; partly in other li
 | Theorem 286 | 345 | Euler product for an arbitrary multiplicative f with sum \\|f(n)\\| n^-s convergent | `EulerProduct.eulerProduct_tprod`, `EulerProduct.eulerProduct_hasProd`, `EulerProduct.eulerProduct` | in Mathlib |  |
 | Theorem 287 | 345 | 1/zeta(s) = sum mu(n) n^-s for s > 1 | `LSeries_zeta_mul_Lseries_moebius`, `LSeries_one_mul_Lseries_moebius` | in Mathlib |  |
 | Theorem 288 | 346 | zeta(s-1)/zeta(s) = sum phi(n) n^-s for s > 2 | `LSeries_totient_eq` | in PrimeNumberTheoremAnd only (not a dependency) |  |
-| Theorem 289 | 346 | zeta(s)^2 = sum d(n) n^-s for s > 1 | `LSeries_tau_eq_riemannZeta_sq` | in PrimeNumberTheoremAnd only (not a dependency) |  |
+| Theorem 289 | 346 | zeta(s)^2 = sum d(n) n^-s for s > 1 | `NTKB.Apostol.LSeries_divisorC` | proved | PNT+: `LSeries_tau_eq_riemannZeta_sq` |
 | Theorem 290 | 346 | zeta(s) zeta(s-1) = sum sigma(n) n^-s for s > 2 | `LSeries_sigma_eq_riemannZeta_mul` | in PrimeNumberTheoremAnd only (not a dependency) |  |
 | Theorem 291 | 346 | zeta(s) zeta(s-k) = sum sigma_k(n) n^-s for s > 1 and s > k+1 | `LSeries_sigma_eq_riemannZeta_mul`, `sigmaR_natCast` | in PrimeNumberTheoremAnd only (not a dependency) |  |
 | Theorem 292 | 347 | sum_n c_n(m) n^-s = sigma_{s-1}(m) / (m^(s-1) zeta(s)) for Ramanujan sums c_n(m) | `NTKB.HardyWright.LSeries_ramanujanSum` | proved |  |
@@ -467,7 +467,7 @@ Rows: 626. proved: 266; in Mathlib: 178; not formalized: 105; partly in other li
 | Theorem 299 | 353 | zeta(s)^k = sum d_k(n) n^-s, d_k(n) the number of ordered factorisations into k factors | `LSeries_d_eq_riemannZeta_pow` | in PrimeNumberTheoremAnd only (not a dependency) |  |
 | Theorem 300 | 354 | zeta(2s)/zeta(s) = sum lambda(n) n^-s with lambda(n) = (-1)^(number of prime factors with multiplicity) | `NTKB.HardyWright.LSeries_liouville` | proved |  |
 | Theorem 301 | 354 | zeta(s)^2/zeta(2s) = sum 2^omega(n) n^-s | `zeta_pow_two` | in PrimeNumberTheoremAnd only (not a dependency) |  |
-| Theorem 302 | 354 | zeta(s)/zeta(2s) = sum \\|mu(n)\\| n^-s (squarefree numbers) | `zeta_alt` | in PrimeNumberTheoremAnd only (not a dependency) |  |
+| Theorem 302 | 354 | zeta(s)/zeta(2s) = sum \\|mu(n)\\| n^-s (squarefree numbers) | `NTKB.Apostol.LSeries_moebiusSq` | proved | PNT+: `zeta_alt` |
 | Theorem 303 | 355 | zeta(s)/zeta(ks) = sum q_k(n) n^-s, q_k the indicator of k-th-power-free numbers | `NTKB.HardyWright.LSeries_powerFreeIndicator` | proved |  |
 | Theorem 304 | 355 | Ramanujan: zeta(s)^4/zeta(2s) = sum d(n)^2 n^-s | `NTKB.HardyWright.LSeries_card_divisors_sq` | proved |  |
 | Theorem 305 | 356 | Ramanujan: zeta(s) zeta(s-a) zeta(s-b) zeta(s-a-b) / zeta(2s-a-b) = sum sigma_a(n) sigma_b(n) n^-s | `NTKB.HardyWright.LSeries_sigma_mul_sigma` | proved |  |
@@ -507,7 +507,7 @@ Rows: 626. proved: 266; in Mathlib: 178; not formalized: 105; partly in other li
 | Theorem 332 | 373 | The probability that two integers are coprime is 6/pi^2 | `NTKB.HardyWright.tendsto_card_coprime_div_card` | proved |  |
 | Theorem 333 | 374 | The squarefree numbers up to x number 6x/pi^2 + O(sqrt x) | `NTKB.HardyWright.squarefreeCount_sub_isBigO`, `NTKB.HardyWright.tendsto_squarefreeCount_div` | proved |  |
 | Theorem 334 | 375 | sum_{n<=x} \\|mu(n)\\| = 6x/pi^2 + O(sqrt x) | `NTKB.HardyWright.sum_abs_moebius_sub_isBigO` | proved |  |
-| Theorem 335 | 375 | M(x) = sum_{n<=x} mu(n) = o(x) | `mu_pnt` | in PrimeNumberTheoremAnd only (not a dependency) |  |
+| Theorem 335 | 375 | M(x) = sum_{n<=x} mu(n) = o(x) | `NTKB.HardyWright.tendsto_mertens_div_self` | proved | PNT+: `mu_pnt` |
 | Theorem 336 | 375 | The lower limit of r(n) is 0 (printed as lim r(n) = 0; r(n)=0 for n = 3 mod 4) | `NTKB.HardyWright.liminf_sumTwoSquaresCount` | proved |  |
 | Theorem 337 | 375 | r(n) = O((log n)^A) is false for every A | `NTKB.HardyWright.not_sumTwoSquaresCount_isBigO_log_rpow` | proved |  |
 | Theorem 338 | 375 | r(n) = O(n^delta) for every delta > 0 | `NTKB.HardyWright.sumTwoSquaresCount_isBigO_rpow` | proved |  |
@@ -522,8 +522,8 @@ Rows: 626. proved: 266; in Mathlib: 178; not formalized: 105; partly in other li
 |---|---|---|---|---|---|
 | Theorem 342 | 381 | Number of partitions of n into m parts equals number of partitions of n with largest part m | `NTKB.HardyWright.card_partitions_parts_eq_card_partitions_largest` | proved | Mathlib: `Nat.Partition.conjugate`, Mathlib: `Nat.Partition.conjugate_conjugate` |
 | Theorem 343 | 381 | Number of partitions of n into at most m parts equals number into parts not exceeding m | `NTKB.HardyWright.card_partitions_parts_le_eq_card_partitions_largest_le` | proved | Mathlib: `Nat.Partition.conjugate`, Mathlib: `Nat.Partition.conjugate_conjugate` |
-| Section 19.3 (19.3.1, Euler's generating function of p(n)) | 382 | sum p(n)x^n = product over k of 1/(1-x^k) | `NTKB.HardyWright.tprod_one_sub_X_pow_mul_partitionSeries` | proved in part | Mathlib: `Nat.Partition.hasProd_genFun`, Mathlib: `Nat.Partition.hasProd_powerSeriesMk_card_restricted` |
-| Section 19.3 (19.3.7, parts at most m) | 383 | 1/((1-x)...(1-x^m)) enumerates partitions of n into parts not exceeding m (equivalently at most m parts) | `Nat.Partition.hasProd_powerSeriesMk_card_restricted` | partly in other libraries; not proved here |  |
+| Section 19.3 (19.3.1, Euler's generating function of p(n)) | 382 | sum p(n)x^n = product over k of 1/(1-x^k) | `NTKB.HardyWright.tprod_one_sub_X_pow_mul_partitionSeries`, `NTKB.NZM.exists_tendsto_eulerPartialProd`, `NTKB.NZM.hasSum_card_partition_mul_pow` | proved in part | Mathlib: `Nat.Partition.hasProd_genFun`, Mathlib: `Nat.Partition.hasProd_powerSeriesMk_card_restricted` |
+| Section 19.3 (19.3.7, parts at most m) | 383 | 1/((1-x)...(1-x^m)) enumerates partitions of n into parts not exceeding m (equivalently at most m parts) | `NTKB.NZM.hasSum_card_restricted_mul_pow`, `NTKB.HardyWright.card_partitions_parts_le_eq_card_partitions_largest_le` | proved in part | Mathlib: `Nat.Partition.hasProd_powerSeriesMk_card_restricted` |
 | Section 19.4 (19.4.1-19.4.5, generating functions with restricted parts) | 384 | Generating functions for partitions into odd, even, unequal, odd-and-unequal parts and parts congruent to 1,4 mod 5 | `Nat.Partition.hasProd_powerSeriesMk_card_restricted`, `Nat.Partition.hasProd_powerSeriesMk_card_countRestricted` | partly in other libraries; not proved here |  |
 | Section 19.4 (19.4.7, product identity behind Theorem 344) | 385 | prod (1+x^k) = prod 1/(1-x^(2k-1)); analytic form: prod(1+q^n) prod(1-q^(2n+1)) = 1 | `TauCeti.tprod_one_add_pow_mul_tprod_one_sub_pow_odd` | in Tau Ceti only (not a dependency) |  |
 | Theorem 344 | 385 | Partitions of n into unequal parts are as many as partitions into odd parts | `Nat.Partition.card_odds_eq_card_distincts` | in Mathlib |  |
@@ -673,7 +673,7 @@ Rows: 626. proved: 266; in Mathlib: 178; not formalized: 105; partly in other li
 
 | Item | Page | Statement | Lean declaration | Status | Also in |
 |---|---|---|---|---|---|
-| Section 23.1 (Dirichlet's Theorem 201 recalled) | 520 | For any reals, n*theta_i can be made simultaneously close to integers (Dirichlet, simultaneous approximation). | `TauCeti.simultaneous_dirichlet` | in Tau Ceti only (not a dependency) |  |
+| Section 23.1 (Dirichlet's Theorem 201 recalled) | 520 | For any reals, n*theta_i can be made simultaneously close to integers (Dirichlet, simultaneous approximation). | `NTKB.NZM.simultaneous_approximation_general` | proved | Tau Ceti: `TauCeti.simultaneous_dirichlet` |
 | Theorem 438 | 520 | For irrational theta, any alpha, N and eps>0 there are integers n>N, p with \\|n*theta-p-alpha\\|<eps. | `TauCeti.kronecker_approximation_nat` | in Tau Ceti only (not a dependency) |  |
 | Theorem 439 | 521 | For irrational theta the fractional parts (n*theta) are dense in (0,1). | `AddCircle.denseRange_zsmul_coe_iff` | in Mathlib |  |
 | Theorem 440 | 522 | For irrational theta, alpha and N there are n>N and p with \\|n*theta-p-alpha\\| < 3/n (quantitative Kronecker, sharper than 438). | — | not formalized |  |
@@ -727,7 +727,7 @@ Rows: 626. proved: 266; in Mathlib: 178; not formalized: 105; partly in other li
 | Theorem 469 | 581 | For points in (z,w)-coordinates with z_P, z_Q divisible by p^k, z_{P+Q} is congruent to z_P+z_Q mod p^{5k} (the first step of formal group filtration). | — | not formalized |  |
 | Theorem 470 | 584 | (Mordell-Weil) For E over Q the group E(Q) is finitely generated. | `AddCommGroup.fg_of_descent'`, `WeierstrassCurve.Affine.approx_parallelogram_law`, `WeierstrassCurve.Affine.finite_naiveHeight_le` | partly in other libraries; not proved here |  |
 | Theorem 471 | 584 | Structure form of Mordell-Weil: every point is uniquely n1P1+...+nrPr+T with T torsion; r is the rank of E(Q). | `AddCommGroup.equiv_free_prod_directSum_zmod` | partly in other libraries; not proved here |  |
-| Theorem 472 | 584 | Rational points of E have the form (a/d^2, b/d^3) with gcd(a,d)=gcd(b,d)=1. | — | not formalized |  |
+| Theorem 472 | 584 | Rational points of E have the form (a/d^2, b/d^3) with gcd(a,d)=gcd(b,d)=1. | `NTKB.NZM.rational_point_denominators` | proved |  |
 | Theorem 473 | 584 | y^2=x^3+x has rank 0: E(Q)={O,(0,0)}. | `not_fermat_42` | partly in other libraries; not proved here |  |
 | Theorem 474 | 585 | For B in {16,-144,-432,3888}, E_B: y^2=x^3+B has finite E_B(Q) (rank 0). | — | not formalized |  |
 | Theorem 475 | 586 | (Weak Mordell-Weil, starred, no proof in the book) E(Q)/2E(Q) is finite. | — | not formalized |  |
@@ -736,7 +736,7 @@ Rows: 626. proved: 266; in Mathlib: 178; not formalized: 105; partly in other li
 | Section 25.5 (descent: finite index of 2E plus heights give generation) | 590 | With H(P+Q)<=c1 H(P)^2 H(Q)^2 and H(2P)>=c2 H(P)^4, a finite set of bounded height generates E(Q). | `AddCommGroup.fg_of_descent'`, `CommGroup.fg_of_descent` | in Mathlib |  |
 | Section 25.6 (counting points: #E(F_p) = p+1 + sum of Legendre symbols) | 592 | #E(F_p) = 1 + sum_x (1 + (x^3+Ax+B / p)) = p+1+sum_x (x^3+Ax+B/p). | — | not formalized |  |
 | Theorem 477 | 592 | (Hasse bound) \\|#E(F_p)-(p+1)\\| < 2 sqrt p for an elliptic curve over F_p. | — | not formalized |  |
-| Theorem 478 | 593 | The equation y^2=x^3+7 has no integer solutions. | — | not formalized |  |
+| Theorem 478 | 593 | The equation y^2=x^3+7 has no integer solutions. | `NTKB.NZM.no_solution_sq_eq_cube_add_seven` | proved |  |
 | Theorem 479 | 593 | The only integer solutions of y^2=x^3-2 are (3,+-5). | — | not formalized |  |
 | Theorem 480 | 594 | Every integer solution of x^3+y^3=A (A nonzero) satisfies x^2+y^2<=2\\|A\\|. | — | not formalized |  |
 | Theorem 481 | 595 | For d not a cube and A nonzero, x^3+dy^3=A has finitely many integer solutions. | `TauCeti.finite_setOf_mul_pow_add_mul_pow_eq`, `MvPolynomial.IsHomogeneous.finite_setOf_eval_eq` | in Tau Ceti only (not a dependency) |  |

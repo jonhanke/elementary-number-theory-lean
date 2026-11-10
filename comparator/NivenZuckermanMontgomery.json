@@ -1,0 +1,23 @@
+{
+  "challenge_module": "Challenge_NivenZuckermanMontgomery",
+  "solution_module": "Solution_NivenZuckermanMontgomery",
+  "theorem_names": [
+    "NTKB.Headlines.NivenZuckermanMontgomery.proper_representation_iff",
+    "NTKB.Headlines.NivenZuckermanMontgomery.linear_system_local_global",
+    "NTKB.Headlines.NivenZuckermanMontgomery.quartic_eq_square",
+    "NTKB.Headlines.NivenZuckermanMontgomery.rational_points_y_sq_eq_x_cube_sub_four_x",
+    "NTKB.Headlines.NivenZuckermanMontgomery.galois_purely_periodic",
+    "NTKB.Headlines.NivenZuckermanMontgomery.eq_convergent_of_sq_sub_mul_sq",
+    "NTKB.Headlines.NivenZuckermanMontgomery.omega_maximal_order",
+    "NTKB.Headlines.NivenZuckermanMontgomery.partition_bounds",
+    "NTKB.Headlines.NivenZuckermanMontgomery.exists_squarefree_add",
+    "NTKB.Headlines.NivenZuckermanMontgomery.mann_alpha_beta"
+  ],
+  "definition_names": [],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "enable_nanoda": true
+}

@@ -2,10 +2,11 @@
 
 [![Lean build](https://github.com/jonhanke/elementary-number-theory-lean/actions/workflows/build.yml/badge.svg)](https://github.com/jonhanke/elementary-number-theory-lean/actions/workflows/build.yml) [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24088043.svg)](https://doi.org/10.5281/zenodo.24088043)
 
-A Lean 4 library (built on Mathlib) that formalizes two texts of elementary number theory item by item: Hardy and
-Wright's *An Introduction to the Theory of Numbers* (6th edition) and Ireland and Rosen's *A Classical Introduction
-to Modern Number Theory* (Chapters 1 to 11, 15 and 16, and part of Chapter 17), together with the special values of
-Dirichlet $`L`$-functions at the integers. The Lean library is called `NTKB`; the repository is
+A Lean 4 library (built on Mathlib) that formalizes three texts of elementary number theory item by item: Hardy
+and Wright's *An Introduction to the Theory of Numbers* (6th edition), Ireland and Rosen's *A Classical Introduction
+to Modern Number Theory* (Chapters 1 to 11, 15 and 16, and part of Chapter 17) and Niven, Zuckerman and Montgomery's
+*An Introduction to the Theory of Numbers* (5th edition), together with the special values of Dirichlet
+$`L`$-functions at the integers. The Lean library is called `NTKB`; the repository is
 elementary-number-theory-lean.
 
 - **Book maps**: for each book, a table from every result (theorem, proposition, lemma, corollary, result stated in
@@ -30,8 +31,9 @@ elementary-number-theory-lean.
 
 | book | rows | proved | proved in part | conditional | in Mathlib | other | proved here, also elsewhere |
 |---|---|---|---|---|---|---|---|
-| [G. H. Hardy and E. M. Wright, *An Introduction to the Theory of Numbers* (6th ed., 2008)](docs/results/books/hardy-wright.md) | 626 | 266 | 9 | 1 | 178 | 172 | 70 |
-| [K. Ireland and M. Rosen, *A Classical Introduction to Modern Number Theory* (2nd ed., 1990), Chapters 1–11, 15, 16 and the results of Chapter 17 proved here](docs/results/books/ireland-rosen.md) | 401 | 109 | 3 | 0 | 178 | 111 | 42 |
+| [G. H. Hardy and E. M. Wright, *An Introduction to the Theory of Numbers* (6th ed., 2008)](docs/results/books/hardy-wright.md) | 626 | 279 | 14 | 1 | 178 | 154 | 79 |
+| [K. Ireland and M. Rosen, *A Classical Introduction to Modern Number Theory* (2nd ed., 1990), Chapters 1–11, 15, 16 and the results of Chapter 17 proved here](docs/results/books/ireland-rosen.md) | 401 | 120 | 5 | 0 | 178 | 98 | 53 |
+| [I. Niven, H. S. Zuckerman and H. L. Montgomery, *An Introduction to the Theory of Numbers* (5th ed., 1991)](docs/results/books/niven-zuckerman-montgomery.md) | 406 | 194 | 4 | 0 | 191 | 17 | 84 |
 | [Special values of Dirichlet $L$-functions and Gauss's sign of quadratic Gauss sums](docs/results/books/special-values.md) | 25 | 25 | 0 | 0 | 0 | 0 | 3 |
 
 *Proved*: proved with only the standard axioms and no unproved input. *Proved in part*: a part, a special case or one instance is proved. *Conditional*: proved from a named unproved input (here only the abc conjecture, in a note of Hardy–Wright). *In Mathlib*: Mathlib (a dependency) has the result; the map names the Mathlib declaration. *Other*: refuted as stated in the book (the corrected form is proved), in Tau Ceti or PrimeNumberTheoremAnd only (not dependencies), partly formalized elsewhere, or not formalized (see each map). *Proved here, also elsewhere*: rows proved (in whole or in part) here whose result, a part of it or a closely related statement is also in Mathlib, Tau Ceti or PrimeNumberTheoremAnd; each map names those declarations in its column *Also in*. Rows that are not results (definitions, remarks, history, open problems) are omitted from the maps.
@@ -91,6 +93,37 @@ a human** (see Provenance).
   for the exponents 3 and 4 and Sophie Germain's algebraic identity (`pow_four_add_four_mul_pow_four`), not this
   theorem.
 
+**Niven, Zuckerman and Montgomery, *An Introduction to the Theory of Numbers*** ([`Challenge_NivenZuckermanMontgomery.lean`](Challenge_NivenZuckermanMontgomery.lean)) (new in 0.2.0)
+
+- **Proper representations by binary quadratic forms:** for integers $`n \ne 0`$ and $`d`$, some form
+  $`ax^2 + bxy + cy^2`$ of discriminant $`b^2 - 4ac = d`$ represents $`n`$ at a relatively prime pair $`(x, y)`$ if
+  and only if $`d`$ is a square modulo $`4|n|`$ (`proper_representation_iff`, Theorem 3.13). Related: Tau Ceti has
+  binary quadratic forms and their discriminants, not this criterion.
+- **The local-global principle for linear systems:** a system $`Ax = b`$ with integer coefficients that has a real
+  solution and is solvable modulo every $`q \ge 1`$ has an integral solution (`linear_system_local_global`,
+  Theorem 5.2). Related: Mathlib has the Smith normal form, which the proof uses.
+- **$`x^4 + x^3 + x^2 + x + 1 = y^2`$** has exactly the integral solutions $`(-1, \pm1)`$, $`(0, \pm1)`$, $`(3, \pm11)`$
+  (`quartic_eq_square`, Theorem 5.9).
+- **The rational points of $`y^2 = x^3 - 4x`$** are $`(0,0)`$, $`(2,0)`$, $`(-2,0)`$ (and the point at infinity): $`2`$ is
+  not a congruent number (`rational_points_y_sq_eq_x_cube_sub_four_x`, Theorem 5.24). Related: Mathlib has
+  Weierstrass curves and Fermat's last theorem for the exponent 4, not this equation.
+- **Galois's theorem:** the continued fraction of a real quadratic irrational $`\xi`$ is purely periodic if and only if
+  $`\xi > 1`$ and its conjugate lies in $`(-1, 0)`$ (`galois_purely_periodic`, Theorem 7.20). Related: Mathlib has
+  generalized continued fractions and the continued fraction of a real number, not periodicity.
+- **Small values of $`x^2 - dy^2`$:** if $`|N| < \sqrt d`$, every solution of $`s^2 - dt^2 = N`$ in relatively prime
+  positive integers is a convergent of $`\sqrt d`$ (`eq_convergent_of_sq_sub_mul_sq`, Theorem 7.24). Related: Mathlib
+  has the solutions of Pell's equation (`Pell.Solution₁`), not their relation to continued fractions.
+- **The maximal order of $`\omega(n)`$:** for every $`\varepsilon > 0`$, $`\omega(n) < (1+\varepsilon)\log n/\log\log n`$
+  for all large $`n`$, and $`\omega(n) > (1-\varepsilon)\log n/\log\log n`$ for infinitely many $`n`$
+  (`omega_maximal_order`, Theorem 8.30).
+- **Bounds for the partition function:** $`2^{\sqrt n} < p(n) < e^{\pi\sqrt{2n/3}}`$ for $`n \ge 4`$
+  (`partition_bounds`, Theorem 10.12).
+- **Sums of two squarefree numbers:** every integer $`n > 1`$ is the sum of two squarefree positive integers
+  (`exists_squarefree_add`, Theorem 11.2).
+- **Mann's $`\alpha + \beta`$ theorem:** for sets $`A, B`$ of natural numbers containing $`0`$, the Schnirelmann density
+  satisfies $`d(A + B) \ge \min(1, d(A) + d(B))`$ (`mann_alpha_beta`, Theorem 11.10). Related: Mathlib has the
+  Schnirelmann density and the case $`d(A) + d(B) \ge 1`$; Mann's theorem is on its list of things to do.
+
 **Special values of Dirichlet $`L`$-functions** ([`Challenge_SpecialValues.lean`](Challenge_SpecialValues.lean))
 
 - **$`L(1-k,\chi) = -B_{k,\chi}/k`$** for every Dirichlet character $`\chi`$ and every $`k \ge 1`$, with no
@@ -109,9 +142,10 @@ a human** (see Provenance).
   for every $`N`$ (`sum_range_cexp_two_pi_I_sq_div`, ported here with credit), not the Gauss sums of Jacobi or
   Kronecker characters.
 
-**Main statements.** To check what is claimed, read three files: [`Challenge_HardyWright.lean`](Challenge_HardyWright.lean),
-[`Challenge_IrelandRosen.lean`](Challenge_IrelandRosen.lean) and [`Challenge_SpecialValues.lean`](Challenge_SpecialValues.lean)
-state the results above, with a docstring for each and a list of the library definitions the statements use; every
+**Main statements.** To check what is claimed, read four files: [`Challenge_HardyWright.lean`](Challenge_HardyWright.lean),
+[`Challenge_IrelandRosen.lean`](Challenge_IrelandRosen.lean),
+[`Challenge_NivenZuckermanMontgomery.lean`](Challenge_NivenZuckermanMontgomery.lean) and
+[`Challenge_SpecialValues.lean`](Challenge_SpecialValues.lean) state the results above, with a docstring for each and a list of the library definitions the statements use; every
 proof there is a deliberate `sorry`. The matching `Solution_<book>.lean` files prove the same statements by appeal
 to the library theorems, and `lake comparator`, configured per book by `comparator/<book>.json` (the books are
 listed in [`comparator.json`](comparator.json)), checks that each proved statement is exactly the one in the
@@ -125,7 +159,9 @@ method of Selberg and Erdős as in Hardy–Wright, Chapter XXII (`NTKB.HardyWrig
 Selberg's formula `NTKB.HardyWright.selberg_theorem`; PrimeNumberTheoremAnd proves the prime number theorem
 analytically); Dirichlet's theorem in the special cases of Hardy–Wright, Chapter II (Mathlib has Dirichlet's
 theorem); the two-square and four-square theorems in their book forms (Mathlib). Each book map credits, in its
-column *Also in*, the results proved here that Mathlib, Tau Ceti or PrimeNumberTheoremAnd also prove.
+column *Also in*, the results proved here that Mathlib, Tau Ceti or PrimeNumberTheoremAnd also prove. From
+Niven–Zuckerman–Montgomery: simultaneous Diophantine approximation (Theorem 6.25,
+`NTKB.NZM.simultaneous_approximation_general`; Tau Ceti has Dirichlet's simultaneous approximation theorem).
 
 ## Corrections to the books
 
@@ -154,7 +190,7 @@ proves the corrected form ([docs/updates-and-errata.md](docs/updates-and-errata.
 
 ```
 Challenge_<book>.lean   the headline statements of one book (proofs: deliberate sorry);
-                        <book> = HardyWright, IrelandRosen, SpecialValues
+                        <book> = HardyWright, IrelandRosen, NivenZuckermanMontgomery, SpecialValues
 Solution_<book>.lean    the same statements, proved from the library
 comparator.json         the books, each with its lake comparator configuration comparator/<book>.json
 formalization.yaml      scope, sources, divergences, provenance, review (formalization.yaml v0.4)
@@ -166,8 +202,9 @@ NTKB/
   IrelandRosen/R1, R2, R3/  Ireland-Rosen: R1 Chapters 1-7 and 16; R2 Chapters 8, 10, 11 (Gauss and Jacobi sums,
                             equations over finite fields, zeta functions); R3 Chapters 9 and 17 (reciprocity, Z[i],
                             Diophantine equations)
+  Elementary/NZM/           Niven-Zuckerman-Montgomery (the results not already proved for the other books)
   Elementary/SpecialValues/ the special values of Dirichlet L-functions and the quadratic Gauss sums
-  Analytic/Apostol/         supporting files (see below)
+  Analytic/Apostol/, Analytic/Davenport/  supporting files (see below)
   Port/                     files ported from Tau Ceti (Apache 2.0), with credit in their headers
   Attr.lean                 the @[kb] citation attribute
 references.bib          bibliography; the keys used by @[kb]
@@ -177,10 +214,11 @@ scripts/verify-comparator.sh    runs lake comparator for one book with the toolc
 .github/workflows/build.yml  the CI workflow (build, axioms, map names, one comparator check per book)
 ```
 
-**Supporting files outside this release's books.** The books import 20 files of the library's treatment
-of Apostol's *Introduction to Analytic Number Theory* (Jacobi's triple product, the Chebyshev functions and the
-equivalent forms of the prime number theorem, partial summation). They are shipped so that the library builds;
-Apostol's book is not part of this release. Some ported files carry the proofs of Tau Ceti results that the
+**Supporting files outside this release's books.** The books import 35 files of the library's treatment
+of Apostol's *Introduction to Analytic Number Theory* and Davenport's *Multiplicative Number Theory* (Jacobi's triple
+product, the Chebyshev functions and the equivalent forms of the prime number theorem, partial summation, the
+partition function, the reduction of binary quadratic forms). They are shipped so that the library builds; the
+analytic books are not part of this release. Some ported files carry the proofs of Tau Ceti results that the
 library needs (Tau Ceti is not a dependency).
 
 ## Usage
@@ -190,14 +228,15 @@ lake exe cache get       # once: download prebuilt Mathlib
 lake build               # build and check everything
 lake env lean scripts/check_axioms.lean          # axioms of the headline theorems
 ./scripts/verify-comparator.sh HardyWright       # Solution_HardyWright against Challenge_HardyWright
-                                                 # (Linux; needs bubblewrap); likewise IrelandRosen, SpecialValues
+                                                 # (Linux; needs bubblewrap); likewise IrelandRosen,
+                                                 # NivenZuckermanMontgomery, SpecialValues
 ```
 
-Mathlib comes prebuilt from its cache; this library is built from source (176 modules, about 49,000 lines; no file
-imports all of Mathlib, so only the Mathlib modules it needs are loaded). On 8 cores and 31 GB (2026-11-09), with
-Mathlib's cache in place, `lake build` took about 4 minutes, with at most 7.4 GB of memory in use and a largest
-single Lean process of 5.5 GB. Each `lake comparator` check (one book: build, export, and the Lean, NanoDa and
-con-ron kernels) took about 8 minutes, with at most 3.8 GB in use and a largest single process of 4.5 GB
+Mathlib comes prebuilt from its cache; this library is built from source (241 modules, about 64,000 lines; no file
+imports all of Mathlib, so only the Mathlib modules it needs are loaded). On 8 cores and 31 GB (2026-11-10), with
+Mathlib's cache in place, `lake build` took about 6 minutes, with at most 7.3 GB of memory in use and a largest
+single Lean process of 5.6 GB. Each `lake comparator` check (one book: build, export, and the Lean, NanoDa and
+con-ron kernels) took 4 to 8 minutes, with at most 3.8 GB in use and a largest single process of at most 4.6 GB
 (`leanexport`).
 
 ## Provenance
@@ -206,7 +245,7 @@ NTKB was written by AI, with Claude Code (Anthropic): almost entirely by Claude 
 Sonnet 5.5, in October and November 2026. Jonathan Hanke designed and directed it: he chose the books, the results,
 the conventions and the proof routes. The files under `NTKB/Port/` and the files of `NTKB/Elementary/SpecialValues/`
 that say so in their headers contain code ported from Tau Ceti (by the Tau Ceti contributors, Apache 2.0). The proofs
-are checked by the Lean kernel, and CI checks that the headline theorems use only the standard axioms. The 16
+are checked by the Lean kernel, and CI checks that the headline theorems use only the standard axioms. The 26
 headline statements of this release in the `Challenge_<book>.lean` files, and the definitions they use, have **not
 yet been reviewed** by a human; that review is planned for a later release. `lake comparator` checks that each
 `Solution_<book>.lean` proves exactly the statements of its `Challenge_<book>.lean`. The rest of the library (its
@@ -219,11 +258,17 @@ mis-formalizations are very welcome.
 Releases are tagged with semantic versions; `main` continues to develop. The DOI [10.5281/zenodo.24088043](https://doi.org/10.5281/zenodo.24088043) always resolves to the latest release. To cite a specific version, use its release page or the "Cite this repository" button.
 
 - **[v0.1.0](https://github.com/jonhanke/elementary-number-theory-lean/releases/tag/v0.1.0)** (Lean v4.36.0-rc2, Mathlib `1b1ccf4`), archived on Zenodo as [doi:10.5281/zenodo.24088044](https://doi.org/10.5281/zenodo.24088044): the first release: the book maps of Hardy–Wright and
-  Ireland–Rosen, the special values of Dirichlet $`L`$-functions, and the 16 headline statements above.
+  Ireland–Rosen, the special values of Dirichlet $`L`$-functions, and 16 headline statements (those of Hardy–Wright,
+  Ireland–Rosen and the special values above).
+- **v0.2.0** (Lean v4.36.0-rc2, Mathlib `1b1ccf4`): Niven, Zuckerman and Montgomery's *An Introduction to the
+  Theory of Numbers* as the third book: its book map (406 results: 194 proved, 4 proved in part, 191 in Mathlib) and 10 new headline statements
+  (`Challenge_NivenZuckermanMontgomery.lean`); refreshed maps of Hardy–Wright and Ireland–Rosen
+  (32 more rows linked to theorems of the library: Hardy–Wright 279 proved and 14 in part, was 266 and 9;
+  Ireland–Rosen 120 and 5, was 109 and 3); the 16
+  headlines of 0.1.0 unchanged. The comparator check stays one per book (now four, run as a matrix in CI); no file
+  imports all of Mathlib.
 
-**Not in this release** (planned for later releases): Niven, Zuckerman and Montgomery's *An Introduction to the
-Theory of Numbers* (its coverage audit is done, but its rows are not yet linked to the declarations of this library);
-Chapters 12 to 14 and 18 to 20 of Ireland–Rosen (algebraic number theory, the Stickelberger relation and Eisenstein
+**Not in this release** (planned for later releases): Chapters 12 to 14 and 18 to 20 of Ireland–Rosen (algebraic number theory, the Stickelberger relation and Eisenstein
 reciprocity, elliptic curves); the analytic books (Apostol, Davenport), planned for a separate library
 analytic-number-theory-lean.
 

@@ -114,7 +114,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        book: [HardyWright, IrelandRosen, SpecialValues]
+        book: [HardyWright, IrelandRosen, NivenZuckermanMontgomery, SpecialValues]
     steps:
       - name: Free disk space (the comparator exports need it)
         run: |
