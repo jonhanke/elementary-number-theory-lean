@@ -8,6 +8,10 @@ import NTKB.IrelandRosen.R2.LastEntry
 import NTKB.IrelandRosen.R3.Reciprocity
 import NTKB.IrelandRosen.R3.Legendre
 import NTKB.IrelandRosen.R3.SophieGermain
+import NTKB.IrelandRosen.R4.CubicReciprocity
+import NTKB.IrelandRosen.R4.QuarticCurve
+import NTKB.IrelandRosen.R4.Bernoulli.Kummer
+import NTKB.IrelandRosen.R4.Bernoulli.ClassNumber
 
 /-!
 # Proofs of the Ireland–Rosen headline statements
@@ -49,5 +53,28 @@ theorem legendre {a b c : ℤ} (hsa : Squarefree a) (hsb : Squarefree b) (hsc : 
 theorem sophie_germain {p : ℕ} (hp : p.Prime) (hp2 : p ≠ 2) (hq : (2 * p + 1).Prime) :
     ¬ ∃ x y z : ℤ, x ^ p + y ^ p + z ^ p = 0 ∧ ¬ (p : ℤ) ∣ x * y * z :=
   SophieGermain.sophie_germain hp hp2 hq
+
+theorem cube_eq_two_iff {p : ℕ} (hp : p.Prime) (hp3 : p % 3 = 1) :
+    (∃ x : ZMod p, x ^ 3 = 2) ↔ ∃ C D : ℤ, (p : ℤ) = C ^ 2 + 27 * D ^ 2 :=
+  Eisenstein.exists_cube_eq_two_iff hp hp3
+
+theorem points_y_sq_eq_x_cube_sub_D_x {p : ℕ} [Fact p.Prime] (hp : p % 4 = 1) {π : GaussianInt}
+    (hπ : Gaussian.IsPrimary π) (hπp : π.norm = p) {D : ℤ} (hD : ¬ (p : ℤ) ∣ D) :
+    (((1 + (Finset.univ.filter fun xy : ZMod p × ZMod p => xy.2 ^ 2 = xy.1 ^ 3 - D * xy.1).card : ℕ) : ℤ) :
+        GaussianInt) =
+      p + 1 - star (Gaussian.quarticChar π D) * π - Gaussian.quarticChar π D * star π :=
+  numPointsQuarticCurve_eq hp hπ hπp hD
+
+theorem kummer_congruences (p : ℕ) [Fact p.Prime] {e m m' : ℕ} (he : 1 ≤ e)
+    (hm : Even m) (hm0 : m ≠ 0) (hm' : Even m') (hm'0 : m' ≠ 0) (hpm : ¬ p - 1 ∣ m)
+    (hmm' : m' ≡ m [MOD (p ^ e).totient]) :
+    ¬ p ∣ (((1 - (p : ℚ) ^ (m' - 1)) * bernoulli m' / m' -
+      (1 - (p : ℚ) ^ (m - 1)) * bernoulli m / m) / (p : ℚ) ^ e).den :=
+  kummer_congruence p he hm hm0 hm' hm'0 hpm hmm'
+
+theorem class_number_bernoulli {p : ℕ} [Fact p.Prime] (hp : p % 4 = 3) (hp3 : 3 < p) :
+    ¬ p ∣ ((-(1 / (p : ℚ)) * ∑ j ∈ Finset.Ico 1 p, (j : ℚ) * legendreSym p j -
+      -2 * bernoulli ((p + 1) / 2)) / (p : ℚ)).den :=
+  by simpa [PModEq, IsPIntegral, jacobiClassNumber] using jacobiClassNumber_pModEq p hp hp3
 
 end NTKB.Headlines.IrelandRosen

@@ -6,14 +6,14 @@
       "config": "comparator/HardyWright.json",
       "challenge_module": "Challenge_HardyWright",
       "solution_module": "Solution_HardyWright",
-      "theorems": 8
+      "theorems": 10
     },
     {
       "book": "IrelandRosen",
       "config": "comparator/IrelandRosen.json",
       "challenge_module": "Challenge_IrelandRosen",
       "solution_module": "Solution_IrelandRosen",
-      "theorems": 5
+      "theorems": 9
     },
     {
       "book": "SpecialValues",

@@ -9,9 +9,11 @@ import NTKB.Elementary.HardyWright.Partitions.Basic
 import NTKB.Elementary.HardyWright.Partitions.Ramanujan
 import NTKB.Elementary.HardyWright.Partitions.RogersRamanujan
 import NTKB.Elementary.HardyWright.SumsOfSquares.Jacobi.FourSquares
+import NTKB.Elementary.HardyWright.SumsOfSquares.ThreeSquares.Theorem
+import NTKB.Elementary.HardyWright.SumsOfSquares.Theta.EightSquares
 
 /-!
-# Headline statements of elementary-number-theory-lean 0.1.0: Hardy and Wright
+# Headline statements of elementary-number-theory-lean: Hardy and Wright
 
 G. H. Hardy and E. M. Wright, *An Introduction to the Theory of Numbers* (6th edition, 2008). The main results of
 the library for this book, one theorem each, with every proof a deliberate `sorry`: to check what is claimed, read
@@ -31,6 +33,10 @@ these too:
 * `NTKB.Apostol.qPoch` (the `q`-Pochhammer symbol `(q; q)_n = ∏_{k=1}^n (1 - q^k)`)
 * `NTKB.HardyWright.sumFourSquaresCount` (`r₄(n)`, the number of `(a, b, c, d) ∈ ℤ⁴` with
   `a² + b² + c² + d² = n`)
+* `NTKB.HardyWright.sumSquaresCount` (`r_k(n)`, the number of `z ∈ ℤᵏ` with `z₁² + ⋯ + z_k² = n`)
+
+The first eight statements are those of release 0.1.0; `three_squares` and `jacobi_eight_squares` are new in
+release 0.3.0.
 -/
 
 namespace NTKB.Headlines.HardyWright
@@ -89,6 +95,22 @@ theorem rogers_ramanujan_two {x : ℂ} (hx : ‖x‖ < 1) :
 not divisible by `4`. Mathlib has Lagrange's theorem (`Nat.sum_four_squares`: `r₄(n) > 0`), not the count. -/
 theorem jacobi_four_squares {n : ℕ} (hn : 0 < n) :
     NTKB.HardyWright.sumFourSquaresCount n = 8 * ∑ d ∈ n.divisors.filter (fun d => ¬ 4 ∣ d), d := by
+  sorry
+
+/-- **The three-square theorem** (Section 20.10; Legendre, Gauss). A natural number is a sum of three squares if
+and only if it is not of the form `4ᵃ(8m + 7)`. The book states it without proof; the library proves it by
+Dirichlet's method (ternary forms of determinant 1, Minkowski's convex body theorem and Dirichlet's theorem on primes
+in progressions). Mathlib has the two- and four-square theorems; neither Mathlib nor Tau Ceti has this one. -/
+theorem three_squares (n : ℕ) :
+    (∃ x y z : ℕ, n = x ^ 2 + y ^ 2 + z ^ 2) ↔ ∀ a m : ℕ, n ≠ 4 ^ a * (8 * m + 7) := by
+  sorry
+
+/-- **Jacobi's eight-square theorem** (Section 20.13, formula (20.13.2)): for `n ≥ 1`, the number `r₈(n)` of
+`z ∈ ℤ⁸` with `z₁² + ⋯ + z₈² = n` is `16 ∑_{d ∣ n} (-1)^{n+d} d³`. The book states it without proof; the library
+proves `θ⁸ = (E₄(τ/2) - 2E₄(τ) + 16E₄(2τ))/15` with modular forms of level one. Neither Mathlib nor Tau Ceti has
+this count. -/
+theorem jacobi_eight_squares {n : ℕ} (hn : 0 < n) :
+    (NTKB.HardyWright.sumSquaresCount 8 n : ℤ) = 16 * ∑ d ∈ n.divisors, (-1) ^ (n + d) * (d : ℤ) ^ 3 := by
   sorry
 
 end NTKB.Headlines.HardyWright

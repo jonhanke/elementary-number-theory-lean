@@ -2,7 +2,7 @@
 
 Each row is a result of the book, the Lean declarations that formalize it, and its status, computed from the Lean kernel (an audit of the axioms and hypotheses of every declaration): *proved* means proved with only the standard axioms and no unproved input; *proved in part* that a part, a special case or one instance is proved; *proved, conditional* that an unproved input (a named statement) is assumed; *refuted as stated in the book* that the library proves the printed statement false and proves a corrected form (see the errata in the README); *in Mathlib* that Mathlib (a dependency) has the result and the Lean name is Mathlib's. Results that are only in Tau Ceti or PrimeNumberTheoremAnd (which this library does not depend on) are marked so. The statements in the third column are short descriptions, not quotations; read the book for the exact wording. The column *Also in* credits other libraries: Mathlib, Tau Ceti or PrimeNumberTheoremAnd declarations that prove the result, a part of it, or a closely related statement (as recorded by the coverage audit). Pages are pages of the pdf file of the 6th edition; theorems are numbered globally, as in the book.
 
-Rows: 626. proved: 279; in Mathlib: 178; not formalized: 96; partly in other libraries; not proved here: 36; proved in part: 14; in Tau Ceti only (not a dependency): 12; in PrimeNumberTheoremAnd only (not a dependency): 6; refuted as stated in the book; corrected form proved: 4; proved, conditional: 1. Proved here and also in another library: 79.
+Rows: 626. proved: 281; in Mathlib: 178; not formalized: 94; partly in other libraries; not proved here: 36; proved in part: 14; in Tau Ceti only (not a dependency): 12; in PrimeNumberTheoremAnd only (not a dependency): 6; refuted as stated in the book; corrected form proved: 4; proved, conditional: 1. Proved here and also in another library: 79.
 
 
 ## Chapter I. The series of primes (1)
@@ -583,14 +583,14 @@ Rows: 626. proved: 279; in Mathlib: 178; not formalized: 96; partly in other lib
 | Theorem 378 | 426 | A rational prime is not a prime quaternion | `NTKB.HardyWright.not_irreducible_natCast` | proved |  |
 | Theorem 379 | 428 | For odd prime p, 4p is a sum of four odd squares | `NTKB.HardyWright.four_mul_prime_eq_sum_four_odd_sq` | proved |  |
 | Theorem 380 | 428 | g(2) = G(2) = 4 | `NTKB.HardyWright.waringNumber_two`, `NTKB.HardyWright.asymptoticWaringNumber_two`, `NTKB.HardyWright.four_le_of_eventually_isSumOfPowers_two` | proved | Mathlib: `Nat.sum_four_squares` |
-| Section 20.10 (three-square theorem) | 428 | n is a sum of three squares iff n is not of the form 4^a(8m+7) (Legendre-Gauss); stated without proof | `NTKB.HardyWright.not_isSumOfPowers_two_three` | proved in part |  |
+| Section 20.10 (three-square theorem) | 428 | n is a sum of three squares iff n is not of the form 4^a(8m+7) (Legendre-Gauss); stated without proof | `NTKB.HardyWright.exists_sq_add_sq_add_sq_iff`, `NTKB.HardyWright.isSumOfPowers_two_three_iff`, `NTKB.HardyWright.exists_sq_add_sq_add_sq_of_ne`, `NTKB.HardyWright.not_isSumOfPowers_two_three` | proved |  |
 | Theorem 381 | 429 | sum over m of u_m(1+u_m) = sum n u_n, with u_r = x^r/(1-x^r) | `NTKB.HardyWright.tsum_lambertU_mul_one_add`, `NTKB.HardyWright.lambertU` | proved |  |
 | Theorem 382 | 430 | sum (-1)^(m-1) u_(2m)(1+u_(2m)) = sum (2n-1) x^(4n-2)/(1-x^(4n-2)) | `NTKB.HardyWright.tsum_neg_one_pow_lambertU` | proved |  |
 | Theorem 383 | 430 | Cotangent identity L^2 = T1 + T2 for L = (1/4)cot(theta/2) + sum u_n sin n theta | `NTKB.HardyWright.cotangent_identity` | proved |  |
 | Theorem 384 | 433 | (1/4 + u1 - u3 + u5 - u7 + ...)^2 = (1/16) + 2(u1 + 2u2 + 3u3 + 5u5 + ...) (no u_4k terms) | `NTKB.HardyWright.sq_quarter_add_chi4` | proved |  |
 | Theorem 385 | 433 | (1+2x+2x^4+2x^9+...)^4 = 1 + 8 sum m x^m/(1+(-x)^m), m not multiple of 4 | `NTKB.HardyWright.theta_pow_four` | proved |  |
 | Theorem 386 | 434 | Jacobi: the number of representations of n as an ordered signed sum of four squares is 8 times the sum of divisors of n not divisible by 4 | `NTKB.HardyWright.sumFourSquaresCount_eq`, `NTKB.HardyWright.hasSum_sumFourSquaresCount` | proved |  |
-| Section 20.13 (r6(n) and r8(n) formulas) | 434 | Formulae for the number of representations as six and eight squares in terms of divisor sums (Jacobi) | — | not formalized |  |
+| Section 20.13 (r6(n) and r8(n) formulas) | 434 | Formulae for the number of representations as six and eight squares in terms of divisor sums (Jacobi) | `NTKB.HardyWright.sumSquaresCount_eight_eq`, `NTKB.HardyWright.EightSquares.jacobiTheta_pow_eight`, `NTKB.HardyWright.hasSum_sumSquaresCount`, `NTKB.HardyWright.sumSquaresCount`, `NTKB.HardyWright.JacobiSixSquares` | proved in part |  |
 | Section 20.13 notes (Conway-Schneeberger fifteen theorem) | 436 | A positive-definite integral quadratic form representing 1 to 15 represents all positive integers | — | not formalized |  |
 
 ## Chapter XXI. Representation by cubes and higher powers
@@ -734,7 +734,7 @@ Rows: 626. proved: 279; in Mathlib: 178; not formalized: 96; partly in other lib
 | Section 25.5 (finitely many rational points of bounded height) | 586 | Only finitely many points of E(Q) have height below any bound. | `WeierstrassCurve.Affine.finite_naiveHeight_le` | in Mathlib |  |
 | Theorem 476 | 587 | For integral E there are c1,c2>0 with H(P+Q)<=c1 H(P)^2 H(Q)^2 and H(2P)>=c2 H(P)^4 for rational points. | `WeierstrassCurve.Affine.approx_parallelogram_law` | partly in other libraries; not proved here |  |
 | Section 25.5 (descent: finite index of 2E plus heights give generation) | 590 | With H(P+Q)<=c1 H(P)^2 H(Q)^2 and H(2P)>=c2 H(P)^4, a finite set of bounded height generates E(Q). | `AddCommGroup.fg_of_descent'`, `CommGroup.fg_of_descent` | in Mathlib |  |
-| Section 25.6 (counting points: #E(F_p) = p+1 + sum of Legendre symbols) | 592 | #E(F_p) = 1 + sum_x (1 + (x^3+Ax+B / p)) = p+1+sum_x (x^3+Ax+B/p). | — | not formalized |  |
+| Section 25.6 (counting points: #E(F_p) = p+1 + sum of Legendre symbols) | 592 | #E(F_p) = 1 + sum_x (1 + (x^3+Ax+B / p)) = p+1+sum_x (x^3+Ax+B/p). | `NTKB.HardyWright.natCard_point_short_eq`, `NTKB.HardyWright.natCard_point_eq`, `NTKB.HardyWright.card_equation_eq` | proved |  |
 | Theorem 477 | 592 | (Hasse bound) \\|#E(F_p)-(p+1)\\| < 2 sqrt p for an elliptic curve over F_p. | — | not formalized |  |
 | Theorem 478 | 593 | The equation y^2=x^3+7 has no integer solutions. | `NTKB.NZM.no_solution_sq_eq_cube_add_seven` | proved |  |
 | Theorem 479 | 593 | The only integer solutions of y^2=x^3-2 are (3,+-5). | — | not formalized |  |
