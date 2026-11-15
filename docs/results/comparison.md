@@ -5,7 +5,9 @@ Libraries searched (source trees of 2026-11-07 and 2026-11-08): Mathlib master `
 Mathlib `1b1ccf4`, an earlier commit), Tau Ceti main `d2083f0f`, PrimeNumberTheoremAnd `127b50e`. A result is a
 headline only if none of the three has it, or if the form here is stronger; the related results are cited. The
 searches were by name and by content (statements read); "not found" means that no declaration of that content was
-found, not a proof of absence.
+found, not a proof of absence. The six headlines new in release 0.3.0 were searched again on 2026-11-15 in Mathlib
+`1b1ccf4` (the dependency; the proofs' authors also searched Mathlib master `4cf60f1d`), Tau Ceti main `9f43ade0`
+and PrimeNumberTheoremAnd `a4fb6989`.
 
 ## Headlines
 
@@ -17,11 +19,17 @@ found, not a proof of absence.
 | `HardyWright.ramanujan_five`, `ramanujan_seven` (Theorems 359, 360) | partitions (`Nat.Partition`), Euler's generating functions; no congruence | not found | not found (its "Ramanujan" files are about Ramanujan's prime inequality) |
 | `HardyWright.rogers_ramanujan_one`, `rogers_ramanujan_two` (Theorems 362, 363) | not found | not found | — |
 | `HardyWright.jacobi_four_squares` (Theorem 386) | Lagrange's four-square theorem (`Nat.sum_four_squares`), Euler's identity | Euler's identity for quadratic maps; no count | — |
+| `HardyWright.three_squares` (Section 20.10; new in 0.3.0) | the two-square theorem (`Nat.eq_sq_add_sq_iff`), Lagrange's four-square theorem; Minkowski's convex body theorem and Dirichlet's theorem on primes in progressions (used in the proof) | not found (quadratic forms over local and global fields, theta series of lattices; no three-square theorem) | — |
+| `HardyWright.jacobi_eight_squares` (Section 20.13; new in 0.3.0) | Jacobi's theta function, the Eisenstein series `E₄` and its `q`-expansion, the discriminant `Δ` (used in the proof); no count of representations | theta series of lattices on congruence subgroups, `r_{E₈}(2m) = 240 σ₃(m)` for the `E₈` root lattice (`ThetaSeries/E8.lean`), the theta series of `ℤ` (`ZLattice.thetaSeries_span_one`); not `r₈` for `ℤ⁸` | — |
 | `IrelandRosen.hasse_davenport` (Chapter 11, § 3) | Gauss sums, `gaussSum_sq`, `gaussSum_mul_gaussSum_eq_card`, Jacobi sums | Jacobi sums of cubic and quartic characters (`gaussSum_pow_three_eq_card_mul_jacobiSum`); not the relation | — |
 | `IrelandRosen.biquadratic_reciprocity` (Chapter 9, § 9) | quadratic reciprocity | cubic reciprocity (`IsPrimaryEisenstein.cubic_reciprocity`); the quartic residue symbol of `ℤ[i]` with its supplementary laws (`IsPrimaryGaussian.powerResidueSymbolIdeal_mk_toInteger`, `powerResidueSymbolIdeal_intCast_four`); not this law | — |
 | `IrelandRosen.gauss_last_entry` (Chapter 11, § 5) | not found | not found | — |
 | `IrelandRosen.legendre` (Proposition 17.3.1) | not found | isotropy of quadratic forms over number fields place by place (`NumberTheory/QuadraticForm/Global/`), not this criterion | — |
 | `IrelandRosen.sophie_germain` (Proposition 17.4.1) | Fermat's last theorem for the exponents 3 and 4; Sophie Germain's identity (`pow_four_add_four_mul_pow_four`) | not found | — |
+| `IrelandRosen.cube_eq_two_iff` (Proposition 9.6.2; new in 0.3.0) | not found | cubic reciprocity (`IsPrimaryEisenstein.cubic_reciprocity`); the splitting field of `X³ - 2` as a Galois example (`Chebotarev/FixedField/S3Contraction.lean`); not this criterion | — |
+| `IrelandRosen.points_y_sq_eq_x_cube_sub_D_x` (Chapter 18, Theorem 5; new in 0.3.0) | Weierstrass curves and their points; no point count | Hasse's bound for every elliptic curve over a finite field (`WeierstrassCurve.hasse_bound`); point counts of `y² = x³ ± x` over `𝔽₃` and `𝔽₅` as worked examples (`Isogeny/Frobenius/WorkedExamples.lean`); Jacobi sums of quartic characters; not this formula | — |
+| `IrelandRosen.kummer_congruences` (Chapter 15, § 2, Theorem 5; new in 0.3.0) | Bernoulli numbers, the theorem of von Staudt and Clausen (`vonStaudt_clausen`, `dvd_den_bernoulli`); no Kummer congruence | not found | — |
+| `IrelandRosen.class_number_bernoulli` (Chapter 15, § 2; new in 0.3.0) | the residue of the Dedekind zeta function (analytic class number formula of every number field); no congruence | the class number formula of imaginary quadratic fields (`TauCeti.NumberField.classNumber_eq_card_units_mul_LFunction_one`); no congruence with Bernoulli numbers | — |
 | `NivenZuckermanMontgomery.proper_representation_iff` (Theorem 3.13) | not found | binary quadratic forms, their discriminants and proper equivalence (`BinaryQuadraticForm`); a primitive form properly represents an integer prime to a given one (`United.lean`); not this criterion | — |
 | `NivenZuckermanMontgomery.linear_system_local_global` (Theorem 5.2) | the Smith normal form of submodules over a principal ideal domain (`Submodule.smithNormalForm`, used in the proof); not this theorem | not found | — |
 | `NivenZuckermanMontgomery.quartic_eq_square` (Theorem 5.9) | not found | not found | — |
@@ -49,9 +57,17 @@ found, not a proof of absence.
 | The number of representations by a positive definite binary form, `r_f(n) = w(f) H_f(n)` (Niven–Zuckerman–Montgomery, Theorem 3.27) | proved here; not chosen as a headline because its statement needs several definitions of the library (automorphs, the count `H_f`); a candidate for a later release. |
 | The splitting of rational primes in a quadratic field with unique factorization (Niven–Zuckerman–Montgomery, Theorem 9.29) | only part (a) proved; parts (b) to (e) stated, not proved. |
 
+| Cubic reciprocity and its supplement (Ireland–Rosen, Chapter 9, § 3, Theorems 1 and 1'; `NTKB.IrelandRosen.Eisenstein.cubic_reciprocity`) | proved here (the supplement in the rational case the book proves); Tau Ceti has cubic reciprocity, so not a headline. Its consequence 9.6.2 is a headline. |
+| Hasse's bound `\|N_p - (p + 1)\| ≤ 2√p` for `y² = x³ - Dx` and `y² = x³ + D` (`abs_numPointsQuarticCurve_sub_le`, `abs_numPointsCubicCurve_sub_le`) | proved here from `\|π\|² = p`; Tau Ceti has Hasse's bound for every elliptic curve over a finite field, so not a headline. |
+| The number of points of `y² = x³ + D` over `𝔽_p` by sextic characters (Ireland–Rosen, Chapter 18, Theorem 4; `NTKB.IrelandRosen.numPointsCubicCurve_eq`) | proved here; not chosen (the companion of the headline Theorem 5, with a sextic residue symbol defined in the library). |
+| Jacobi's formula for `r₆(n)` (Hardy–Wright, (20.13.1)) | not proved (stated as `NTKB.HardyWright.JacobiSixSquares`); see Known restrictions in the README. |
+| `h(-p) ≡ -2B_{(p+1)/2} (mod p)` with the class number of the field `ℚ(√-p)` (`NTKB.IrelandRosen.classNumber_pModEq_bernoulli`) | proved from two cited results assumed as named statements (discriminants of quadratic fields; the number of ideals of given norm), so not a headline; the headline states the congruence for Jacobi's expression of the class number, unconditionally. |
+| Primes in a progression have Dirichlet density `1/φ(m)` (Ireland–Rosen, Chapter 16, Theorem 1; `NTKB.IrelandRosen.hasDirichletDensity_modEq`) | proved here; Mathlib has the natural-density form of Dirichlet's theorem and the definition of Dirichlet density for number fields, so not a headline. |
+| Carlitz: infinitely many irregular primes (Ireland–Rosen, Chapter 15, § 2, Theorem 6; `NTKB.IrelandRosen.infinite_setOf_isIrregularPrime`) | proved here; not chosen in favour of the Kummer congruences it is derived from (a candidate for a later release). |
+
 ## Results proved here that the other libraries also prove
 
-Each book map lists them in its column *Also in*: 70 rows of Hardy–Wright (mostly results with a weaker or
+Each book map lists them in its column *Also in*: 79 rows of Hardy–Wright (mostly results with a weaker or
 differently stated Mathlib or PrimeNumberTheoremAnd form, for example the Chebyshev bounds and the prime number
-theorem), 42 of Ireland–Rosen (mostly finite fields, Gauss and Jacobi sums, with Mathlib or Tau Ceti forms), and 3
-of the special values (ports of Tau Ceti theorems).
+theorem), 66 of Ireland–Rosen (mostly finite fields, Gauss and Jacobi sums, with Mathlib or Tau Ceti forms), 84 of
+Niven–Zuckerman–Montgomery, and 3 of the special values (ports of Tau Ceti theorems).

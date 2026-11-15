@@ -9,6 +9,8 @@ import NTKB.Elementary.HardyWright.Partitions.Basic
 import NTKB.Elementary.HardyWright.Partitions.Ramanujan
 import NTKB.Elementary.HardyWright.Partitions.RogersRamanujan
 import NTKB.Elementary.HardyWright.SumsOfSquares.Jacobi.FourSquares
+import NTKB.Elementary.HardyWright.SumsOfSquares.ThreeSquares.Theorem
+import NTKB.Elementary.HardyWright.SumsOfSquares.Theta.EightSquares
 
 /-!
 # Proofs of the Hardy–Wright headline statements
@@ -53,5 +55,13 @@ theorem rogers_ramanujan_two {x : ℂ} (hx : ‖x‖ < 1) :
 theorem jacobi_four_squares {n : ℕ} (hn : 0 < n) :
     NTKB.HardyWright.sumFourSquaresCount n = 8 * ∑ d ∈ n.divisors.filter (fun d => ¬ 4 ∣ d), d :=
   NTKB.HardyWright.sumFourSquaresCount_eq hn
+
+theorem three_squares (n : ℕ) :
+    (∃ x y z : ℕ, n = x ^ 2 + y ^ 2 + z ^ 2) ↔ ∀ a m : ℕ, n ≠ 4 ^ a * (8 * m + 7) :=
+  NTKB.HardyWright.exists_sq_add_sq_add_sq_iff n
+
+theorem jacobi_eight_squares {n : ℕ} (hn : 0 < n) :
+    (NTKB.HardyWright.sumSquaresCount 8 n : ℤ) = 16 * ∑ d ∈ n.divisors, (-1) ^ (n + d) * (d : ℤ) ^ 3 :=
+  NTKB.HardyWright.sumSquaresCount_eight_eq hn
 
 end NTKB.Headlines.HardyWright

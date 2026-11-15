@@ -6,7 +6,11 @@
     "NTKB.Headlines.IrelandRosen.biquadratic_reciprocity",
     "NTKB.Headlines.IrelandRosen.gauss_last_entry",
     "NTKB.Headlines.IrelandRosen.legendre",
-    "NTKB.Headlines.IrelandRosen.sophie_germain"
+    "NTKB.Headlines.IrelandRosen.sophie_germain",
+    "NTKB.Headlines.IrelandRosen.cube_eq_two_iff",
+    "NTKB.Headlines.IrelandRosen.points_y_sq_eq_x_cube_sub_D_x",
+    "NTKB.Headlines.IrelandRosen.kummer_congruences",
+    "NTKB.Headlines.IrelandRosen.class_number_bernoulli"
   ],
   "definition_names": [],
   "permitted_axioms": [
