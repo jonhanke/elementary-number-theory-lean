@@ -350,7 +350,7 @@ Releases are tagged with semantic versions; `main` continues to develop. The DOI
   Ireland–Rosen 120 and 5, was 109 and 3); the 16
   headlines of 0.1.0 unchanged. The comparator check stays one per book (now four, run as a matrix in CI); no file
   imports all of Mathlib.
-- **v0.3.0** (Lean v4.36.0-rc2, Mathlib `1b1ccf4`), archived on Zenodo as [doi:10.5281/zenodo.24257518](https://doi.org/10.5281/zenodo.24257518):
+- **[v0.3.0](https://github.com/jonhanke/elementary-number-theory-lean/releases/tag/v0.3.0)** (Lean v4.36.0-rc2, Mathlib `1b1ccf4`), archived on Zenodo as [doi:10.5281/zenodo.24257518](https://doi.org/10.5281/zenodo.24257518):
   cubic reciprocity and curves over finite fields, quadratic residues for every modulus, Dirichlet density, the
   Bernoulli congruences of Ireland–Rosen § 15.2, the three-square theorem and Jacobi's eight-square theorem (see
   [What's new in 0.3.0](#whats-new-in-030)); 6 new headline statements (Ireland–Rosen 4, Hardy–Wright 2), the 26
