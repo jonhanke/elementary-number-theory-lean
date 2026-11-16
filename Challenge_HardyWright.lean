@@ -11,6 +11,8 @@ import NTKB.Elementary.HardyWright.Partitions.RogersRamanujan
 import NTKB.Elementary.HardyWright.SumsOfSquares.Jacobi.FourSquares
 import NTKB.Elementary.HardyWright.SumsOfSquares.ThreeSquares.Theorem
 import NTKB.Elementary.HardyWright.SumsOfSquares.Theta.EightSquares
+import NTKB.Elementary.HardyWright.SumsOfSquares.Theta.SixSquares
+import NTKB.Elementary.HardyWright.SumsOfSquares.Theta.TwelveSquares
 
 /-!
 # Headline statements of elementary-number-theory-lean: Hardy and Wright
@@ -36,7 +38,11 @@ these too:
 * `NTKB.HardyWright.sumSquaresCount` (`r_k(n)`, the number of `z ∈ ℤᵏ` with `z₁² + ⋯ + z_k² = n`)
 
 The first eight statements are those of release 0.1.0; `three_squares` and `jacobi_eight_squares` are new in
-release 0.3.0.
+release 0.3.0; `jacobi_six_squares` and `glaisher_twelve_squares` are new in release 0.4.0 (besides `sumSquaresCount`
+they use only Mathlib's definitions: `ZMod.χ₄`, `HasSum`, `tprod`).
+
+Not a headline (stated, not proved): Liouville's formula for `r₁₀(n)` is stated in the library as the proposition
+`NTKB.HardyWright.LiouvilleTenSquares`, assumed nowhere.
 -/
 
 namespace NTKB.Headlines.HardyWright
@@ -111,6 +117,30 @@ proves `θ⁸ = (E₄(τ/2) - 2E₄(τ) + 16E₄(2τ))/15` with modular forms of
 this count. -/
 theorem jacobi_eight_squares {n : ℕ} (hn : 0 < n) :
     (NTKB.HardyWright.sumSquaresCount 8 n : ℤ) = 16 * ∑ d ∈ n.divisors, (-1) ^ (n + d) * (d : ℤ) ^ 3 := by
+  sorry
+
+/-- **Jacobi's six-square theorem** (Section 20.13, formula (20.13.1)): for `n ≥ 1`, the number `r₆(n)` of
+`z ∈ ℤ⁶` with `z₁² + ⋯ + z₆² = n` is `16 ∑_{d ∣ n} χ(n/d) d² - 4 ∑_{d ∣ n} χ(d) d²`, with `χ` the non-principal
+character modulo 4 (Mathlib's `ZMod.χ₄`). The book states it without proof; the library proves a theta identity for
+`θ⁶` with an Eisenstein-type lattice sum of weight 3 by modular forms of level one. Neither Mathlib nor Tau Ceti has this count. -/
+theorem jacobi_six_squares {n : ℕ} (hn : 0 < n) :
+    (NTKB.HardyWright.sumSquaresCount 6 n : ℂ) =
+      16 * ∑ d ∈ n.divisors, ((ZMod.χ₄ ((n / d : ℕ) : ZMod 4) : ℤ) : ℂ) * (d : ℂ) ^ 2 -
+        4 * ∑ d ∈ n.divisors, ((ZMod.χ₄ (d : ZMod 4) : ℤ) : ℂ) * (d : ℂ) ^ 2 := by
+  sorry
+
+/-- **Glaisher's twelve-square theorem** (beyond the book; J. W. L. Glaisher, 1907; see E. Grosswald,
+*Representations of Integers as Sums of Squares*, 1985). Let `a(n)` be the coefficients of
+`q ∏_{m ≥ 1} (1 - q^{2m})¹² = η(2z)¹²` (`q = e^{2πiz}`), the cusp form of weight 6 and level 4. Then for `n ≥ 1`
+`r₁₂(n) = 8 ∑_{d ∣ n} (-1)^{n + d + n/d + 1} d⁵ + 16 a(n)`. The coefficients `a(n)` are determined by the power
+series identity on the unit disc. The library proves `κ θ¹² = L + c η(2z)¹²` with a lattice sum `L` of weight 6 by
+modular forms of level one. Neither Mathlib nor Tau Ceti has this count (Tau Ceti has theta
+series of lattices as modular forms, not this identity). -/
+theorem glaisher_twelve_squares :
+    ∃ a : ℕ → ℤ, (∀ q : ℂ, ‖q‖ < 1 →
+        HasSum (fun n => (a n : ℂ) * q ^ n) (q * ∏' m : ℕ, (1 - q ^ (2 * (m + 1))) ^ 12)) ∧
+      ∀ n : ℕ, 0 < n → (NTKB.HardyWright.sumSquaresCount 12 n : ℤ) =
+        8 * ∑ d ∈ n.divisors, (-1) ^ (n + d + n / d + 1) * (d : ℤ) ^ 5 + 16 * a n := by
   sorry
 
 end NTKB.Headlines.HardyWright

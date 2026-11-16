@@ -10,7 +10,13 @@
     "NTKB.Headlines.IrelandRosen.cube_eq_two_iff",
     "NTKB.Headlines.IrelandRosen.points_y_sq_eq_x_cube_sub_D_x",
     "NTKB.Headlines.IrelandRosen.kummer_congruences",
-    "NTKB.Headlines.IrelandRosen.class_number_bernoulli"
+    "NTKB.Headlines.IrelandRosen.class_number_bernoulli",
+    "NTKB.Headlines.IrelandRosen.class_number_bernoulli_field",
+    "NTKB.Headlines.IrelandRosen.hecke_character_quartic_curve_split",
+    "NTKB.Headlines.IrelandRosen.hecke_character_quartic_curve_inert",
+    "NTKB.Headlines.IrelandRosen.hecke_character_cubic_curve_split",
+    "NTKB.Headlines.IrelandRosen.hecke_character_cubic_curve_inert",
+    "NTKB.Headlines.IrelandRosen.mordell_class_number"
   ],
   "definition_names": [],
   "permitted_axioms": [

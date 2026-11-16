@@ -12,6 +12,10 @@ import NTKB.IrelandRosen.R4.CubicReciprocity
 import NTKB.IrelandRosen.R4.QuarticCurve
 import NTKB.IrelandRosen.R4.Bernoulli.Kummer
 import NTKB.IrelandRosen.R4.Bernoulli.ClassNumber
+import NTKB.IrelandRosen.R4.Bernoulli.ClassNumberField
+import NTKB.IrelandRosen.R5.HeckeGaussian
+import NTKB.IrelandRosen.R5.HeckeEisenstein
+import NTKB.IrelandRosen.R5.MordellClassNumber
 
 /-!
 # Headline statements of elementary-number-theory-lean: Ireland and Rosen
@@ -42,9 +46,22 @@ these too:
 * `NTKB.IrelandRosen.Legendre.HasSol` (`ax² + by² + cz² = 0` has a nontrivial integral solution),
   `NTKB.IrelandRosen.Legendre.SqMod` (`m` is a square modulo `n`)
 
+* (since 0.4.0) `NTKB.IrelandRosen.CM.heckeCharQuartic D` (the Hecke character of `ℚ(i)` of `y² = x³ - Dx`:
+  `α ↦ conj((D/α)₄) α'` for `α` prime to `2D`, `α'` the primary associate of `α`, and `0` otherwise),
+  `NTKB.HardyWright.ZRho` (`ℤ[ω]`, `ω² = -1 - ω`, as Mathlib's `QuadraticAlgebra ℤ (-1) (-1)`),
+  `NTKB.IrelandRosen.Eisenstein.IsPrimary` (`π ≡ 2 mod 3` in `ℤ[ω]`) and
+  `NTKB.IrelandRosen.CM.heckeCharSextic D` (the Hecke character of `ℚ(ω)` of `y² = x³ + D`, completely multiplicative
+  on the elements prime to `6D`, `0` on the others; at a prime `ρ` of rational prime norm it is
+  `-conj((4D/ρ')₆) ρ'`, `ρ'` the primary associate, with the sextic residue symbol
+  `NTKB.IrelandRosen.Eisenstein.sexticChar`, and at an inert prime `-ρ'`); the local polynomial and the places of `ℚ`
+  are Mathlib's (`WeierstrassCurve.localPolynomial`, `IsDedekindDomain.HeightOneSpectrum`,
+  `Rat.HeightOneSpectrum.primesEquiv`)
+
 The first five statements are those of release 0.1.0; `cube_eq_two_iff`, `points_y_sq_eq_x_cube_sub_D_x`,
 `kummer_congruences` and `class_number_bernoulli` are new in release 0.3.0 and use only Mathlib's definitions besides
-those above (`bernoulli`, `legendreSym`, `Nat.totient`).
+those above (`bernoulli`, `legendreSym`, `Nat.totient`). New in release 0.4.0: `class_number_bernoulli_field` and
+`mordell_class_number` (only Mathlib's definitions: `NumberField.classNumber`, `QuadraticAlgebra`), and the four local
+forms of Theorems 7 and 8 of Chapter 18 (the Hecke characters above).
 -/
 
 namespace NTKB.Headlines.IrelandRosen
@@ -140,6 +157,80 @@ assumed as named statements (see the README, Known restrictions). Neither Mathli
 theorem class_number_bernoulli {p : ℕ} [Fact p.Prime] (hp : p % 4 = 3) (hp3 : 3 < p) :
     ¬ p ∣ ((-(1 / (p : ℚ)) * ∑ j ∈ Finset.Ico 1 p, (j : ℚ) * legendreSym p j -
       -2 * bernoulli ((p + 1) / 2)) / (p : ℚ)).den := by
+  sorry
+
+/-- **The class number of `ℚ(√-p)` and a Bernoulli number** (Chapter 15, § 2, after Proposition 15.2.3), new in
+0.4.0 for the class number of the field itself, with no assumed input. For a prime `p ≡ 3 (mod 4)`, `p > 3`, and the
+quadratic number field `K` of discriminant `-p`, `h(K) ≡ -2 B_{(p+1)/2} (mod p)`: the difference divided by `p` is a
+rational number whose denominator is prime to `p`. Here `h(K)` is Mathlib's `NumberField.classNumber K` and `B_k`
+Mathlib's `bernoulli k`. (The headline `class_number_bernoulli` of 0.3.0 has Jacobi's expression in place of
+`h(K)`.) Neither Mathlib nor Tau Ceti has this congruence. -/
+theorem class_number_bernoulli_field {K : Type} [Field K] [NumberField K] {p : ℕ} [Fact p.Prime]
+    (hp : p % 4 = 3) (hp3 : 3 < p) (hK : Module.finrank ℚ K = 2) (hD : NumberField.discr K = -p) :
+    ¬ p ∣ (((NumberField.classNumber K : ℚ) - -2 * bernoulli ((p + 1) / 2)) / (p : ℚ)).den := by
+  sorry
+
+/-- **The Hecke character of `y² = x³ - Dx`, split primes** (Chapter 18, § 5, Theorem 7, local form). Let `v` be
+the finite place of `ℚ` of a prime `p ∤ 2D` with `p = π π̄`, `π` primary in `ℤ[i]`. Then Mathlib's local polynomial of
+the curve at `p` (`WeierstrassCurve.localPolynomial`, the Euler factor of `WeierstrassCurve.LFunction`, here mapped to
+`ℤ[i]`) is the Euler factor `(1 - χ(π) X)(1 - χ(π̄) X)` of `L(s, χ)` at the two primes above `p` (`X = p^{-s}`),
+where `χ = NTKB.IrelandRosen.CM.heckeCharQuartic D` is the book's Hecke character `χ((α)) = conj((D/α)₄) α` of
+`ℚ(i)`. So the Euler factors of `L(E, s)` and `L(s, χ)` agree at every `p ∤ 2D`; the primes dividing `2D` are not
+compared (see the README, Known restrictions). The library also proves that `χ` is a completely multiplicative function
+of ideals with `N(χ(A)) = N(A)` (Proposition 18.5.1 for this `χ`). Mathlib has the local polynomials and the L-function of a Weierstrass curve and Hecke characters
+as definitions; Tau Ceti has Hecke L-functions and the complex multiplication of `y² = x³ + ax`; neither links
+the L-function of a curve to a Hecke character. -/
+theorem hecke_character_quartic_curve_split (v : IsDedekindDomain.HeightOneSpectrum (NumberField.RingOfIntegers ℚ))
+    {D : ℤ} (hD : ¬ (((Rat.HeightOneSpectrum.primesEquiv v : Nat.Primes) : ℕ) : ℤ) ∣ 2 * D) {π : GaussianInt} (hπ : Gaussian.IsPrimary π)
+    (hπp : π.norm = ((Rat.HeightOneSpectrum.primesEquiv v : Nat.Primes) : ℕ)) :
+    ((((⟨0, 0, 0, -D, 0⟩ : WeierstrassCurve ℤ).baseChange ℚ).baseChange (v.adicCompletion ℚ)).localPolynomial
+        (v.adicCompletionIntegers ℚ)).map (Int.castRingHom GaussianInt) =
+      (1 - Polynomial.C (CM.heckeCharQuartic D π) * Polynomial.X) *
+        (1 - Polynomial.C (CM.heckeCharQuartic D (star π)) * Polynomial.X) := by
+  sorry
+
+/-- **The Hecke character of `y² = x³ - Dx`, inert primes** (Chapter 18, § 5, Theorem 7, local form). For the
+finite place `v` of a prime `p ≡ 3 (mod 4)`, `p ∤ 2D`, the local polynomial of the curve at `p` is the Euler factor
+`1 - χ((p)) X²` of `L(s, χ)` at the prime `(p)` of `ℤ[i]` (of norm `p²`). -/
+theorem hecke_character_quartic_curve_inert (v : IsDedekindDomain.HeightOneSpectrum (NumberField.RingOfIntegers ℚ))
+    {D : ℤ} (hD : ¬ (((Rat.HeightOneSpectrum.primesEquiv v : Nat.Primes) : ℕ) : ℤ) ∣ 2 * D) (hp3 : ((Rat.HeightOneSpectrum.primesEquiv v : Nat.Primes) : ℕ) % 4 = 3) :
+    ((((⟨0, 0, 0, -D, 0⟩ : WeierstrassCurve ℤ).baseChange ℚ).baseChange (v.adicCompletion ℚ)).localPolynomial
+        (v.adicCompletionIntegers ℚ)).map (Int.castRingHom GaussianInt) =
+      1 - Polynomial.C (CM.heckeCharQuartic D (((Rat.HeightOneSpectrum.primesEquiv v : Nat.Primes) : ℕ) : GaussianInt)) * Polynomial.X ^ 2 := by
+  sorry
+
+/-- **The Hecke character of `y² = x³ + D`, split primes** (Chapter 18, § 5, Theorem 8, local form). Let `v` be
+the finite place of `ℚ` of a prime `p ∤ 6D` with `p = π π̄`, `π` primary in `ℤ[ω]` (`π ≡ 2 (mod 3)`). Then the local
+polynomial of the curve at `p`, mapped to `ℤ[ω]`, is `(1 - χ(π) X)(1 - χ(π̄) X)`, where
+`χ = NTKB.IrelandRosen.CM.heckeCharSextic D` is the book's Hecke character of `ℚ(ω)` built from the sextic residue
+symbol `(4D/π)₆`. The primes dividing `6D` are not compared (see the README, Known restrictions). -/
+theorem hecke_character_cubic_curve_split (v : IsDedekindDomain.HeightOneSpectrum (NumberField.RingOfIntegers ℚ))
+    {D : ℤ} (hD : ¬ (((Rat.HeightOneSpectrum.primesEquiv v : Nat.Primes) : ℕ) : ℤ) ∣ 6 * D) {π : NTKB.HardyWright.ZRho} (hπ : Eisenstein.IsPrimary π)
+    (hπp : QuadraticAlgebra.norm π = ((Rat.HeightOneSpectrum.primesEquiv v : Nat.Primes) : ℕ)) :
+    ((((⟨0, 0, 0, 0, D⟩ : WeierstrassCurve ℤ).baseChange ℚ).baseChange (v.adicCompletion ℚ)).localPolynomial
+        (v.adicCompletionIntegers ℚ)).map (Int.castRingHom NTKB.HardyWright.ZRho) =
+      (1 - Polynomial.C (CM.heckeCharSextic D π) * Polynomial.X) *
+        (1 - Polynomial.C (CM.heckeCharSextic D (star π)) * Polynomial.X) := by
+  sorry
+
+/-- **The Hecke character of `y² = x³ + D`, inert primes** (Chapter 18, § 5, Theorem 8, local form). For the
+finite place `v` of a prime `p ≡ 2 (mod 3)`, `p ∤ 6D`, the local polynomial of the curve at `p` is
+`1 - χ((p)) X²`. -/
+theorem hecke_character_cubic_curve_inert (v : IsDedekindDomain.HeightOneSpectrum (NumberField.RingOfIntegers ℚ))
+    {D : ℤ} (hD : ¬ (((Rat.HeightOneSpectrum.primesEquiv v : Nat.Primes) : ℕ) : ℤ) ∣ 6 * D) (hp2 : ((Rat.HeightOneSpectrum.primesEquiv v : Nat.Primes) : ℕ) % 3 = 2) :
+    ((((⟨0, 0, 0, 0, D⟩ : WeierstrassCurve ℤ).baseChange ℚ).baseChange (v.adicCompletion ℚ)).localPolynomial
+        (v.adicCompletionIntegers ℚ)).map (Int.castRingHom NTKB.HardyWright.ZRho) =
+      1 - Polynomial.C (CM.heckeCharSextic D (((Rat.HeightOneSpectrum.primesEquiv v : Nat.Primes) : ℕ) : NTKB.HardyWright.ZRho)) * Polynomial.X ^ 2 := by
+  sorry
+
+/-- **Integral points on `y² = x³ - d` and the class number of `ℚ(√-d)`** (Chapter 17, § 10, Proposition
+17.10.2). Let `d > 1` be squarefree, `d ≡ 1, 2 (mod 4)`, and suppose `3` does not divide the class number of
+`ℚ(√-d)` (Mathlib's `QuadraticAlgebra ℚ (-d) 0`). Then `y² = x³ - d` has a solution in integers if and only if
+`d = 3t² ± 1` for an integer `t`. The proof is the book's (the ring of integers `ℤ[√-d]`, Proposition 13.1.1, is
+proved in the library). Neither Mathlib nor Tau Ceti has this criterion. -/
+theorem mordell_class_number {d : ℤ} [Fact (1 < d)] (hsq : Squarefree d) (h4 : d % 4 = 1 ∨ d % 4 = 2)
+    (h3 : ¬ 3 ∣ NumberField.classNumber (QuadraticAlgebra ℚ ((-d : ℤ) : ℚ) 0)) :
+    (∃ x y : ℤ, y ^ 2 = x ^ 3 - d) ↔ ∃ t : ℤ, d = 3 * t ^ 2 + 1 ∨ d = 3 * t ^ 2 - 1 := by
   sorry
 
 end NTKB.Headlines.IrelandRosen

@@ -7,7 +7,8 @@ headline only if none of the three has it, or if the form here is stronger; the 
 searches were by name and by content (statements read); "not found" means that no declaration of that content was
 found, not a proof of absence. The six headlines new in release 0.3.0 were searched again on 2026-11-15 in Mathlib
 `1b1ccf4` (the dependency; the proofs' authors also searched Mathlib master `4cf60f1d`), Tau Ceti main `9f43ade0`
-and PrimeNumberTheoremAnd `a4fb6989`.
+and PrimeNumberTheoremAnd `a4fb6989`. The eight headlines new in release 0.4.0 were searched on 2026-11-16 in
+Mathlib master `a8754b1`, Tau Ceti main `726e93ef` and PrimeNumberTheoremAnd `a4fb6989`.
 
 ## Headlines
 
@@ -43,6 +44,12 @@ and PrimeNumberTheoremAnd `a4fb6989`.
 | `SpecialValues.LFunction_one_sub_nat` | `ζ(-k)` and `hurwitzZeta_neg_nat` (`k ≥ 1`); the value of `L(0, χ)` for even `χ` (`ZMod.LFunction_apply_zero_of_even`) | the generalized Bernoulli numbers (`DirichletCharacter.generalizedBernoulli`, ported here) | — |
 | `SpecialValues.LFunction_natCast` | the functional equation of `L(s, χ)` (`ZMod.LFunction_one_sub`) | `τ(χ) ∑_{n ∈ ℤ} χ̄(n) n^{-k} = -(2πi)^k B_{k,χ}/(k! N^{k-1})` for `k ≥ 2` (`DirichletCharacter.gaussSum_mul_tsum_inv_pow_eq_generalizedBernoulli`, ported here); not `k = 1` nor `L(k, χ)` | — |
 | `SpecialValues.gaussSum_kroneckerChar` | `τ(χ)² = χ(-1) p` (`gaussSum_sq`) | `∑_{r mod N} e^{2πi r²/N}` for every `N` (`sum_range_cexp_two_pi_I_sq_div`, ported here); Gauss sums of lattices; not the Gauss sums of Jacobi or Kronecker characters | — |
+| `HardyWright.jacobi_six_squares` (Section 20.13, (20.13.1); new in 0.4.0) | sums of two and four squares; no `r₆` | theta series of lattices as modular forms (`ZLattice.thetaSeries_span_orthonormalBasis`: the theta series of `ℤⁿ` is `jacobiTheta ^ n`); no count | not found |
+| `HardyWright.glaisher_twelve_squares` (Glaisher, beyond the book; new in 0.4.0) | Dedekind's `η` (used in the proof); no `r₁₂` (its "Glaisher" theorem is the partition theorem) | as for `r₆`; no count | not found |
+| `IrelandRosen.class_number_bernoulli_field` (corollary to 15.2.3, the class number of the field; new in 0.4.0) | the class number `NumberField.classNumber`, Bernoulli numbers; no congruence | the class number formula of imaginary quadratic fields (`classNumber_eq_card_units_mul_LFunction_one`); no congruence | — |
+| `IrelandRosen.hecke_character_quartic_curve_split`, `_inert` (Chapter 18, Theorem 7; new in 0.4.0) | `WeierstrassCurve.localPolynomial` and `WeierstrassCurve.LFunction` (definitions, used in the statements), `NumberField.HeckeCharacter` (a definition); no link | Hecke L-functions of ray class characters and Grössencharacters (`LFunctions/Hecke/`, `LFunctions/Grossencharacter/`), the complex multiplication of `y² = x³ + ax` (`hasGeometricCM_of_a₆_eq_zero`); no link between `L(E, s)` and a Hecke character | — |
+| `IrelandRosen.hecke_character_cubic_curve_split`, `_inert` (Chapter 18, Theorem 8; new in 0.4.0) | as above | as above | — |
+| `IrelandRosen.mordell_class_number` (Proposition 17.10.2; new in 0.4.0) | class groups; no Mordell equation | Mordell–Weil and worked examples of curves; not this criterion | — |
 
 ## Candidates considered and not chosen
 
@@ -51,7 +58,7 @@ and PrimeNumberTheoremAnd `a4fb6989`.
 | The prime number theorem by the elementary method (Hardy–Wright, Chapter XXII; `NTKB.HardyWright.prime_number_theorem`, Selberg's formula `NTKB.HardyWright.selberg_theorem`) | proved here; PrimeNumberTheoremAnd has the prime number theorem (analytic proof), so not a headline. Mathlib has the Chebyshev bounds only. |
 | `L(0, χ_D) = 2h(D)/w(D)` for `D < 0` | not proved. Missing: the factorization `ζ_{ℚ(√D)}(s) = ζ(s) L(s, χ_D)` (equivalently, the number of ideals of norm `n` of `ℚ(√D)` is `∑_{d ∣ n} χ_D(d)`) and the identification of the discriminant of `ℚ(√D)` with `D`; with them, Mathlib's residue of the Dedekind zeta function gives the formula. |
 | Eisenstein reciprocity (Ireland–Rosen, Chapter 14) | not in this library (Chapter 14 is outside this release); proved in algebraic-number-theory-lean (`NumberFieldKB.MilneCFT.Ch8.Eisenstein.eisensteinReciprocity`). |
-| Mordell equations (Ireland–Rosen, Propositions 17.10.1 and 17.10.2; Hardy–Wright, Theorems 478 and 479) | not proved: 17.10.1 needs Mordell's theorem (no proof in the book), 17.10.2 the class group of `ℤ[√-d]`, Theorem 479 unique factorization in `ℤ[√-2]` applied to `y² = x³ - 2`; Theorem 478 (`y² = x³ + 7`) is elementary but not done. |
+| Mordell equations (Ireland–Rosen, Propositions 17.10.1 and 17.10.2; Hardy–Wright, Theorems 478 and 479) | 17.10.2 is a headline since 0.4.0; 17.10.1 needs Mordell's theorem (no proof in the book), Theorem 479 unique factorization in `ℤ[√-2]` applied to `y² = x³ - 2`; Theorem 478 (`y² = x³ + 7`) is elementary but not done. |
 | Ramanujan's congruence modulo 11 (Hardy–Wright, Theorem 361) | not proved; the book gives no proof. |
 | Simultaneous Diophantine approximation (Niven–Zuckerman–Montgomery, Theorem 6.25; `NTKB.NZM.simultaneous_approximation_general`) | proved here; Tau Ceti has Dirichlet's simultaneous approximation theorem (`TauCeti.simultaneous_dirichlet`, with `≤` in place of `<`), so not a headline. |
 | The number of representations by a positive definite binary form, `r_f(n) = w(f) H_f(n)` (Niven–Zuckerman–Montgomery, Theorem 3.27) | proved here; not chosen as a headline because its statement needs several definitions of the library (automorphs, the count `H_f`); a candidate for a later release. |
@@ -60,8 +67,9 @@ and PrimeNumberTheoremAnd `a4fb6989`.
 | Cubic reciprocity and its supplement (Ireland–Rosen, Chapter 9, § 3, Theorems 1 and 1'; `NTKB.IrelandRosen.Eisenstein.cubic_reciprocity`) | proved here (the supplement in the rational case the book proves); Tau Ceti has cubic reciprocity, so not a headline. Its consequence 9.6.2 is a headline. |
 | Hasse's bound `\|N_p - (p + 1)\| ≤ 2√p` for `y² = x³ - Dx` and `y² = x³ + D` (`abs_numPointsQuarticCurve_sub_le`, `abs_numPointsCubicCurve_sub_le`) | proved here from `\|π\|² = p`; Tau Ceti has Hasse's bound for every elliptic curve over a finite field, so not a headline. |
 | The number of points of `y² = x³ + D` over `𝔽_p` by sextic characters (Ireland–Rosen, Chapter 18, Theorem 4; `NTKB.IrelandRosen.numPointsCubicCurve_eq`) | proved here; not chosen (the companion of the headline Theorem 5, with a sextic residue symbol defined in the library). |
-| Jacobi's formula for `r₆(n)` (Hardy–Wright, (20.13.1)) | not proved (stated as `NTKB.HardyWright.JacobiSixSquares`); see Known restrictions in the README. |
-| `h(-p) ≡ -2B_{(p+1)/2} (mod p)` with the class number of the field `ℚ(√-p)` (`NTKB.IrelandRosen.classNumber_pModEq_bernoulli`) | proved from two cited results assumed as named statements (discriminants of quadratic fields; the number of ideals of given norm), so not a headline; the headline states the congruence for Jacobi's expression of the class number, unconditionally. |
+| Liouville's formula for `r₁₀(n)` (beyond the books) | not proved (stated as `NTKB.HardyWright.LiouvilleTenSquares`, assumed nowhere); see Conditional theorems in the README. (Jacobi's `r₆`, a candidate in 0.3.0, is a headline since 0.4.0.) |
+| The ring of integers, discriminant and decomposition law of `ℚ(√d)` (Ireland–Rosen 13.1.1 to 13.1.4) | proved here (new in 0.4.0); Tau Ceti proves them (`NumberField/Quadratic/RingOfIntegers.lean`, `PrimeDecomposition.lean`), so not a headline. |
+| Theorem 6 of Ireland–Rosen 18 (the analytic continuation of `L(s, χ)` for the two characters) and the Euler factors at the primes dividing `2D` (resp. `6D`) | not proved. |
 | Primes in a progression have Dirichlet density `1/φ(m)` (Ireland–Rosen, Chapter 16, Theorem 1; `NTKB.IrelandRosen.hasDirichletDensity_modEq`) | proved here; Mathlib has the natural-density form of Dirichlet's theorem and the definition of Dirichlet density for number fields, so not a headline. |
 | Carlitz: infinitely many irregular primes (Ireland–Rosen, Chapter 15, § 2, Theorem 6; `NTKB.IrelandRosen.infinite_setOf_isIrregularPrime`) | proved here; not chosen in favour of the Kummer congruences it is derived from (a candidate for a later release). |
 
@@ -69,5 +77,5 @@ and PrimeNumberTheoremAnd `a4fb6989`.
 
 Each book map lists them in its column *Also in*: 79 rows of Hardy–Wright (mostly results with a weaker or
 differently stated Mathlib or PrimeNumberTheoremAnd form, for example the Chebyshev bounds and the prime number
-theorem), 66 of Ireland–Rosen (mostly finite fields, Gauss and Jacobi sums, with Mathlib or Tau Ceti forms), 84 of
+theorem), 67 of Ireland–Rosen (mostly finite fields, Gauss and Jacobi sums, with Mathlib or Tau Ceti forms), 84 of
 Niven–Zuckerman–Montgomery, and 3 of the special values (ports of Tau Ceti theorems).
