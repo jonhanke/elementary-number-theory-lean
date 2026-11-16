@@ -405,7 +405,7 @@ Releases are tagged with semantic versions; `main` continues to develop. The DOI
   Hardy–Wright 626 (281 proved, 14 in part, 1 conditional). The comparator check stays one per book (four, run as a
   matrix in CI); no file imports all of Mathlib.
 
-- **v0.4.0** (Lean v4.36.0-rc2, Mathlib `1b1ccf4`), archived on Zenodo as [doi:ZENODO-DOI-v0.4.0](https://doi.org/ZENODO-DOI-v0.4.0):
+- **v0.4.0** (Lean v4.36.0-rc2, Mathlib `1b1ccf4`), archived on Zenodo as [doi:10.5281/zenodo.24285920](https://doi.org/10.5281/zenodo.24285920):
   quadratic fields with no assumed input (Ireland–Rosen 13.1), the Hecke characters of the curves
   $`y^2 = x^3 - Dx`$ and $`y^2 = x^3 + D`$ against Mathlib's local factors of $`L(E, s)`$ (Ireland–Rosen 18, Theorems 7
   and 8), Proposition 17.10.2, Jacobi's six-square and Glaisher's twelve-square theorems (see
