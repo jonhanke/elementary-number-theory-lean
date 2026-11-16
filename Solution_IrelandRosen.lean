@@ -12,6 +12,10 @@ import NTKB.IrelandRosen.R4.CubicReciprocity
 import NTKB.IrelandRosen.R4.QuarticCurve
 import NTKB.IrelandRosen.R4.Bernoulli.Kummer
 import NTKB.IrelandRosen.R4.Bernoulli.ClassNumber
+import NTKB.IrelandRosen.R4.Bernoulli.ClassNumberField
+import NTKB.IrelandRosen.R5.HeckeGaussian
+import NTKB.IrelandRosen.R5.HeckeEisenstein
+import NTKB.IrelandRosen.R5.MordellClassNumber
 
 /-!
 # Proofs of the Ireland–Rosen headline statements
@@ -76,5 +80,47 @@ theorem class_number_bernoulli {p : ℕ} [Fact p.Prime] (hp : p % 4 = 3) (hp3 : 
     ¬ p ∣ ((-(1 / (p : ℚ)) * ∑ j ∈ Finset.Ico 1 p, (j : ℚ) * legendreSym p j -
       -2 * bernoulli ((p + 1) / 2)) / (p : ℚ)).den :=
   by simpa [PModEq, IsPIntegral, jacobiClassNumber] using jacobiClassNumber_pModEq p hp hp3
+
+theorem class_number_bernoulli_field {K : Type} [Field K] [NumberField K] {p : ℕ} [Fact p.Prime]
+    (hp : p % 4 = 3) (hp3 : 3 < p) (hK : Module.finrank ℚ K = 2) (hD : NumberField.discr K = -p) :
+    ¬ p ∣ (((NumberField.classNumber K : ℚ) - -2 * bernoulli ((p + 1) / 2)) / (p : ℚ)).den :=
+  by simpa [PModEq, IsPIntegral] using classNumber_pModEq_bernoulli_unconditional hp hp3 hK hD
+
+theorem hecke_character_quartic_curve_split (v : IsDedekindDomain.HeightOneSpectrum (NumberField.RingOfIntegers ℚ))
+    {D : ℤ} (hD : ¬ (((Rat.HeightOneSpectrum.primesEquiv v : Nat.Primes) : ℕ) : ℤ) ∣ 2 * D) {π : GaussianInt} (hπ : Gaussian.IsPrimary π)
+    (hπp : π.norm = ((Rat.HeightOneSpectrum.primesEquiv v : Nat.Primes) : ℕ)) :
+    ((((⟨0, 0, 0, -D, 0⟩ : WeierstrassCurve ℤ).baseChange ℚ).baseChange (v.adicCompletion ℚ)).localPolynomial
+        (v.adicCompletionIntegers ℚ)).map (Int.castRingHom GaussianInt) =
+      (1 - Polynomial.C (CM.heckeCharQuartic D π) * Polynomial.X) *
+        (1 - Polynomial.C (CM.heckeCharQuartic D (star π)) * Polynomial.X) :=
+  CM.localPolynomial_quarticCurve_split v hD hπ hπp
+
+theorem hecke_character_quartic_curve_inert (v : IsDedekindDomain.HeightOneSpectrum (NumberField.RingOfIntegers ℚ))
+    {D : ℤ} (hD : ¬ (((Rat.HeightOneSpectrum.primesEquiv v : Nat.Primes) : ℕ) : ℤ) ∣ 2 * D) (hp3 : ((Rat.HeightOneSpectrum.primesEquiv v : Nat.Primes) : ℕ) % 4 = 3) :
+    ((((⟨0, 0, 0, -D, 0⟩ : WeierstrassCurve ℤ).baseChange ℚ).baseChange (v.adicCompletion ℚ)).localPolynomial
+        (v.adicCompletionIntegers ℚ)).map (Int.castRingHom GaussianInt) =
+      1 - Polynomial.C (CM.heckeCharQuartic D (((Rat.HeightOneSpectrum.primesEquiv v : Nat.Primes) : ℕ) : GaussianInt)) * Polynomial.X ^ 2 :=
+  CM.localPolynomial_quarticCurve_inert v hD hp3
+
+theorem hecke_character_cubic_curve_split (v : IsDedekindDomain.HeightOneSpectrum (NumberField.RingOfIntegers ℚ))
+    {D : ℤ} (hD : ¬ (((Rat.HeightOneSpectrum.primesEquiv v : Nat.Primes) : ℕ) : ℤ) ∣ 6 * D) {π : NTKB.HardyWright.ZRho} (hπ : Eisenstein.IsPrimary π)
+    (hπp : QuadraticAlgebra.norm π = ((Rat.HeightOneSpectrum.primesEquiv v : Nat.Primes) : ℕ)) :
+    ((((⟨0, 0, 0, 0, D⟩ : WeierstrassCurve ℤ).baseChange ℚ).baseChange (v.adicCompletion ℚ)).localPolynomial
+        (v.adicCompletionIntegers ℚ)).map (Int.castRingHom NTKB.HardyWright.ZRho) =
+      (1 - Polynomial.C (CM.heckeCharSextic D π) * Polynomial.X) *
+        (1 - Polynomial.C (CM.heckeCharSextic D (star π)) * Polynomial.X) :=
+  CM.localPolynomial_cubicCurve_split v hD hπ hπp
+
+theorem hecke_character_cubic_curve_inert (v : IsDedekindDomain.HeightOneSpectrum (NumberField.RingOfIntegers ℚ))
+    {D : ℤ} (hD : ¬ (((Rat.HeightOneSpectrum.primesEquiv v : Nat.Primes) : ℕ) : ℤ) ∣ 6 * D) (hp2 : ((Rat.HeightOneSpectrum.primesEquiv v : Nat.Primes) : ℕ) % 3 = 2) :
+    ((((⟨0, 0, 0, 0, D⟩ : WeierstrassCurve ℤ).baseChange ℚ).baseChange (v.adicCompletion ℚ)).localPolynomial
+        (v.adicCompletionIntegers ℚ)).map (Int.castRingHom NTKB.HardyWright.ZRho) =
+      1 - Polynomial.C (CM.heckeCharSextic D (((Rat.HeightOneSpectrum.primesEquiv v : Nat.Primes) : ℕ) : NTKB.HardyWright.ZRho)) * Polynomial.X ^ 2 :=
+  CM.localPolynomial_cubicCurve_inert v hD hp2
+
+theorem mordell_class_number {d : ℤ} [Fact (1 < d)] (hsq : Squarefree d) (h4 : d % 4 = 1 ∨ d % 4 = 2)
+    (h3 : ¬ 3 ∣ NumberField.classNumber (QuadraticAlgebra ℚ ((-d : ℤ) : ℚ) 0)) :
+    (∃ x y : ℤ, y ^ 2 = x ^ 3 - d) ↔ ∃ t : ℤ, d = 3 * t ^ 2 + 1 ∨ d = 3 * t ^ 2 - 1 :=
+  CM.exists_sq_eq_cube_sub_iff_unconditional hsq h4 h3
 
 end NTKB.Headlines.IrelandRosen

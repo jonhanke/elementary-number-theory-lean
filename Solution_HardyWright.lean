@@ -11,6 +11,8 @@ import NTKB.Elementary.HardyWright.Partitions.RogersRamanujan
 import NTKB.Elementary.HardyWright.SumsOfSquares.Jacobi.FourSquares
 import NTKB.Elementary.HardyWright.SumsOfSquares.ThreeSquares.Theorem
 import NTKB.Elementary.HardyWright.SumsOfSquares.Theta.EightSquares
+import NTKB.Elementary.HardyWright.SumsOfSquares.Theta.SixSquares
+import NTKB.Elementary.HardyWright.SumsOfSquares.Theta.TwelveSquares
 
 /-!
 # Proofs of the Hardy–Wright headline statements
@@ -63,5 +65,19 @@ theorem three_squares (n : ℕ) :
 theorem jacobi_eight_squares {n : ℕ} (hn : 0 < n) :
     (NTKB.HardyWright.sumSquaresCount 8 n : ℤ) = 16 * ∑ d ∈ n.divisors, (-1) ^ (n + d) * (d : ℤ) ^ 3 :=
   NTKB.HardyWright.sumSquaresCount_eight_eq hn
+
+theorem jacobi_six_squares {n : ℕ} (hn : 0 < n) :
+    (NTKB.HardyWright.sumSquaresCount 6 n : ℂ) =
+      16 * ∑ d ∈ n.divisors, ((ZMod.χ₄ ((n / d : ℕ) : ZMod 4) : ℤ) : ℂ) * (d : ℂ) ^ 2 -
+        4 * ∑ d ∈ n.divisors, ((ZMod.χ₄ (d : ZMod 4) : ℤ) : ℂ) * (d : ℂ) ^ 2 :=
+  NTKB.HardyWright.sumSquaresCount_six_eq hn
+
+theorem glaisher_twelve_squares :
+    ∃ a : ℕ → ℤ, (∀ q : ℂ, ‖q‖ < 1 →
+        HasSum (fun n => (a n : ℂ) * q ^ n) (q * ∏' m : ℕ, (1 - q ^ (2 * (m + 1))) ^ 12)) ∧
+      ∀ n : ℕ, 0 < n → (NTKB.HardyWright.sumSquaresCount 12 n : ℤ) =
+        8 * ∑ d ∈ n.divisors, (-1) ^ (n + d + n / d + 1) * (d : ℤ) ^ 5 + 16 * a n :=
+  ⟨NTKB.HardyWright.TwelveSquares.etaTwelveCoeff, fun _ hq => NTKB.HardyWright.TwelveSquares.hasSum_etaTwelveCoeff hq,
+    fun _ hn => NTKB.HardyWright.sumSquaresCount_twelve_eq hn⟩
 
 end NTKB.Headlines.HardyWright

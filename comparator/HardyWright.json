@@ -11,7 +11,9 @@
     "NTKB.Headlines.HardyWright.rogers_ramanujan_two",
     "NTKB.Headlines.HardyWright.jacobi_four_squares",
     "NTKB.Headlines.HardyWright.three_squares",
-    "NTKB.Headlines.HardyWright.jacobi_eight_squares"
+    "NTKB.Headlines.HardyWright.jacobi_eight_squares",
+    "NTKB.Headlines.HardyWright.jacobi_six_squares",
+    "NTKB.Headlines.HardyWright.glaisher_twelve_squares"
   ],
   "definition_names": [],
   "permitted_axioms": [

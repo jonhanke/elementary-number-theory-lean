@@ -4,6 +4,7 @@ imaginary quadratic field of discriminant -p.
 -/
 import NTKB.IrelandRosen.R4.Bernoulli.ClassNumber
 import NTKB.Analytic.Davenport.ClassNumber.Finite
+import NTKB.Analytic.Davenport.ClassNumber.Unconditional
 
 /-!
 # `h(-p) ≡ -2 B_{(p+1)/2} (mod p)` for the class number of `ℚ(√-p)`
@@ -12,6 +13,10 @@ Combines the unconditional congruence `jacobiClassNumber_pModEq` with Jacobi's f
 `NTKB.Davenport.classNumber_eq_jacobi` (Davenport §6 (19)), which is proved from the
 named inputs `QuadraticFieldDiscriminants` and `QuadraticIdealCount`.
 Ireland and Rosen cite the class number formula (from Borevich–Shafarevich) rather than prove it.
+
+The library proves the two inputs (`NTKB.Davenport.quadraticFieldDiscriminants`,
+`NTKB.Davenport.quadraticIdealCount`), so `classNumber_pModEq_bernoulli_unconditional` holds with no
+assumed input.
 -/
 
 namespace NTKB.IrelandRosen
@@ -37,5 +42,16 @@ theorem classNumber_pModEq_bernoulli (hF : NTKB.Davenport.QuadraticFieldDiscrimi
     linarith
   rw [hq]
   exact jacobiClassNumber_pModEq p hp hp3
+
+/-- **Ireland–Rosen, §15.2: `h(-p) ≡ -2 B_{(p+1)/2} (mod p)`**, with no assumed input: for a
+prime `p ≡ 3 (mod 4)`, `p > 3`, and the quadratic field `K` of discriminant `-p`, Mathlib's class
+number of `K` is congruent to `-2 B_{(p+1)/2}` modulo `p`. -/
+@[kb "irelandrosen1990" "§15.2, h(-p) ≡ -2 B_{(p+1)/2} (mod p)"]
+theorem classNumber_pModEq_bernoulli_unconditional {K : Type} [Field K] [NumberField K]
+    {p : ℕ} [Fact p.Prime] (hp : p % 4 = 3) (hp3 : 3 < p) (hK : finrank ℚ K = 2)
+    (hD : discr K = -p) :
+    PModEq p 1 (classNumber K) (-2 * bernoulli ((p + 1) / 2)) :=
+  classNumber_pModEq_bernoulli NTKB.Davenport.quadraticFieldDiscriminants
+    NTKB.Davenport.quadraticIdealCount hp hp3 hK hD
 
 end NTKB.IrelandRosen

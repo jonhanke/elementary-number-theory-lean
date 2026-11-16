@@ -4,7 +4,8 @@
 
 A Lean 4 library (built on Mathlib) that formalizes three texts of elementary number theory item by item: Hardy
 and Wright's *An Introduction to the Theory of Numbers* (6th edition), Ireland and Rosen's *A Classical Introduction
-to Modern Number Theory* (Chapters 1 to 11, 15 and 16, and the results of Chapters 17 and 18 proved here) and Niven,
+to Modern Number Theory* (Chapters 1 to 11, 15 and 16, and the results of Chapter 13, section 1 and of Chapters 17
+and 18 proved here) and Niven,
 Zuckerman and Montgomery's *An Introduction to the Theory of Numbers* (5th edition), together with the special values
 of Dirichlet $`L`$-functions at the integers. The Lean library is called `NTKB`; the repository is
 elementary-number-theory-lean.
@@ -21,44 +22,47 @@ elementary-number-theory-lean.
   `lake comparator` once per book to check the proved statements against the `Challenge_<book>.lean` files.
 - **Cited results are named**: where the library assumes a result it does not prove, the result is a named Lean
   structure, never assumed silently; a theorem that uses it has it as a hypothesis and the book maps mark the row
-  *conditional* (in this release two rows: one assumes the abc conjecture, the other two cited results on quadratic
-  fields; no headline depends on them; see [Known restrictions](#known-restrictions)).
+  *conditional* (in this release one row, in a note of Hardy–Wright, assumes the abc conjecture; no headline depends
+  on it; see [Conditional theorems](#conditional-theorems)). Conjectures are stated, never assumed as true.
 - **Comparison**: [docs/results/comparison.md](docs/results/comparison.md) says, for each headline, what Mathlib,
   [Tau Ceti](https://github.com/TauCetiProject/TauCeti) and
   [PrimeNumberTheoremAnd](https://github.com/AlexKontorovich/PrimeNumberTheoremAnd) already have and what this library
   adds. This library depends on Mathlib only.
 
-## What's new in 0.3.0
+## What's new in 0.4.0
 
-- **Cubic reciprocity and curves over finite fields** (Ireland–Rosen, Chapters 9 and 18; Hardy–Wright, Section
-  25.6): the law of cubic reciprocity in $`\mathbb Z[\omega]`$ and its supplement (the rational case, which the book
-  proves), Gauss's cubic period polynomial, the criterion for $`x^3 \equiv 2 \pmod p`$; the number of points of an
-  elliptic curve over a finite field of odd characteristic as $`q + 1`$ plus a sum of quadratic characters, for
-  Mathlib's Weierstrass curves; the number of points of $`y^2 = x^3 + D`$ (by sextic characters) and of $`y^2 = x^3 - Dx`$ (by the quartic
-  residue symbol) over $`\mathbb F_p`$, with Hasse's bound $`|N_p - (p+1)| \le 2\sqrt p`$ for both families.
-- **Quadratic residues for every modulus, Dirichlet density, Bernoulli congruences** (Ireland–Rosen, Chapters 5, 15
-  and 16): the criterion for $`x^2 \equiv a \pmod m`$ ($`a`$ prime to $`m`$) for every modulus $`m`$, Euler's form of quadratic reciprocity, a
-  nonsquare is a nonresidue of infinitely many primes; Dirichlet's theorem in the form of Dirichlet density
-  ($`1/\varphi(m)`$ for the primes $`p \equiv a \pmod m`$, $`a`$ prime to $`m`$); the Voronoi congruences, Adams's theorem, the Kummer congruences,
-  Carlitz's theorem that there are infinitely many irregular primes, and $`h(-p) \equiv -2B_{(p+1)/2} \pmod p`$.
-- **Three squares and theta functions** (Hardy–Wright, Chapter XX): the three-square theorem (both directions; the
-  book gives no proof) and Jacobi's formula for the number of representations as a sum of eight squares, by
-  modular forms of level one. Jacobi's formula for six squares is stated, not proved
-  ([Known restrictions](#known-restrictions)).
-- **Six new headline statements** (four of Ireland–Rosen, two of Hardy–Wright; marked "new in 0.3.0" below); the 26
-  headlines of 0.1.0 and 0.2.0 are unchanged. The Ireland–Rosen map now covers 404 results (167 proved, was 120 of
-  401), the Hardy–Wright map 626 (281 proved, was 279).
+- **Quadratic fields with no assumed input** (Ireland–Rosen, Chapter 13, § 1): the ring of integers, the
+  discriminant and the decomposition law of $`\mathbb Q(\sqrt d)`$, the prime 2 included, proved from Mathlib's
+  `QuadraticAlgebra`; every quadratic number field is $`\mathbb Q(\sqrt D)`$ with $`D`$ a fundamental discriminant;
+  the units of the imaginary quadratic fields. With them, the two cited results that 0.3.0 assumed (the discriminants
+  of the quadratic fields, and the number of ideals of norm $`n`$) are theorems, and
+  $`h(-p) \equiv -2B_{(p+1)/2} \pmod p`$ holds for the class number of the field itself (a headline).
+- **Hecke characters of the curves with complex multiplication** (Ireland–Rosen, Chapter 18, § 5, Theorems 7 and 8):
+  the Hecke characters $`\chi`$ of $`\mathbb Q(i)`$ and $`\mathbb Q(\omega)`$ attached to $`y^2 = x^3 - Dx`$ and
+  $`y^2 = x^3 + D`$ (completely multiplicative functions of ideals with $`N(\chi(A)) = N(A)`$) and, at every prime
+  $`p \nmid 2D`$ (resp. $`p \nmid 6D`$), the equality of Mathlib's local factor of $`L(E, s)`$
+  (`WeierstrassCurve.localPolynomial`) with the Euler factor of $`L(s, \chi)`$. On the way: for a Weierstrass curve
+  over $`\mathbb Z`$, the local polynomial at a prime of good reduction is $`1 - a_pX + pX^2`$ with
+  $`a_p = p - \#\{\text{affine points mod } p\}`$.
+- **Integral points and class numbers** (Ireland–Rosen, Proposition 17.10.2): $`y^2 = x^3 - d`$ and the class number
+  of $`\mathbb Q(\sqrt{-d})`$.
+- **Sums of six and twelve squares** (Hardy–Wright, Section 20.13, and beyond the book): Jacobi's formula for
+  $`r_6(n)`$ and Glaisher's formula for $`r_{12}(n)`$ (with the coefficients of $`\eta(2z)^{12}`$), both by modular
+  forms of level one, as for $`r_8`$ in 0.3.0. Liouville's formula for $`r_{10}(n)`$ is stated, not proved.
+- **Eight new headline statements** (six of Ireland–Rosen, two of Hardy–Wright; marked "new in 0.4.0" below); the 32
+  headlines of 0.1.0 to 0.3.0 are unchanged. Maps: Ireland–Rosen 413 results (174 proved, 8 in part, none
+  conditional; was 404, 167, 5, 1), Hardy–Wright 628 (283 proved, 13 in part, 1 conditional; was 626, 281, 14, 1).
 
 ## The books
 
 | book | rows | proved | proved in part | conditional | in Mathlib | other | proved here, also elsewhere |
 |---|---|---|---|---|---|---|---|
-| [G. H. Hardy and E. M. Wright, *An Introduction to the Theory of Numbers* (6th ed., 2008)](docs/results/books/hardy-wright.md) | 626 | 281 | 14 | 1 | 178 | 152 | 79 |
-| [K. Ireland and M. Rosen, *A Classical Introduction to Modern Number Theory* (2nd ed., 1990), Chapters 1–11, 15, 16 and the results of Chapters 17 and 18 proved here](docs/results/books/ireland-rosen.md) | 404 | 167 | 5 | 1 | 178 | 53 | 66 |
+| [G. H. Hardy and E. M. Wright, *An Introduction to the Theory of Numbers* (6th ed., 2008)](docs/results/books/hardy-wright.md) | 628 | 283 | 13 | 1 | 178 | 153 | 79 |
+| [K. Ireland and M. Rosen, *A Classical Introduction to Modern Number Theory* (2nd ed., 1990), Chapters 1–11, 15, 16 and the results of Chapter 13 §1 and Chapters 17 and 18 proved here](docs/results/books/ireland-rosen.md) | 413 | 174 | 8 | 0 | 178 | 53 | 67 |
 | [I. Niven, H. S. Zuckerman and H. L. Montgomery, *An Introduction to the Theory of Numbers* (5th ed., 1991)](docs/results/books/niven-zuckerman-montgomery.md) | 406 | 194 | 4 | 0 | 191 | 17 | 84 |
 | [Special values of Dirichlet $L$-functions and Gauss's sign of quadratic Gauss sums](docs/results/books/special-values.md) | 25 | 25 | 0 | 0 | 0 | 0 | 3 |
 
-*Proved*: proved with only the standard axioms and no unproved input. *Proved in part*: a part, a special case or one instance is proved. *Conditional*: proved from a named unproved input (here the abc conjecture, in a note of Hardy–Wright, and the two cited inputs of the class number formula of imaginary quadratic fields, in Ireland–Rosen's congruence h(-p) ≡ -2B_{(p+1)/2} (mod p); that congruence is proved unconditionally with Jacobi's expression for h(-p)). *In Mathlib*: Mathlib (a dependency) has the result; the map names the Mathlib declaration. *Other*: refuted as stated in the book (the corrected form is proved), in Tau Ceti or PrimeNumberTheoremAnd only (not dependencies), partly formalized elsewhere, or not formalized (see each map). *Proved here, also elsewhere*: rows proved (in whole or in part) here whose result, a part of it or a closely related statement is also in Mathlib, Tau Ceti or PrimeNumberTheoremAnd; each map names those declarations in its column *Also in*. Rows that are not results (definitions, remarks, history, open problems) are omitted from the maps.
+*Proved*: proved with only the standard axioms and no unproved input. *Proved in part*: a part, a special case or one instance is proved. *Conditional*: proved from a named unproved input (here the abc conjecture, in a note of Hardy–Wright; since 0.4.0 the two inputs of the class number formula of quadratic fields are proved, so Ireland–Rosen's congruence h(-p) ≡ -2B_{(p+1)/2} (mod p) holds unconditionally). *In Mathlib*: Mathlib (a dependency) has the result; the map names the Mathlib declaration. *Other*: refuted as stated in the book (the corrected form is proved), in Tau Ceti or PrimeNumberTheoremAnd only (not dependencies), partly formalized elsewhere, or not formalized (see each map). *Proved here, also elsewhere*: rows proved (in whole or in part) here whose result, a part of it or a closely related statement is also in Mathlib, Tau Ceti or PrimeNumberTheoremAnd; each map names those declarations in its column *Also in*. Rows that are not results (definitions, remarks, history, open problems) are omitted from the maps.
 
 ## Highlights
 
@@ -100,6 +104,16 @@ a human** (see Provenance).
   without proof in the book). Proved from $`\theta^8 = (E_4(\tau/2) - 2E_4(\tau) + 16E_4(2\tau))/15`$ with Mathlib's
   modular forms of level one. Related: Tau Ceti has theta series of lattices and $`r(2m) = 240\sigma_3(m)`$ for the
   $`E_8`$ root lattice, not the count for $`\mathbb Z^8`$.
+- **Jacobi's six-square theorem** (new in 0.4.0): for $`n \ge 1`$, the number of $`z \in \mathbb Z^6`$ with
+  $`z_1^2 + \dots + z_6^2 = n`$ is $`16\sum_{d \mid n}\chi(n/d)d^2 - 4\sum_{d \mid n}\chi(d)d^2`$, $`\chi`$ the
+  nontrivial character modulo 4 (`jacobi_six_squares`, Section 20.13, stated without proof in the book). Proved from
+  an identity between $`\theta^6`$ and a lattice sum of weight 3, by modular forms of level one. Related: neither
+  Mathlib nor Tau Ceti has the count.
+- **Glaisher's twelve-square theorem** (new in 0.4.0, beyond the book): for $`n \ge 1`$,
+  $`r_{12}(n) = 8\sum_{d \mid n}(-1)^{n+d+n/d+1}d^5 + 16a(n)`$, where $`\sum a(n)q^n = q\prod_{m \ge 1}(1 - q^{2m})^{12}`$
+  is $`\eta(2z)^{12}`$, the cusp form of weight 6 and level 4 (`glaisher_twelve_squares`; J. W. L. Glaisher, 1907).
+  The first $`r_k`$ here with a cusp form. Related: Tau Ceti has theta series of lattices as modular forms, not this
+  count.
 
 **Ireland and Rosen, *A Classical Introduction to Modern Number Theory*** ([`Challenge_IrelandRosen.lean`](Challenge_IrelandRosen.lean))
 
@@ -139,8 +153,28 @@ a human** (see Provenance).
 - **The class number of $`\mathbb Q(\sqrt{-p})`$ modulo $`p`$** (new in 0.3.0): for a prime $`p \equiv 3 \pmod 4`$,
   $`p > 3`$, Jacobi's expression $`h = -\frac1p\sum_{j=1}^{p-1} j\left(\frac jp\right)`$ satisfies
   $`h \equiv -2B_{(p+1)/2} \pmod p`$ (`class_number_bernoulli`, Chapter 15, § 2). That $`h`$ is the class number is
-  Jacobi's class number formula, which the book cites; see [Known restrictions](#known-restrictions). Related:
+  Jacobi's class number formula, which the book cites; since 0.4.0 it is proved, see the next item. Related:
   Tau Ceti has the class number formula of imaginary quadratic fields, not this congruence.
+- **The class number of $`\mathbb Q(\sqrt{-p})`$ modulo $`p`$, for the field** (new in 0.4.0): for a prime
+  $`p \equiv 3 \pmod 4`$, $`p > 3`$, and the quadratic field $`K`$ of discriminant $`-p`$,
+  $`h(K) \equiv -2B_{(p+1)/2} \pmod p`$ with Mathlib's class number $`h(K)`$, with no assumed input
+  (`class_number_bernoulli_field`). Related: neither Mathlib nor Tau Ceti has the congruence.
+- **The Hecke character of $`y^2 = x^3 - Dx`$** (new in 0.4.0; Chapter 18, § 5, Theorem 7): for every prime
+  $`p \nmid 2D`$, Mathlib's local polynomial of the curve at $`p`$ is $`(1 - \chi(\pi)X)(1 - \chi(\bar\pi)X)`$ if
+  $`p = \pi\bar\pi`$ ($`\pi`$ primary in $`\mathbb Z[i]`$) and $`1 - \chi((p))X^2`$ if $`p \equiv 3 \pmod 4`$, where
+  $`\chi((\alpha)) = \overline{(D/\alpha)_4}\,\alpha`$ is the book's Hecke character of $`\mathbb Q(i)`$
+  (`hecke_character_quartic_curve_split`, `hecke_character_quartic_curve_inert`): the Euler factors of $`L(E, s)`$
+  and $`L(s, \chi)`$ agree at every $`p \nmid 2D`$. Related: Mathlib has the local polynomials and the $`L`$-function
+  of a Weierstrass curve, and Hecke characters, as definitions; Tau Ceti has Hecke $`L`$-functions and the complex
+  multiplication of $`y^2 = x^3 + ax`$; neither links the $`L`$-function of a curve to a Hecke character.
+- **The Hecke character of $`y^2 = x^3 + D`$** (new in 0.4.0; Chapter 18, § 5, Theorem 8): the same over
+  $`\mathbb Z[\omega]`$ with the sextic residue symbol, at every prime $`p \nmid 6D`$
+  (`hecke_character_cubic_curve_split`, `hecke_character_cubic_curve_inert`).
+- **Integral points on $`y^2 = x^3 - d`$** (new in 0.4.0; Proposition 17.10.2): for squarefree $`d > 1`$ with
+  $`d \equiv 1, 2 \pmod 4`$ and $`3`$ not dividing the class number of $`\mathbb Q(\sqrt{-d})`$, the equation has an
+  integral solution if and only if $`d = 3t^2 \pm 1`$ for an integer $`t`$ (`mordell_class_number`), by the book's
+  proof (the ring of integers $`\mathbb Z[\sqrt{-d}]`$, the cube of an ideal, principal because $`3 \nmid h`$).
+  Related: neither Mathlib nor Tau Ceti has this criterion.
 
 **Niven, Zuckerman and Montgomery, *An Introduction to the Theory of Numbers*** ([`Challenge_NivenZuckermanMontgomery.lean`](Challenge_NivenZuckermanMontgomery.lean)) (new in 0.2.0)
 
@@ -215,7 +249,11 @@ Niven–Zuckerman–Montgomery: simultaneous Diophantine approximation (Theorem 
 bound for the curves $`y^2 = x^3 - Dx`$ and $`y^2 = x^3 + D`$ (`NTKB.IrelandRosen.abs_numPointsQuarticCurve_sub_le`,
 `NTKB.IrelandRosen.abs_numPointsCubicCurve_sub_le`; Tau Ceti has Hasse's bound for every elliptic curve over a
 finite field); Dirichlet's theorem in the form of Dirichlet density (`NTKB.IrelandRosen.hasDirichletDensity_modEq`;
-Mathlib has the natural-density form).
+Mathlib has the natural-density form). New in 0.4.0: the ring of integers, the discriminant and the decomposition
+law of $`\mathbb Q(\sqrt d)`$, the prime 2 included (Ireland–Rosen 13.1.1 to 13.1.4,
+`NTKB.IrelandRosen.isIntegral_iff_of_mod_four_ne_one`, `NTKB.IrelandRosen.discr_quadField`,
+`NTKB.QuadraticField.exists_split`, `NTKB.QuadraticField.isPrime_of_inert`, `NTKB.QuadraticField.exists_ramified`;
+Tau Ceti has them, by a different route).
 
 ## Corrections to the books
 
@@ -240,27 +278,33 @@ proves the corrected form ([docs/updates-and-errata.md](docs/updates-and-errata.
   printed by `NTKB.HardyWright.not_moebius_inversion_floor_all_pos` and
   `NTKB.HardyWright.not_moebius_inversion_floor_converse_all_pos`).
 
-## Known restrictions
+## Conditional theorems
 
-Results of the books that the library proves only in part, or only from a cited result it assumes. No headline
-statement depends on them; each is marked in the book maps.
+Theorems proved from a named input that the library does not prove. No headline is conditional.
 
 - **Hardy–Wright, notes to Chapter XIII (the abc conjecture):** the finiteness of the set of coprime solutions of
-  Fermat's equation $`x^n + y^n = z^n`$ with $`n \ge 4`$ (all exponents together) is proved from the (corrected) abc conjecture, an open problem, assumed as the named statement
-  `NTKB.HardyWright.AbcConjecture` (`NTKB.HardyWright.fermat_finite_of_abc`).
-- **Hardy–Wright, Section 20.13 (six squares):** Jacobi's formula
-  $`r_6(n) = 16\sum_{d \mid n}\chi(n/d)d^2 - 4\sum_{d \mid n}\chi(d)d^2`$ ($`\chi`$ the nontrivial character modulo
-  4) is stated as `NTKB.HardyWright.JacobiSixSquares` and not proved; it is not assumed anywhere. The eight-square
-  formula of the same section is proved (a headline). The route of the eight-square proof applies once the
-  Eisenstein series of weight 3 with the character modulo 4 is available.
-- **Ireland–Rosen, Chapter 15, § 2 ($`h(-p) \equiv -2B_{(p+1)/2} \pmod p`$ for the class number):** the congruence is
-  proved unconditionally for Jacobi's expression of the class number (the headline `class_number_bernoulli`). For the
-  class number of the field $`\mathbb Q(\sqrt{-p})`$ itself (`NTKB.IrelandRosen.classNumber_pModEq_bernoulli`), the
-  library uses Jacobi's class number formula (Davenport, Chapter 6), which it proves from two cited results assumed as
-  named statements: the discriminants of the quadratic fields are exactly the fundamental discriminants
-  (`NTKB.Davenport.QuadraticFieldDiscriminants`), and the number of ideals of norm $`n`$ of a quadratic field is
-  $`\sum_{m \mid n}(d/m)`$ (`NTKB.Davenport.QuadraticIdealCount`). Both are classical (Dedekind) and proved in Tau Ceti,
-  whose proof was not ported because of its size.
+  Fermat's equation $`x^n + y^n = z^n`$ with $`n \ge 4`$ (all exponents together) is proved from the (corrected) abc
+  conjecture, an open problem, which is the hypothesis `NTKB.HardyWright.AbcConjecture` of
+  `NTKB.HardyWright.fermat_finite_of_abc`; the conjecture is stated, not assumed.
+
+**Stated, not proved:** Liouville's formula for the number of representations as a sum of ten squares,
+$`5r_{10}(n) = 4\sum_{d \mid n}\chi(d)d^4 + 64\sum_{d \mid n}\chi(n/d)d^4 + 8\sum_{N(a) = n}a^4`$ (the last sum over
+the Gaussian integers $`a`$ of norm $`n`$), is the proposition `NTKB.HardyWright.LiouvilleTenSquares`, assumed nowhere.
+The missing step is the transformation law of the theta series $`\sum_{a \in \mathbb Z[i]}a^4q^{N(a)}`$.
+
+## Known restrictions
+
+Results of the books that the library proves only in part, or under a hypothesis that the book does not make. Each
+is marked in the book maps.
+
+- **Ireland–Rosen, Chapter 18, Theorems 7 and 8 (headlines):** the Euler factors of $`L(E, s)`$ and $`L(s, \chi)`$
+  are compared only at the primes $`p \nmid 2D`$ (resp. $`p \nmid 6D`$), where the curve has good reduction; the
+  factors at the primes dividing $`2D`$ (resp. $`6D`$) are not compared. Theorem 6 of the same section (the analytic
+  continuation of $`L(s, \chi)`$) is not proved, nor are Propositions 17.9.1 and 17.10.1 (infinitely many rational
+  points from one).
+- **Ireland–Rosen, Proposition 17.10.2 (headline):** the library proves the answer $`d = 3t^2 + 1`$ or
+  $`d = 3t^2 - 1`$, which the book's proof gives ($`d = 2`$ needs the second form: $`5^2 = 3^3 - 2`$); whether the
+  printed statement has both signs was not rechecked against the book.
 - **Ireland–Rosen, Chapter 9, Theorem 1' (the supplement to cubic reciprocity):** proved in the rational case, the
   case the book proves; the case of a general primary prime (the book's Exercises 24 to 26 of Chapter 9) is not
   formalized.
@@ -283,7 +327,11 @@ NTKB/
                             equations over finite fields, zeta functions); R3 Chapters 9 and 17 (reciprocity, Z[i],
                             Diophantine equations); R4 (new in 0.3.0) cubic reciprocity in Z[omega] and Chapter 18
                             (points of y^2 = x^3 + D and y^2 = x^3 - Dx), Chapter 5 (quadratic residues for every
-                            modulus), Chapter 15 (Bernoulli numbers), Chapter 16 (Dirichlet density)
+                            modulus), Chapter 15 (Bernoulli numbers), Chapter 16 (Dirichlet density); R5 (new in
+                            0.4.0) Chapter 13, section 1 (quadratic fields), the Hecke characters of Chapter 18 and
+                            Proposition 17.10.2
+  Elementary/QuadraticField/ (new in 0.4.0) quadratic number fields: the model Q(sqrt D) of a fundamental
+                            discriminant D, its ring of integers, the decomposition law and the ideal count
   Elementary/NZM/           Niven-Zuckerman-Montgomery (the results not already proved for the other books)
   Elementary/SpecialValues/ the special values of Dirichlet L-functions and the quadratic Gauss sums
   Analytic/Apostol/, Analytic/Davenport/  supporting files (see below)
@@ -296,11 +344,11 @@ scripts/verify-comparator.sh    runs lake comparator for one book with the toolc
 .github/workflows/build.yml  the CI workflow (build, axioms, map names, one comparator check per book)
 ```
 
-**Supporting files outside this release's books.** The books import 46 files of the library's treatment
+**Supporting files outside this release's books.** The books import 81 files of the library's treatment
 of Apostol's *Introduction to Analytic Number Theory* and Davenport's *Multiplicative Number Theory* (Jacobi's triple
 product, the Chebyshev functions and the equivalent forms of the prime number theorem, partial summation, the
-partition function, the reduction of binary quadratic forms, and, new in 0.3.0, Jacobi's class number formula of
-imaginary quadratic fields with its two cited inputs). They are shipped so that the library builds; the
+partition function, the reduction of binary quadratic forms, and, since 0.3.0, Jacobi's class number formula of
+imaginary quadratic fields, whose two inputs are proved since 0.4.0). They are shipped so that the library builds; the
 analytic books are not part of this release. Some ported files carry the proofs of Tau Ceti results that the
 library needs (Tau Ceti is not a dependency).
 
@@ -315,11 +363,11 @@ lake env lean scripts/check_axioms.lean          # axioms of the headline theore
                                                  # NivenZuckermanMontgomery, SpecialValues
 ```
 
-Mathlib comes prebuilt from its cache; this library is built from source (280 modules, about 75,000 lines; no file
-imports all of Mathlib, so only the Mathlib modules it needs are loaded). On 8 cores and 31 GB (2026-11-15), with
-Mathlib's cache in place, `lake build` took about 6.5 minutes, with at most 7.1 GB of memory in use and a largest
+Mathlib comes prebuilt from its cache; this library is built from source (339 modules, about 91,000 lines; no file
+imports all of Mathlib, so only the Mathlib modules it needs are loaded). On 8 cores and 31 GB (2026-11-16), with
+Mathlib's cache in place, `lake build` took about 8 minutes, with at most 7.5 GB of memory in use and a largest
 single Lean process of 5.0 GB. Each `lake comparator` check (one book: build, export, and the Lean, NanoDa and
-con-ron kernels) took 4 to 11 minutes, with at most 4.6 GB in use and a largest single process of at most 4.8 GB
+con-ron kernels) took 4 to 12 minutes, with at most 5.1 GB in use and a largest single process of at most 4.8 GB
 (`leanexport`).
 
 ## Provenance
@@ -328,7 +376,7 @@ NTKB was written by AI, with Claude Code (Anthropic): almost entirely by Claude 
 Sonnet 5.5, in October and November 2026. Jonathan Hanke designed and directed it: he chose the books, the results,
 the conventions and the proof routes. The files under `NTKB/Port/` and the files of `NTKB/Elementary/SpecialValues/`
 that say so in their headers contain code ported from Tau Ceti (by the Tau Ceti contributors, Apache 2.0). The proofs
-are checked by the Lean kernel, and CI checks that the headline theorems use only the standard axioms. The 32
+are checked by the Lean kernel, and CI checks that the headline theorems use only the standard axioms. The 40
 headline statements of this release in the `Challenge_<book>.lean` files, and the definitions they use, have **not
 yet been reviewed** by a human; that review is planned for a later release. `lake comparator` checks that each
 `Solution_<book>.lean` proves exactly the statements of its `Challenge_<book>.lean`. The rest of the library (its
@@ -352,16 +400,27 @@ Releases are tagged with semantic versions; `main` continues to develop. The DOI
   imports all of Mathlib.
 - **[v0.3.0](https://github.com/jonhanke/elementary-number-theory-lean/releases/tag/v0.3.0)** (Lean v4.36.0-rc2, Mathlib `1b1ccf4`), archived on Zenodo as [doi:10.5281/zenodo.24257518](https://doi.org/10.5281/zenodo.24257518):
   cubic reciprocity and curves over finite fields, quadratic residues for every modulus, Dirichlet density, the
-  Bernoulli congruences of Ireland–Rosen § 15.2, the three-square theorem and Jacobi's eight-square theorem (see
-  [What's new in 0.3.0](#whats-new-in-030)); 6 new headline statements (Ireland–Rosen 4, Hardy–Wright 2), the 26
+  Bernoulli congruences of Ireland–Rosen § 15.2, the three-square theorem and Jacobi's eight-square theorem; 6 new headline statements (Ireland–Rosen 4, Hardy–Wright 2), the 26
   headlines of 0.1.0 and 0.2.0 unchanged; maps: Ireland–Rosen 404 results (167 proved, 5 in part, 1 conditional),
   Hardy–Wright 626 (281 proved, 14 in part, 1 conditional). The comparator check stays one per book (four, run as a
   matrix in CI); no file imports all of Mathlib.
 
-**Not in this release** (planned for later releases): Chapters 12 to 14, 19 and 20 of Ireland–Rosen (algebraic
-number theory, the Stickelberger relation and Eisenstein reciprocity, the arithmetic of elliptic curves) and the
-results of Chapter 18 not proved here; Jacobi's six-square formula. The analytic books (Apostol, Davenport) are in the
-separate library analytic-number-theory-lean.
+- **v0.4.0** (Lean v4.36.0-rc2, Mathlib `1b1ccf4`), archived on Zenodo as [doi:ZENODO-DOI-v0.4.0](https://doi.org/ZENODO-DOI-v0.4.0):
+  quadratic fields with no assumed input (Ireland–Rosen 13.1), the Hecke characters of the curves
+  $`y^2 = x^3 - Dx`$ and $`y^2 = x^3 + D`$ against Mathlib's local factors of $`L(E, s)`$ (Ireland–Rosen 18, Theorems 7
+  and 8), Proposition 17.10.2, Jacobi's six-square and Glaisher's twelve-square theorems (see
+  [What's new in 0.4.0](#whats-new-in-040)); 8 new headline statements (Ireland–Rosen 6, Hardy–Wright 2), the 32
+  headlines of 0.1.0 to 0.3.0 unchanged; maps: Ireland–Rosen 413 results (174 proved, 8 in part, none conditional),
+  Hardy–Wright 628 (283 proved, 13 in part, 1 conditional). The comparator check stays one per book (four, run as a
+  matrix in CI); no file imports all of Mathlib.
+
+**Not in this release** (planned for later releases): Chapters 12, 14, 19 and 20 of Ireland–Rosen and the rest of
+Chapter 13 (algebraic number theory, the Stickelberger relation and Eisenstein reciprocity, the arithmetic of
+elliptic curves), and the results of Chapters 17 and 18 not proved here (Theorem 6 of Chapter 18, Propositions 17.9.1
+and 17.10.1); Liouville's ten-square formula (stated only). The analytic books (Apostol, Davenport) are in the
+separate library analytic-number-theory-lean. The library's historical formalizations (results from Dickson's
+*History of the Theory of Numbers* and Gauss's *Disquisitiones Arithmeticae*, three rounds) are a separate Lean
+library and are not published in this repository.
 
 ## License
 

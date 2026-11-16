@@ -35,8 +35,8 @@ non-principal character modulo `4` (`chi4`, valued in `ℂ`). -/
 noncomputable def jacobiSixSum (n : ℕ) : ℂ :=
   16 * ∑ d ∈ n.divisors, chi4 (n / d : ℕ) * (d : ℂ) ^ 2 - 4 * ∑ d ∈ n.divisors, chi4 d * (d : ℂ) ^ 2
 
-/-- The statement of Hardy–Wright (20.13.1) (Jacobi's formula for `r₆`). Recorded as an open
-statement; it is not assumed anywhere. -/
+/-- The statement of Hardy–Wright (20.13.1) (Jacobi's formula for `r₆`). Proved as
+`NTKB.HardyWright.jacobiSixSquares` (`Theta/SixSquares.lean`). -/
 def JacobiSixSquares : Prop := ∀ n : ℕ, 0 < n → (sumSquaresCount 6 n : ℂ) = jacobiSixSum n
 
 end NTKB.HardyWright

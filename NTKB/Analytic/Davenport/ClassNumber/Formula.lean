@@ -21,7 +21,7 @@ Davenport, *Multiplicative Number Theory*, §6. Let `K` be a quadratic number fi
 discriminant `d` and `χ = (d/·)` its Kronecker character (`NTKB.kroneckerChar d`).
 
 Two cited results are assumed as named statements (the closure of Tau Ceti's proof beyond Mathlib
-is 185 files, about 41,600 lines):
+is 185 files, about 41,600 lines, on another Mathlib commit):
 
 * `QuadraticFieldDiscriminants`: the discriminant of a quadratic field is a fundamental
   discriminant, and every fundamental discriminant `d ≠ 1` is the discriminant of a quadratic
