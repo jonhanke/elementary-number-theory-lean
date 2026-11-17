@@ -16,6 +16,8 @@ import NTKB.IrelandRosen.R4.Bernoulli.ClassNumberField
 import NTKB.IrelandRosen.R5.HeckeGaussian
 import NTKB.IrelandRosen.R5.HeckeEisenstein
 import NTKB.IrelandRosen.R5.MordellClassNumber
+import NTKB.IrelandRosen.R5.BadPrimesCM
+import NTKB.IrelandRosen.R5.MordellInfinite
 
 /-!
 # Headline statements of elementary-number-theory-lean: Ireland and Rosen
@@ -56,12 +58,22 @@ these too:
   `NTKB.IrelandRosen.Eisenstein.sexticChar`, and at an inert prime `-ρ'`); the local polynomial and the places of `ℚ`
   are Mathlib's (`WeierstrassCurve.localPolynomial`, `IsDedekindDomain.HeightOneSpectrum`,
   `Rat.HeightOneSpectrum.primesEquiv`)
+* (since 0.4.1) `NTKB.IrelandRosen.CM.MordellTorsionInput` (the named input of the two conditional statements: every
+  rational point `(x, y)` with `xy ≠ 0` of finite order on `y² = x³ + k` has `k = d⁶` or `k = -432 d⁶`), with
+  `NTKB.IrelandRosen.CM.mordellCurve k` (the Weierstrass curve `y² = x³ + k` over `ℚ`, with Mathlib's points
+  `WeierstrassCurve.Affine.Point` and `IsOfFinAddOrder`)
 
 The first five statements are those of release 0.1.0; `cube_eq_two_iff`, `points_y_sq_eq_x_cube_sub_D_x`,
 `kummer_congruences` and `class_number_bernoulli` are new in release 0.3.0 and use only Mathlib's definitions besides
 those above (`bernoulli`, `legendreSym`, `Nat.totient`). New in release 0.4.0: `class_number_bernoulli_field` and
 `mordell_class_number` (only Mathlib's definitions: `NumberField.classNumber`, `QuadraticAlgebra`), and the four local
-forms of Theorems 7 and 8 of Chapter 18 (the Hecke characters above).
+forms of Theorems 7 and 8 of Chapter 18 (the Hecke characters above). New in release 0.4.1: the same theorems at the
+primes dividing `2D` (resp. `6D`) where the reduction is additive (`hecke_character_quartic_curve_bad`,
+`hecke_character_cubic_curve_bad`), and two *conditional* statements, Propositions 17.9.1 and 17.10.1
+(`infinite_points_sum_cubes`, `infinite_points_mordell`), which take as a hypothesis the named input
+`NTKB.IrelandRosen.CM.MordellTorsionInput` (Fueter's classification of the rational points of finite order on
+`y² = x³ + k`, a cited result the library does not prove; it is a hypothesis of these two statements only, never an
+axiom).
 -/
 
 namespace NTKB.Headlines.IrelandRosen
@@ -231,6 +243,58 @@ proved in the library). Neither Mathlib nor Tau Ceti has this criterion. -/
 theorem mordell_class_number {d : ℤ} [Fact (1 < d)] (hsq : Squarefree d) (h4 : d % 4 = 1 ∨ d % 4 = 2)
     (h3 : ¬ 3 ∣ NumberField.classNumber (QuadraticAlgebra ℚ ((-d : ℤ) : ℚ) 0)) :
     (∃ x y : ℤ, y ^ 2 = x ^ 3 - d) ↔ ∃ t : ℤ, d = 3 * t ^ 2 + 1 ∨ d = 3 * t ^ 2 - 1 := by
+  sorry
+
+/-- **The Hecke character of `y² = x³ - Dx` at the primes dividing `2D`** (Chapter 18, § 5, Theorem 7, local form;
+new in 0.4.1). Let `v` be the finite place of `ℚ` of a prime `p ∣ 2D` with `p¹² ∤ 64 D³` (the discriminant), that is
+`p⁴ ∤ D` for odd `p` and `4 ∤ D` for `p = 2`. Then Mathlib's local polynomial of the curve at `p` is `1` (the reduction
+is additive), and `χ(π) = 0` for every prime `π` of `ℤ[i]` above `p`, `χ = NTKB.IrelandRosen.CM.heckeCharQuartic D`;
+so the Euler factors of `L(E, s)` and `L(s, χ)` at `p` are both `1`. With `hecke_character_quartic_curve_split` and
+`hecke_character_quartic_curve_inert` (the primes `p ∤ 2D`), the Euler factors agree at every prime except `p = 2` with
+`4 ∣ D` and the odd `p` with `p⁴ ∣ D` (see the README, Known restrictions). Mathlib defines the local polynomial (its value `1` at a prime of additive reduction is
+stated in a comment, not proved); neither Mathlib nor Tau Ceti links it to a Hecke character. -/
+theorem hecke_character_quartic_curve_bad (v : IsDedekindDomain.HeightOneSpectrum (NumberField.RingOfIntegers ℚ))
+    {D : ℤ} (hD : (((Rat.HeightOneSpectrum.primesEquiv v : Nat.Primes) : ℕ) : ℤ) ∣ 2 * D) (h12 : ¬ (((Rat.HeightOneSpectrum.primesEquiv v : Nat.Primes) : ℕ) : ℤ) ^ 12 ∣ 64 * D ^ 3) :
+    (((⟨0, 0, 0, -D, 0⟩ : WeierstrassCurve ℤ).baseChange ℚ).baseChange (v.adicCompletion ℚ)).localPolynomial
+        (v.adicCompletionIntegers ℚ) = 1 ∧
+      ∀ π : GaussianInt, ¬ IsUnit π → π ∣ (((Rat.HeightOneSpectrum.primesEquiv v : Nat.Primes) : ℕ) : GaussianInt) → CM.heckeCharQuartic D π = 0 := by
+  sorry
+
+/-- **The Hecke character of `y² = x³ + D` at the primes dividing `6D`** (Chapter 18, § 5, Theorem 8, local form;
+new in 0.4.1). Let `v` be the finite place of `ℚ` of a prime `p ∣ 6D` with `p¹² ∤ 432 D²` (up to sign the
+discriminant), that is `p⁶ ∤ D` for `p ≥ 5`, `16 ∤ D` for `p = 2` and `3⁵ ∤ D` for `p = 3`. Then Mathlib's local
+polynomial of the curve at `p` is `1`, and `χ(π) = 0` for every prime `π` of `ℤ[ω]` above `p`,
+`χ = NTKB.IrelandRosen.CM.heckeCharSextic D`; so the Euler factors of `L(E, s)` and `L(s, χ)` at `p` are both `1`.
+UPSTREAM_IR_BAD -/
+theorem hecke_character_cubic_curve_bad (v : IsDedekindDomain.HeightOneSpectrum (NumberField.RingOfIntegers ℚ))
+    {D : ℤ} (hD : (((Rat.HeightOneSpectrum.primesEquiv v : Nat.Primes) : ℕ) : ℤ) ∣ 6 * D) (h12 : ¬ (((Rat.HeightOneSpectrum.primesEquiv v : Nat.Primes) : ℕ) : ℤ) ^ 12 ∣ 432 * D ^ 2) :
+    (((⟨0, 0, 0, 0, D⟩ : WeierstrassCurve ℤ).baseChange ℚ).baseChange (v.adicCompletion ℚ)).localPolynomial
+        (v.adicCompletionIntegers ℚ) = 1 ∧
+      ∀ π : NTKB.HardyWright.ZRho, ¬ IsUnit π → π ∣ (((Rat.HeightOneSpectrum.primesEquiv v : Nat.Primes) : ℕ) : NTKB.HardyWright.ZRho) →
+        CM.heckeCharSextic D π = 0 := by
+  sorry
+
+/-- **Infinitely many rational points on `y² = x³ + k`** (Chapter 17, § 10, Proposition 17.10.1; new in 0.4.1,
+*conditional*). Let `k` be sixth-power free, `k ≠ 1, -432`. If `y² = x³ + k` has a rational solution with `xy ≠ 0`, it
+has infinitely many rational solutions. Conditional on the named input `NTKB.IrelandRosen.CM.MordellTorsionInput`
+(Fueter, 1930; see Cassels, *Lectures on Elliptic Curves*, § 14): a rational point `(x, y)` with `xy ≠ 0` of finite
+order on `y² = x³ + k` exists only if `k = d⁶` or `k = -432 d⁶`. It follows from the Lutz–Nagell theorem and a finite
+case analysis; the library does not prove it. Neither Mathlib nor Tau Ceti has this statement (Tau Ceti has the
+Lutz–Nagell theorem, not Fueter's classification). -/
+theorem infinite_points_mordell (hin : CM.MordellTorsionInput) {k : ℤ} (hk0 : k ≠ 0)
+    (hk : ∀ d : ℤ, d ^ 6 ∣ k → IsUnit d) (hk1 : k ≠ 1) (hk432 : k ≠ -432) {x y : ℚ}
+    (hx : x ≠ 0) (hy : y ≠ 0) (hxy : y ^ 2 = x ^ 3 + k) :
+    {p : ℚ × ℚ | p.2 ^ 2 = p.1 ^ 3 + k}.Infinite := by
+  sorry
+
+/-- **Infinitely many rational points on `x³ + y³ = a`** (Chapter 17, § 9, Proposition 17.9.1; new in 0.4.1,
+*conditional*). Let `a > 2` be cube free. If `x³ + y³ = a` has a rational solution, it has infinitely many. The proof
+maps the curve to `Y² = X³ - 432 a²` by `(x, y) ↦ (12a/(x + y), 36a(x - y)/(x + y))`; conditional on the same named
+input `NTKB.IrelandRosen.CM.MordellTorsionInput` as `infinite_points_mordell`. Neither Mathlib nor Tau Ceti has this statement (Tau Ceti has the
+Lutz–Nagell theorem, not Fueter's classification). -/
+theorem infinite_points_sum_cubes (hin : CM.MordellTorsionInput) {a : ℤ} (ha : 2 < a)
+    (hcf : ∀ d : ℤ, d ^ 3 ∣ a → IsUnit d) {x y : ℚ} (hxy : x ^ 3 + y ^ 3 = a) :
+    {p : ℚ × ℚ | p.1 ^ 3 + p.2 ^ 3 = a}.Infinite := by
   sorry
 
 end NTKB.Headlines.IrelandRosen

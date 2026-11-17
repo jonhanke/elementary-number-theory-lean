@@ -1,5 +1,5 @@
 name = "elementary_number_theory_lean"
-version = "0.4.0"
+version = "0.4.1"
 defaultTargets = ["NTKB", "Challenge_HardyWright", "Solution_HardyWright", "Challenge_IrelandRosen",
   "Solution_IrelandRosen", "Challenge_SpecialValues", "Solution_SpecialValues", "Challenge_NivenZuckermanMontgomery",
   "Solution_NivenZuckermanMontgomery"]

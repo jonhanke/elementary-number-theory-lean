@@ -16,6 +16,8 @@ import NTKB.IrelandRosen.R4.Bernoulli.ClassNumberField
 import NTKB.IrelandRosen.R5.HeckeGaussian
 import NTKB.IrelandRosen.R5.HeckeEisenstein
 import NTKB.IrelandRosen.R5.MordellClassNumber
+import NTKB.IrelandRosen.R5.BadPrimesCM
+import NTKB.IrelandRosen.R5.MordellInfinite
 
 /-!
 # Proofs of the Ireland–Rosen headline statements
@@ -122,5 +124,34 @@ theorem mordell_class_number {d : ℤ} [Fact (1 < d)] (hsq : Squarefree d) (h4 :
     (h3 : ¬ 3 ∣ NumberField.classNumber (QuadraticAlgebra ℚ ((-d : ℤ) : ℚ) 0)) :
     (∃ x y : ℤ, y ^ 2 = x ^ 3 - d) ↔ ∃ t : ℤ, d = 3 * t ^ 2 + 1 ∨ d = 3 * t ^ 2 - 1 :=
   CM.exists_sq_eq_cube_sub_iff_unconditional hsq h4 h3
+
+theorem hecke_character_quartic_curve_bad (v : IsDedekindDomain.HeightOneSpectrum (NumberField.RingOfIntegers ℚ))
+    {D : ℤ} (hD : (((Rat.HeightOneSpectrum.primesEquiv v : Nat.Primes) : ℕ) : ℤ) ∣ 2 * D) (h12 : ¬ (((Rat.HeightOneSpectrum.primesEquiv v : Nat.Primes) : ℕ) : ℤ) ^ 12 ∣ 64 * D ^ 3) :
+    (((⟨0, 0, 0, -D, 0⟩ : WeierstrassCurve ℤ).baseChange ℚ).baseChange (v.adicCompletion ℚ)).localPolynomial
+        (v.adicCompletionIntegers ℚ) = 1 ∧
+      ∀ π : GaussianInt, ¬ IsUnit π → π ∣ (((Rat.HeightOneSpectrum.primesEquiv v : Nat.Primes) : ℕ) : GaussianInt) → CM.heckeCharQuartic D π = 0 :=
+  ⟨CM.localPolynomial_quarticCurve_eq_one v hD h12, fun _ hπ hπp =>
+    CM.heckeCharQuartic_eq_zero_of_dvd hπ (hπp.trans (by exact_mod_cast CM.intCast_dvd_of_dvd (A := GaussianInt) hD))⟩
+
+theorem hecke_character_cubic_curve_bad (v : IsDedekindDomain.HeightOneSpectrum (NumberField.RingOfIntegers ℚ))
+    {D : ℤ} (hD : (((Rat.HeightOneSpectrum.primesEquiv v : Nat.Primes) : ℕ) : ℤ) ∣ 6 * D) (h12 : ¬ (((Rat.HeightOneSpectrum.primesEquiv v : Nat.Primes) : ℕ) : ℤ) ^ 12 ∣ 432 * D ^ 2) :
+    (((⟨0, 0, 0, 0, D⟩ : WeierstrassCurve ℤ).baseChange ℚ).baseChange (v.adicCompletion ℚ)).localPolynomial
+        (v.adicCompletionIntegers ℚ) = 1 ∧
+      ∀ π : NTKB.HardyWright.ZRho, ¬ IsUnit π → π ∣ (((Rat.HeightOneSpectrum.primesEquiv v : Nat.Primes) : ℕ) : NTKB.HardyWright.ZRho) →
+        CM.heckeCharSextic D π = 0 :=
+  ⟨CM.localPolynomial_cubicCurve_eq_one v hD h12, fun _ hπ hπp =>
+    CM.heckeCharSextic_eq_zero_of_dvd hπ
+      (hπp.trans (by exact_mod_cast CM.intCast_dvd_of_dvd (A := NTKB.HardyWright.ZRho) hD))⟩
+
+theorem infinite_points_mordell (hin : CM.MordellTorsionInput) {k : ℤ} (hk0 : k ≠ 0)
+    (hk : ∀ d : ℤ, d ^ 6 ∣ k → IsUnit d) (hk1 : k ≠ 1) (hk432 : k ≠ -432) {x y : ℚ}
+    (hx : x ≠ 0) (hy : y ≠ 0) (hxy : y ^ 2 = x ^ 3 + k) :
+    {p : ℚ × ℚ | p.2 ^ 2 = p.1 ^ 3 + k}.Infinite :=
+  CM.infinite_points_mordell_of_input hin hk0 hk hk1 hk432 hx hy hxy
+
+theorem infinite_points_sum_cubes (hin : CM.MordellTorsionInput) {a : ℤ} (ha : 2 < a)
+    (hcf : ∀ d : ℤ, d ^ 3 ∣ a → IsUnit d) {x y : ℚ} (hxy : x ^ 3 + y ^ 3 = a) :
+    {p : ℚ × ℚ | p.1 ^ 3 + p.2 ^ 3 = a}.Infinite :=
+  CM.infinite_points_sum_cubes_of_input hin ha hcf hxy
 
 end NTKB.Headlines.IrelandRosen

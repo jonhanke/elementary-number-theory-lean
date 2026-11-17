@@ -22,12 +22,34 @@ elementary-number-theory-lean.
   `lake comparator` once per book to check the proved statements against the `Challenge_<book>.lean` files.
 - **Cited results are named**: where the library assumes a result it does not prove, the result is a named Lean
   structure, never assumed silently; a theorem that uses it has it as a hypothesis and the book maps mark the row
-  *conditional* (in this release one row, in a note of Hardy–Wright, assumes the abc conjecture; no headline depends
-  on it; see [Conditional theorems](#conditional-theorems)). Conjectures are stated, never assumed as true.
+  *conditional* (in this release three rows: one, in a note of Hardy–Wright, assumes the abc conjecture, and two
+  headlines, Ireland–Rosen's Propositions 17.9.1 and 17.10.1, assume Fueter's classification of the torsion points of
+  $`y^2 = x^3 + k`$; see [Conditional theorems](#conditional-theorems)). Conjectures are stated, never assumed as true.
 - **Comparison**: [docs/results/comparison.md](docs/results/comparison.md) says, for each headline, what Mathlib,
   [Tau Ceti](https://github.com/TauCetiProject/TauCeti) and
   [PrimeNumberTheoremAnd](https://github.com/AlexKontorovich/PrimeNumberTheoremAnd) already have and what this library
   adds. This library depends on Mathlib only.
+
+## What's new in 0.4.1
+
+- **Liouville's ten-square theorem** (beyond Hardy–Wright, § 20.13, which gives $`r_6`$ and $`r_8`$): for $`n \ge 1`$,
+  $`5r_{10}(n) = 4\sum_{d \mid n}\chi(d)d^4 + 64\sum_{d \mid n}\chi(n/d)d^4 + 8\sum_{N(a) = n}a^4`$, the last sum over the
+  Gaussian integers $`a`$ of norm $`n`$. Stated only in 0.4.0, now proved: the transformation law of the theta series
+  $`\sum_{a \in \mathbb Z[i]}a^4q^{N(a)}`$ under $`\tau \mapsto -1/\tau`$ comes from Mathlib's functional equation of
+  the two-variable Jacobi theta function, and the identity from modular forms of level one, as for $`r_6`$ and
+  $`r_{12}`$.
+- **Theorems 7 and 8 of Ireland–Rosen, Chapter 18, at more primes:** at the primes $`p \mid 2D`$ (resp. $`p \mid 6D`$)
+  with $`p^{12}`$ not dividing the discriminant, Mathlib's local polynomial of the curve is $`1`$ (the reduction is
+  additive) and the Hecke character vanishes on the primes above $`p`$, so the two Euler factors agree there too. On
+  the way: for a Weierstrass curve over $`\mathbb Z`$, the local polynomial is $`1`$ at a prime $`p`$ dividing
+  $`\Delta`$ and $`c_4`$ with $`p^{12} \nmid \Delta`$.
+- **Propositions 17.9.1 and 17.10.1 of Ireland–Rosen** (*conditional*): one rational point on $`x^3 + y^3 = a`$
+  ($`a > 2`$ cube free), or one with $`xy \ne 0`$ on $`y^2 = x^3 + k`$ ($`k`$ sixth-power free, $`k \ne 1, -432`$), gives
+  infinitely many, from Fueter's classification of the rational points of finite order on $`y^2 = x^3 + k`$, a named
+  input that the library does not prove (see [Conditional theorems](#conditional-theorems)).
+- **Five new headline statements** (four of Ireland–Rosen, two of them conditional; one of Hardy–Wright; marked "new in
+  0.4.1" below); the 40 headlines of 0.1.0 to 0.4.0 are unchanged. Maps: Ireland–Rosen 415 results (174 proved, 8 in
+  part, 2 conditional; was 413, 174, 8, 0), Hardy–Wright 628 (284 proved, 13 in part, 1 conditional; was 283).
 
 ## What's new in 0.4.0
 
@@ -48,7 +70,8 @@ elementary-number-theory-lean.
   of $`\mathbb Q(\sqrt{-d})`$.
 - **Sums of six and twelve squares** (Hardy–Wright, Section 20.13, and beyond the book): Jacobi's formula for
   $`r_6(n)`$ and Glaisher's formula for $`r_{12}(n)`$ (with the coefficients of $`\eta(2z)^{12}`$), both by modular
-  forms of level one, as for $`r_8`$ in 0.3.0. Liouville's formula for $`r_{10}(n)`$ is stated, not proved.
+  forms of level one, as for $`r_8`$ in 0.3.0. Liouville's formula for $`r_{10}(n)`$ is stated, not proved (proved in
+  0.4.1).
 - **Eight new headline statements** (six of Ireland–Rosen, two of Hardy–Wright; marked "new in 0.4.0" below); the 32
   headlines of 0.1.0 to 0.3.0 are unchanged. Maps: Ireland–Rosen 413 results (174 proved, 8 in part, none
   conditional; was 404, 167, 5, 1), Hardy–Wright 628 (283 proved, 13 in part, 1 conditional; was 626, 281, 14, 1).
@@ -57,8 +80,8 @@ elementary-number-theory-lean.
 
 | book | rows | proved | proved in part | conditional | in Mathlib | other | proved here, also elsewhere |
 |---|---|---|---|---|---|---|---|
-| [G. H. Hardy and E. M. Wright, *An Introduction to the Theory of Numbers* (6th ed., 2008)](docs/results/books/hardy-wright.md) | 628 | 283 | 13 | 1 | 178 | 153 | 79 |
-| [K. Ireland and M. Rosen, *A Classical Introduction to Modern Number Theory* (2nd ed., 1990), Chapters 1–11, 15, 16 and the results of Chapter 13 §1 and Chapters 17 and 18 proved here](docs/results/books/ireland-rosen.md) | 413 | 174 | 8 | 0 | 178 | 53 | 67 |
+| [G. H. Hardy and E. M. Wright, *An Introduction to the Theory of Numbers* (6th ed., 2008)](docs/results/books/hardy-wright.md) | 628 | 284 | 13 | 1 | 178 | 152 | 79 |
+| [K. Ireland and M. Rosen, *A Classical Introduction to Modern Number Theory* (2nd ed., 1990), Chapters 1–11, 15, 16 and the results of Chapter 13 §1 and Chapters 17 and 18 proved here](docs/results/books/ireland-rosen.md) | 415 | 174 | 8 | 2 | 178 | 53 | 67 |
 | [I. Niven, H. S. Zuckerman and H. L. Montgomery, *An Introduction to the Theory of Numbers* (5th ed., 1991)](docs/results/books/niven-zuckerman-montgomery.md) | 406 | 194 | 4 | 0 | 191 | 17 | 84 |
 | [Special values of Dirichlet $L$-functions and Gauss's sign of quadratic Gauss sums](docs/results/books/special-values.md) | 25 | 25 | 0 | 0 | 0 | 0 | 3 |
 
@@ -114,6 +137,11 @@ a human** (see Provenance).
   is $`\eta(2z)^{12}`$, the cusp form of weight 6 and level 4 (`glaisher_twelve_squares`; J. W. L. Glaisher, 1907).
   The first $`r_k`$ here with a cusp form. Related: Tau Ceti has theta series of lattices as modular forms, not this
   count.
+- **Liouville's ten-square theorem** (new in 0.4.1, beyond the book): for $`n \ge 1`$,
+  $`5r_{10}(n) = 4\sum_{d \mid n}\chi(d)d^4 + 64\sum_{d \mid n}\chi(n/d)d^4 + 8\sum_{x^2 + y^2 = n}(x^4 - 6x^2y^2 + y^4)`$,
+  $`\chi`$ the nontrivial character modulo 4 (`liouville_ten_squares`; J. Liouville, 1866), by a theta series of
+  weight 5 with the harmonic polynomial $`\operatorname{Re} a^4`$ and modular forms of level one. Related: neither Mathlib
+  nor Tau Ceti has the count.
 
 **Ireland and Rosen, *A Classical Introduction to Modern Number Theory*** ([`Challenge_IrelandRosen.lean`](Challenge_IrelandRosen.lean))
 
@@ -170,11 +198,23 @@ a human** (see Provenance).
 - **The Hecke character of $`y^2 = x^3 + D`$** (new in 0.4.0; Chapter 18, § 5, Theorem 8): the same over
   $`\mathbb Z[\omega]`$ with the sextic residue symbol, at every prime $`p \nmid 6D`$
   (`hecke_character_cubic_curve_split`, `hecke_character_cubic_curve_inert`).
+- **The same at the primes of additive reduction** (new in 0.4.1): for $`p \mid 2D`$ with $`p^{12} \nmid 64D^3`$ (resp.
+  $`p \mid 6D`$ with $`p^{12} \nmid 432D^2`$), Mathlib's local polynomial of the curve at $`p`$ is $`1`$ and $`\chi`$ is
+  $`0`$ on every prime of $`\mathbb Z[i]`$ (resp. $`\mathbb Z[\omega]`$) above $`p`$, so both Euler factors are $`1`$
+  (`hecke_character_quartic_curve_bad`, `hecke_character_cubic_curve_bad`). Related: Mathlib defines the local
+  polynomial and the reduction types; it does not prove the value at an additive prime.
 - **Integral points on $`y^2 = x^3 - d`$** (new in 0.4.0; Proposition 17.10.2): for squarefree $`d > 1`$ with
   $`d \equiv 1, 2 \pmod 4`$ and $`3`$ not dividing the class number of $`\mathbb Q(\sqrt{-d})`$, the equation has an
   integral solution if and only if $`d = 3t^2 \pm 1`$ for an integer $`t`$ (`mordell_class_number`), by the book's
   proof (the ring of integers $`\mathbb Z[\sqrt{-d}]`$, the cube of an ideal, principal because $`3 \nmid h`$).
   Related: neither Mathlib nor Tau Ceti has this criterion.
+- **Infinitely many rational points from one** (new in 0.4.1; Propositions 17.9.1 and 17.10.1; *conditional* on the
+  named input `NTKB.IrelandRosen.CM.MordellTorsionInput`): if $`k`$ is sixth-power free, $`k \ne 1, -432`$, and
+  $`y^2 = x^3 + k`$ has a rational solution with $`xy \ne 0`$, it has infinitely many (`infinite_points_mordell`); if
+  $`a > 2`$ is cube free and $`x^3 + y^3 = a`$ has a rational solution, it has infinitely many
+  (`infinite_points_sum_cubes`, through the map $`(x, y) \mapsto (12a/(x + y), 36a(x - y)/(x + y))`$ to
+  $`Y^2 = X^3 - 432a^2`$). Related: Tau Ceti has the Lutz–Nagell theorem, not Fueter's classification nor these
+  statements; Mathlib has neither.
 
 **Niven, Zuckerman and Montgomery, *An Introduction to the Theory of Numbers*** ([`Challenge_NivenZuckermanMontgomery.lean`](Challenge_NivenZuckermanMontgomery.lean)) (new in 0.2.0)
 
@@ -280,17 +320,20 @@ proves the corrected form ([docs/updates-and-errata.md](docs/updates-and-errata.
 
 ## Conditional theorems
 
-Theorems proved from a named input that the library does not prove. No headline is conditional.
+Theorems proved from a named input that the library does not prove. Two headlines are conditional (new in 0.4.1).
+
+- **Ireland–Rosen, Propositions 17.9.1 and 17.10.1 (headlines `infinite_points_sum_cubes`, `infinite_points_mordell`):**
+  proved from the named input `NTKB.IrelandRosen.CM.MordellTorsionInput`, Fueter's classification (1930; see Cassels,
+  *Lectures on Elliptic Curves*, § 14): a rational point $`(x, y)`$ with $`xy \ne 0`$ of finite order on
+  $`y^2 = x^3 + k`$ exists only if $`k = d^6`$ or $`k = -432d^6`$. It follows from the Lutz–Nagell theorem and a finite
+  case analysis, not formalized here. The input is a hypothesis of the two headlines, never an axiom.
 
 - **Hardy–Wright, notes to Chapter XIII (the abc conjecture):** the finiteness of the set of coprime solutions of
   Fermat's equation $`x^n + y^n = z^n`$ with $`n \ge 4`$ (all exponents together) is proved from the (corrected) abc
   conjecture, an open problem, which is the hypothesis `NTKB.HardyWright.AbcConjecture` of
   `NTKB.HardyWright.fermat_finite_of_abc`; the conjecture is stated, not assumed.
 
-**Stated, not proved:** Liouville's formula for the number of representations as a sum of ten squares,
-$`5r_{10}(n) = 4\sum_{d \mid n}\chi(d)d^4 + 64\sum_{d \mid n}\chi(n/d)d^4 + 8\sum_{N(a) = n}a^4`$ (the last sum over
-the Gaussian integers $`a`$ of norm $`n`$), is the proposition `NTKB.HardyWright.LiouvilleTenSquares`, assumed nowhere.
-The missing step is the transformation law of the theta series $`\sum_{a \in \mathbb Z[i]}a^4q^{N(a)}`$.
+Liouville's formula for $`r_{10}(n)`$, stated only in 0.4.0, is proved in 0.4.1 (headline `liouville_ten_squares`).
 
 ## Known restrictions
 
@@ -298,10 +341,16 @@ Results of the books that the library proves only in part, or under a hypothesis
 is marked in the book maps.
 
 - **Ireland–Rosen, Chapter 18, Theorems 7 and 8 (headlines):** the Euler factors of $`L(E, s)`$ and $`L(s, \chi)`$
-  are compared only at the primes $`p \nmid 2D`$ (resp. $`p \nmid 6D`$), where the curve has good reduction; the
-  factors at the primes dividing $`2D`$ (resp. $`6D`$) are not compared. Theorem 6 of the same section (the analytic
-  continuation of $`L(s, \chi)`$) is not proved, nor are Propositions 17.9.1 and 17.10.1 (infinitely many rational
-  points from one).
+  are compared at the primes $`p \nmid 2D`$ (resp. $`p \nmid 6D`$), where the curve has good reduction, and since 0.4.1
+  at the primes $`p \mid 2D`$ (resp. $`p \mid 6D`$) with $`p^{12}`$ not dividing the discriminant. Not compared:
+  $`y^2 = x^3 - Dx`$ at $`p = 2`$ with $`4 \mid D`$; $`y^2 = x^3 + D`$ at $`p = 2`$ with $`16 \mid D`$ and at $`p = 3`$ with
+  $`3^5 \mid D`$ (where Tate's algorithm is needed: $`y^2 = x^3 - 432`$ has good reduction at 2); and the primes where
+  $`D`$ is not fourth-power (resp. sixth-power) free, where the model is not minimal. The identity of the
+  $`L`$-functions as Dirichlet series is not assembled from the Euler factors. Theorem 6 of the same section (the
+  analytic continuation of $`L(s, \chi)`$) is not proved.
+- **Ireland–Rosen, Propositions 17.9.1 and 17.10.1 (headlines):** conditional on Fueter's classification of the
+  torsion points (see [Conditional theorems](#conditional-theorems)); the book's own argument (denominators of the
+  points of the tangent process) is not formalized.
 - **Ireland–Rosen, Proposition 17.10.2 (headline):** the library proves the answer $`d = 3t^2 + 1`$ or
   $`d = 3t^2 - 1`$, which the book's proof gives ($`d = 2`$ needs the second form: $`5^2 = 3^3 - 2`$); whether the
   printed statement has both signs was not rechecked against the book.
@@ -329,7 +378,7 @@ NTKB/
                             (points of y^2 = x^3 + D and y^2 = x^3 - Dx), Chapter 5 (quadratic residues for every
                             modulus), Chapter 15 (Bernoulli numbers), Chapter 16 (Dirichlet density); R5 (new in
                             0.4.0) Chapter 13, section 1 (quadratic fields), the Hecke characters of Chapter 18 and
-                            Proposition 17.10.2
+                            Propositions 17.9.1, 17.10.1 (since 0.4.1) and 17.10.2
   Elementary/QuadraticField/ (new in 0.4.0) quadratic number fields: the model Q(sqrt D) of a fundamental
                             discriminant D, its ring of integers, the decomposition law and the ideal count
   Elementary/NZM/           Niven-Zuckerman-Montgomery (the results not already proved for the other books)
@@ -363,11 +412,11 @@ lake env lean scripts/check_axioms.lean          # axioms of the headline theore
                                                  # NivenZuckermanMontgomery, SpecialValues
 ```
 
-Mathlib comes prebuilt from its cache; this library is built from source (339 modules, about 91,000 lines; no file
-imports all of Mathlib, so only the Mathlib modules it needs are loaded). On 8 cores and 31 GB (2026-11-16), with
-Mathlib's cache in place, `lake build` took about 8 minutes, with at most 7.5 GB of memory in use and a largest
-single Lean process of 5.0 GB. Each `lake comparator` check (one book: build, export, and the Lean, NanoDa and
-con-ron kernels) took 4 to 12 minutes, with at most 5.1 GB in use and a largest single process of at most 4.8 GB
+Mathlib comes prebuilt from its cache; this library is built from source (353 modules, about 94,000 lines; no file
+imports all of Mathlib, so only the Mathlib modules it needs are loaded). On 8 cores and 31 GB (2026-11-17), with
+Mathlib's cache in place, `lake build` took about 8 minutes, with at most 8.0 GB of memory in use and a largest
+single Lean process of 5.1 GB. Each `lake comparator` check (one book: build, export, and the Lean, NanoDa and
+con-ron kernels) took 4 to 13 minutes, with at most 5.1 GB in use and a largest single process of at most 4.9 GB
 (`leanexport`).
 
 ## Provenance
@@ -376,7 +425,7 @@ NTKB was written by AI, with Claude Code (Anthropic): almost entirely by Claude 
 Sonnet 5.5, in October and November 2026. Jonathan Hanke designed and directed it: he chose the books, the results,
 the conventions and the proof routes. The files under `NTKB/Port/` and the files of `NTKB/Elementary/SpecialValues/`
 that say so in their headers contain code ported from Tau Ceti (by the Tau Ceti contributors, Apache 2.0). The proofs
-are checked by the Lean kernel, and CI checks that the headline theorems use only the standard axioms. The 40
+are checked by the Lean kernel, and CI checks that the headline theorems use only the standard axioms. The 45
 headline statements of this release in the `Challenge_<book>.lean` files, and the definitions they use, have **not
 yet been reviewed** by a human; that review is planned for a later release. `lake comparator` checks that each
 `Solution_<book>.lean` proves exactly the statements of its `Challenge_<book>.lean`. The rest of the library (its
@@ -413,13 +462,20 @@ Releases are tagged with semantic versions; `main` continues to develop. The DOI
   headlines of 0.1.0 to 0.3.0 unchanged; maps: Ireland–Rosen 413 results (174 proved, 8 in part, none conditional),
   Hardy–Wright 628 (283 proved, 13 in part, 1 conditional). The comparator check stays one per book (four, run as a
   matrix in CI); no file imports all of Mathlib.
+- **[v0.4.1](https://github.com/jonhanke/elementary-number-theory-lean/releases/tag/v0.4.1)** (Lean v4.36.0-rc2, Mathlib `1b1ccf4`), archived on Zenodo as [doi:ZENODO-DOI-v0.4.1](https://doi.org/ZENODO-DOI-v0.4.1):
+  Liouville's ten-square theorem, Theorems 7 and 8 of Ireland–Rosen 18 at the primes of additive reduction, and
+  Propositions 17.9.1 and 17.10.1 conditional on Fueter's classification of the torsion points (see
+  [What's new in 0.4.1](#whats-new-in-041)); 5 new headline statements (Ireland–Rosen 4, two of them conditional;
+  Hardy–Wright 1), the 40 headlines of 0.1.0 to 0.4.0 unchanged; maps: Ireland–Rosen 415 results (174 proved, 8 in
+  part, 2 conditional), Hardy–Wright 628 (284 proved, 13 in part, 1 conditional). The comparator check stays one per
+  book (four, run as a matrix in CI); no file imports all of Mathlib.
 
 **Not in this release** (planned for later releases): Chapters 12, 14, 19 and 20 of Ireland–Rosen and the rest of
 Chapter 13 (algebraic number theory, the Stickelberger relation and Eisenstein reciprocity, the arithmetic of
-elliptic curves), and the results of Chapters 17 and 18 not proved here (Theorem 6 of Chapter 18, Propositions 17.9.1
-and 17.10.1); Liouville's ten-square formula (stated only). The analytic books (Apostol, Davenport) are in the
+elliptic curves), and the results of Chapters 17 and 18 not proved here (Theorem 6 of Chapter 18; Propositions 17.9.1
+and 17.10.1 are conditional). The analytic books (Apostol, Davenport) are in the
 separate library analytic-number-theory-lean. The library's historical formalizations (results from Dickson's
-*History of the Theory of Numbers* and Gauss's *Disquisitiones Arithmeticae*, three rounds) are a separate Lean
+*History of the Theory of Numbers* and Gauss's *Disquisitiones Arithmeticae*) are a separate Lean
 library and are not published in this repository.
 
 ## License
