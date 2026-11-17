@@ -462,7 +462,7 @@ Releases are tagged with semantic versions; `main` continues to develop. The DOI
   headlines of 0.1.0 to 0.3.0 unchanged; maps: Ireland–Rosen 413 results (174 proved, 8 in part, none conditional),
   Hardy–Wright 628 (283 proved, 13 in part, 1 conditional). The comparator check stays one per book (four, run as a
   matrix in CI); no file imports all of Mathlib.
-- **[v0.4.1](https://github.com/jonhanke/elementary-number-theory-lean/releases/tag/v0.4.1)** (Lean v4.36.0-rc2, Mathlib `1b1ccf4`), archived on Zenodo as [doi:ZENODO-DOI-v0.4.1](https://doi.org/ZENODO-DOI-v0.4.1):
+- **[v0.4.1](https://github.com/jonhanke/elementary-number-theory-lean/releases/tag/v0.4.1)** (Lean v4.36.0-rc2, Mathlib `1b1ccf4`), archived on Zenodo as [doi:10.5281/zenodo.24301260](https://doi.org/10.5281/zenodo.24301260):
   Liouville's ten-square theorem, Theorems 7 and 8 of Ireland–Rosen 18 at the primes of additive reduction, and
   Propositions 17.9.1 and 17.10.1 conditional on Fueter's classification of the torsion points (see
   [What's new in 0.4.1](#whats-new-in-041)); 5 new headline statements (Ireland–Rosen 4, two of them conditional;
