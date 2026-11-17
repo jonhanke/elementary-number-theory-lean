@@ -10,12 +10,12 @@ project:
     Introduction to the Theory of Numbers (5th edition), with the special values of Dirichlet L-functions at the
     integers. Principal results: the five complex Euclidean quadratic fields; x^3 + y^3 = 3z^3;
     Jacobi's triple product, Ramanujan's congruences modulo 5 and 7 and the Rogers-Ramanujan identities; Jacobi's
-    four-square theorem; the three-square theorem; Jacobi's six- and eight-square theorems; Glaisher's twelve-square theorem; the Hasse-Davenport relation; biquadratic reciprocity; Gauss's last entry; Legendre's
+    four-square theorem; the three-square theorem; Jacobi's six- and eight-square theorems; Liouville's ten-square theorem; Glaisher's twelve-square theorem; the Hasse-Davenport relation; biquadratic reciprocity; Gauss's last entry; Legendre's
     theorem on ax^2 + by^2 + cz^2 = 0; Sophie Germain's theorem; x^3 = 2 (mod p) is solvable iff p = C^2 + 27D^2
     (from cubic reciprocity); the number of points of y^2 = x^3 - Dx over F_p by the quartic residue symbol; the
     Kummer congruences; h(-p) = -2B_{(p+1)/2} (mod p) for Jacobi's expression of the class number and for the class
     number of Q(sqrt(-p)); the Hecke characters of y^2 = x^3 - Dx and y^2 = x^3 + D and the local factors of L(E, s) at
-    the primes of good reduction; integral points of y^2 = x^3 - d and the class number of Q(sqrt(-d)); L(1 - k, chi) = -B_{k,chi}/k for every Dirichlet
+    the primes of good reduction and of additive reduction; infinitely many rational points on y^2 = x^3 + k and x^3 + y^3 = a from one (conditional on Fueter's classification of torsion points); integral points of y^2 = x^3 - d and the class number of Q(sqrt(-d)); L(1 - k, chi) = -B_{k,chi}/k for every Dirichlet
     character and L(k, chi) through Gauss sums; Gauss's sign of the quadratic Gauss sum for every fundamental
     discriminant; proper representations by binary quadratic forms; the local-global principle for linear systems;
     the integral points of x^4 + x^3 + x^2 + x + 1 = y^2 and the rational points of y^2 = x^3 - 4x; Galois's theorem
@@ -79,14 +79,14 @@ sources:
 related_formalizations:
   - id: "https://github.com/leanprover-community/mathlib4"
     relationship: "builds-on"
-    note: "Built on Mathlib at commit 1b1ccf4. docs/results/comparison.md says what each headline adds to Mathlib master (df6966d, 2026-11-07; the headlines new in 0.3.0 against 4cf60f1d and 1b1ccf4, 2026-11-15; those new in 0.4.0 against a8754b1, 2026-11-16)."
+    note: "Built on Mathlib at commit 1b1ccf4. docs/results/comparison.md says what each headline adds to Mathlib master (df6966d, 2026-11-07; the headlines new in 0.3.0 against 4cf60f1d and 1b1ccf4, 2026-11-15; those new in 0.4.0 against a8754b1, 2026-11-16; those new in 0.4.1 against d9a73ae1, 2026-11-17)."
   - id: "https://github.com/TauCetiProject/TauCeti"
     relationship: "related"
     note: >-
       Not a dependency. A few files are ported from Tau Ceti with credit (NTKB/Port/ and parts of
       NTKB/Elementary/SpecialValues/: generalized Bernoulli numbers, the Gauss sum identities of primitive
       characters, the evaluation of the quadratic Gauss sum by theta functions, the Jacobi sum of a quartic
-      character). docs/results/comparison.md compares each headline with Tau Ceti main (d2083f0f; the headlines new in 0.3.0 with 9f43ade0, those new in 0.4.0 with 726e93ef).
+      character). docs/results/comparison.md compares each headline with Tau Ceti main (d2083f0f; the headlines new in 0.3.0 with 9f43ade0, those new in 0.4.0 with 726e93ef, those new in 0.4.1 with 7b4d5f70).
   - id: "https://github.com/AlexKontorovich/PrimeNumberTheoremAnd"
     relationship: "related"
     note: "Not a dependency. It proves the prime number theorem analytically; this library proves it by the elementary method of Hardy-Wright, Chapter XXII (not a headline)."
@@ -96,18 +96,24 @@ related_formalizations:
 
 status:
   scope: >-
-    Release 0.4.0. Formalized (the 40 statements of the Challenge_<book>.lean files, proved in the
-    Solution_<book>.lean files): Hardy-Wright 12 (Theorems 246, 232, 352, 359, 360, 362, 363, 386, Sections 20.10
-    and 20.13 (six and eight squares), and Glaisher's twelve-square theorem, beyond the book), Ireland-Rosen 15
+    Release 0.4.1. Formalized (the 45 statements of the Challenge_<book>.lean files, proved in the
+    Solution_<book>.lean files): Hardy-Wright 13 (Theorems 246, 232, 352, 359, 360, 362, 363, 386, Sections 20.10
+    and 20.13 (six and eight squares), and Liouville's ten-square and Glaisher's twelve-square theorems, beyond the
+    book), Ireland-Rosen 19
     (Chapter 11 section 3 Theorem 1, Chapter 9 section 9 Theorem 2, the theorem of Chapter 11 section 5, Propositions
     17.3.1, 17.4.1, 9.6.2 and 17.10.2, Chapter 18 section 4 Theorem 5, Chapter 15 section 2 Theorem 5, the class
     number congruence of Chapter 15 section 2 in Jacobi's form and for the class number of the field, and the local
-    forms of Theorems 7 and 8 of Chapter 18 section 5, two statements each), Niven-Zuckerman-Montgomery 10
+    forms of Theorems 7 and 8 of Chapter 18 section 5, three statements each, and Propositions 17.9.1 and 17.10.1,
+    conditional on a named input), Niven-Zuckerman-Montgomery 10
     (Theorems 3.13, 5.2, 5.9, 5.24, 7.20, 7.24, 8.30, 10.12, 11.2, 11.10), special values 3. The book maps give the
-    status of every result. Named statements assumed (no headline depends on them): the abc conjecture, in one
-    theorem of the notes to Chapter XIII of Hardy-Wright. Stated and not proved, assumed nowhere: Liouville's
-    formula for r_10(n). Theorems 7 and 8 of Ireland-Rosen 18 are compared with Mathlib's local factors only at the
-    primes not dividing 2D (resp. 6D).
+    status of every result. Named statements assumed: Fueter's classification of the rational points of finite
+    order on y^2 = x^3 + k (NTKB.IrelandRosen.CM.MordellTorsionInput), a hypothesis of the two conditional headlines
+    (Propositions 17.9.1 and 17.10.1); the abc conjecture, in one theorem of the notes to Chapter XIII of
+    Hardy-Wright (no headline depends on it). Not proved: Theorem 6 of Ireland-Rosen 18 (L(s, chi) entire).
+    Theorems 7 and 8 of Ireland-Rosen 18 are compared with Mathlib's local factors at
+    the primes not dividing 2D (resp. 6D) and at those dividing it where p^12 does not divide the discriminant (not
+    at p = 2 with 4 | D, resp. p = 2, 3 with 16 | D, 3^5 | D, nor where D is not fourth- (resp. sixth-) power free);
+    the global identity of L-functions is not assembled.
   sorry_count: 0
   sorry_in_definitions: 0
   # No custom axioms; the standard axioms used (checked by scripts/check_axioms.lean and lake comparator):
@@ -127,7 +133,7 @@ automation:
         assumed silently; a kernel-level audit decides which are proved.
   notes: >-
     Jonathan Hanke designed and directed the project; the Lean code was written almost entirely by Claude Opus 5.5,
-    with a share by Claude Sonnet 5.5, in October and November 2026 (releases 0.3.0 and 0.4.0: November 2026). All proofs are checked by the Lean kernel; the
+    with a share by Claude Sonnet 5.5, in October and November 2026 (releases 0.3.0 to 0.4.1: November 2026). All proofs are checked by the Lean kernel; the
     headline statements are collected in the Challenge_<book>.lean files for human review.
 
 fidelity:
@@ -147,7 +153,7 @@ fidelity:
     one-line statements are paraphrases.
 
 review:
-  status: "not yet reviewed: the 40 headline statements of the Challenge_<book>.lean files and the definitions they use have not yet been reviewed by a human"
+  status: "not yet reviewed: the 45 headline statements of the Challenge_<book>.lean files and the definitions they use have not yet been reviewed by a human"
   reviewers: []
   notes: >-
     The headline statements and the definitions they use have not yet been reviewed by a human; that review is
@@ -317,6 +323,26 @@ alignment:
     - source: "Glaisher (1907), r_12(n) (beyond the books; Grosswald, Representations of Integers as Sums of Squares, 1985)"
       lean: "NTKB.Headlines.HardyWright.glaisher_twelve_squares"
       module: "Challenge_HardyWright / Solution_HardyWright"
+      status: "proved"
+    - source: "Liouville (1866), r_10(n) (beyond the books; Grosswald, Representations of Integers as Sums of Squares, 1985)"
+      lean: "NTKB.Headlines.HardyWright.liouville_ten_squares"
+      module: "Challenge_HardyWright / Solution_HardyWright"
+      status: "proved"
+    - source: "Ireland-Rosen, Chapter 18, section 5, Theorem 7 (primes dividing 2D with additive reduction, local form)"
+      lean: "NTKB.Headlines.IrelandRosen.hecke_character_quartic_curve_bad"
+      module: "Challenge_IrelandRosen / Solution_IrelandRosen"
+      status: "proved"
+    - source: "Ireland-Rosen, Chapter 18, section 5, Theorem 8 (primes dividing 6D with additive reduction, local form)"
+      lean: "NTKB.Headlines.IrelandRosen.hecke_character_cubic_curve_bad"
+      module: "Challenge_IrelandRosen / Solution_IrelandRosen"
+      status: "proved"
+    - source: "Ireland-Rosen, Proposition 17.10.1 (conditional on the named input MordellTorsionInput, Fueter's classification)"
+      lean: "NTKB.Headlines.IrelandRosen.infinite_points_mordell"
+      module: "Challenge_IrelandRosen / Solution_IrelandRosen"
+      status: "proved"
+    - source: "Ireland-Rosen, Proposition 17.9.1 (conditional on the named input MordellTorsionInput, Fueter's classification)"
+      lean: "NTKB.Headlines.IrelandRosen.infinite_points_sum_cubes"
+      module: "Challenge_IrelandRosen / Solution_IrelandRosen"
       status: "proved"
 
 acknowledgements: >-

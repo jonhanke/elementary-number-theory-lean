@@ -13,6 +13,7 @@ import NTKB.Elementary.HardyWright.SumsOfSquares.ThreeSquares.Theorem
 import NTKB.Elementary.HardyWright.SumsOfSquares.Theta.EightSquares
 import NTKB.Elementary.HardyWright.SumsOfSquares.Theta.SixSquares
 import NTKB.Elementary.HardyWright.SumsOfSquares.Theta.TwelveSquares
+import NTKB.Elementary.HardyWright.SumsOfSquares.Theta.TenSquares
 
 /-!
 # Proofs of the Hardy–Wright headline statements
@@ -79,5 +80,14 @@ theorem glaisher_twelve_squares :
         8 * ∑ d ∈ n.divisors, (-1) ^ (n + d + n / d + 1) * (d : ℤ) ^ 5 + 16 * a n :=
   ⟨NTKB.HardyWright.TwelveSquares.etaTwelveCoeff, fun _ hq => NTKB.HardyWright.TwelveSquares.hasSum_etaTwelveCoeff hq,
     fun _ hn => NTKB.HardyWright.sumSquaresCount_twelve_eq hn⟩
+
+theorem liouville_ten_squares {n : ℕ} (hn : 0 < n) :
+    5 * (NTKB.HardyWright.sumSquaresCount 10 n : ℤ) =
+      4 * ∑ d ∈ n.divisors, (ZMod.χ₄ (d : ZMod 4) : ℤ) * (d : ℤ) ^ 4 +
+        64 * ∑ d ∈ n.divisors, (ZMod.χ₄ ((n / d : ℕ) : ZMod 4) : ℤ) * (d : ℤ) ^ 4 +
+        8 * ∑ v ∈ ((Finset.Icc (-(n : ℤ)) n) ×ˢ (Finset.Icc (-(n : ℤ)) n)).filter
+            (fun v : ℤ × ℤ => v.1 ^ 2 + v.2 ^ 2 = n),
+          (v.1 ^ 4 - 6 * v.1 ^ 2 * v.2 ^ 2 + v.2 ^ 4) :=
+  NTKB.HardyWright.liouvilleTenSquares n hn
 
 end NTKB.Headlines.HardyWright

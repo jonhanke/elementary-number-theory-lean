@@ -8,7 +8,9 @@ searches were by name and by content (statements read); "not found" means that n
 found, not a proof of absence. The six headlines new in release 0.3.0 were searched again on 2026-11-15 in Mathlib
 `1b1ccf4` (the dependency; the proofs' authors also searched Mathlib master `4cf60f1d`), Tau Ceti main `9f43ade0`
 and PrimeNumberTheoremAnd `a4fb6989`. The eight headlines new in release 0.4.0 were searched on 2026-11-16 in
-Mathlib master `a8754b1`, Tau Ceti main `726e93ef` and PrimeNumberTheoremAnd `a4fb6989`.
+Mathlib master `a8754b1`, Tau Ceti main `726e93ef` and PrimeNumberTheoremAnd `a4fb6989`. The five headlines new in
+release 0.4.1 were searched on 2026-11-17 in Mathlib master `d9a73ae1` and Tau Ceti main `7b4d5f70`
+(PrimeNumberTheoremAnd, which has no curves and no sums of squares, was not searched again).
 
 ## Headlines
 
@@ -50,6 +52,9 @@ Mathlib master `a8754b1`, Tau Ceti main `726e93ef` and PrimeNumberTheoremAnd `a4
 | `IrelandRosen.hecke_character_quartic_curve_split`, `_inert` (Chapter 18, Theorem 7; new in 0.4.0) | `WeierstrassCurve.localPolynomial` and `WeierstrassCurve.LFunction` (definitions, used in the statements), `NumberField.HeckeCharacter` (a definition); no link | Hecke L-functions of ray class characters and Grössencharacters (`LFunctions/Hecke/`, `LFunctions/Grossencharacter/`), the complex multiplication of `y² = x³ + ax` (`hasGeometricCM_of_a₆_eq_zero`); no link between `L(E, s)` and a Hecke character | — |
 | `IrelandRosen.hecke_character_cubic_curve_split`, `_inert` (Chapter 18, Theorem 8; new in 0.4.0) | as above | as above | — |
 | `IrelandRosen.mordell_class_number` (Proposition 17.10.2; new in 0.4.0) | class groups; no Mordell equation | Mordell–Weil and worked examples of curves; not this criterion | — |
+| `HardyWright.liouville_ten_squares` (Liouville, beyond the book; new in 0.4.1) | Jacobi's theta function and its functional equation in two variables (used in the proof); no `r₁₀` | as for `r₆`; no count | — |
+| `IrelandRosen.hecke_character_quartic_curve_bad`, `hecke_character_cubic_curve_bad` (Chapter 18, Theorems 7 and 8 at the primes of additive reduction; new in 0.4.1) | `WeierstrassCurve.localPolynomial` (a definition; its value `1` at a prime of additive reduction is only a comment), the reduction types of a minimal model (`HasAdditiveReduction`); no theorem on the local polynomial | as for the 0.4.0 forms; no link | — |
+| `IrelandRosen.infinite_points_mordell`, `infinite_points_sum_cubes` (Propositions 17.10.1 and 17.9.1, conditional on `MordellTorsionInput`; new in 0.4.1) | the group of points of a Weierstrass curve; no infinitude statement | the Lutz–Nagell theorem (`WeierstrassCurve.lutz_nagell`), worked examples of curves of positive rank; not Fueter's classification, not these statements | — |
 
 ## Candidates considered and not chosen
 
@@ -58,7 +63,7 @@ Mathlib master `a8754b1`, Tau Ceti main `726e93ef` and PrimeNumberTheoremAnd `a4
 | The prime number theorem by the elementary method (Hardy–Wright, Chapter XXII; `NTKB.HardyWright.prime_number_theorem`, Selberg's formula `NTKB.HardyWright.selberg_theorem`) | proved here; PrimeNumberTheoremAnd has the prime number theorem (analytic proof), so not a headline. Mathlib has the Chebyshev bounds only. |
 | `L(0, χ_D) = 2h(D)/w(D)` for `D < 0` | not proved. Missing: the factorization `ζ_{ℚ(√D)}(s) = ζ(s) L(s, χ_D)` (equivalently, the number of ideals of norm `n` of `ℚ(√D)` is `∑_{d ∣ n} χ_D(d)`) and the identification of the discriminant of `ℚ(√D)` with `D`; with them, Mathlib's residue of the Dedekind zeta function gives the formula. |
 | Eisenstein reciprocity (Ireland–Rosen, Chapter 14) | not in this library (Chapter 14 is outside this release); proved in algebraic-number-theory-lean (`NumberFieldKB.MilneCFT.Ch8.Eisenstein.eisensteinReciprocity`). |
-| Mordell equations (Ireland–Rosen, Propositions 17.10.1 and 17.10.2; Hardy–Wright, Theorems 478 and 479) | 17.10.2 is a headline since 0.4.0; 17.10.1 needs Mordell's theorem (no proof in the book), Theorem 479 unique factorization in `ℤ[√-2]` applied to `y² = x³ - 2`; Theorem 478 (`y² = x³ + 7`) is elementary but not done. |
+| Mordell equations (Ireland–Rosen, Propositions 17.10.1 and 17.10.2; Hardy–Wright, Theorems 478 and 479) | 17.10.2 is a headline since 0.4.0; 17.10.1 (and 17.9.1) are conditional headlines since 0.4.1, from Fueter's classification of the torsion points (a named input); Theorem 479 unique factorization in `ℤ[√-2]` applied to `y² = x³ - 2`; Theorem 478 (`y² = x³ + 7`) is elementary but not done. |
 | Ramanujan's congruence modulo 11 (Hardy–Wright, Theorem 361) | not proved; the book gives no proof. |
 | Simultaneous Diophantine approximation (Niven–Zuckerman–Montgomery, Theorem 6.25; `NTKB.NZM.simultaneous_approximation_general`) | proved here; Tau Ceti has Dirichlet's simultaneous approximation theorem (`TauCeti.simultaneous_dirichlet`, with `≤` in place of `<`), so not a headline. |
 | The number of representations by a positive definite binary form, `r_f(n) = w(f) H_f(n)` (Niven–Zuckerman–Montgomery, Theorem 3.27) | proved here; not chosen as a headline because its statement needs several definitions of the library (automorphs, the count `H_f`); a candidate for a later release. |
@@ -67,7 +72,8 @@ Mathlib master `a8754b1`, Tau Ceti main `726e93ef` and PrimeNumberTheoremAnd `a4
 | Cubic reciprocity and its supplement (Ireland–Rosen, Chapter 9, § 3, Theorems 1 and 1'; `NTKB.IrelandRosen.Eisenstein.cubic_reciprocity`) | proved here (the supplement in the rational case the book proves); Tau Ceti has cubic reciprocity, so not a headline. Its consequence 9.6.2 is a headline. |
 | Hasse's bound `\|N_p - (p + 1)\| ≤ 2√p` for `y² = x³ - Dx` and `y² = x³ + D` (`abs_numPointsQuarticCurve_sub_le`, `abs_numPointsCubicCurve_sub_le`) | proved here from `\|π\|² = p`; Tau Ceti has Hasse's bound for every elliptic curve over a finite field, so not a headline. |
 | The number of points of `y² = x³ + D` over `𝔽_p` by sextic characters (Ireland–Rosen, Chapter 18, Theorem 4; `NTKB.IrelandRosen.numPointsCubicCurve_eq`) | proved here; not chosen (the companion of the headline Theorem 5, with a sextic residue symbol defined in the library). |
-| Liouville's formula for `r₁₀(n)` (beyond the books) | not proved (stated as `NTKB.HardyWright.LiouvilleTenSquares`, assumed nowhere); see Conditional theorems in the README. (Jacobi's `r₆`, a candidate in 0.3.0, is a headline since 0.4.0.) |
+| Liouville's formula for `r₁₀(n)` (beyond the books) | stated only in 0.4.0; proved and a headline since 0.4.1 (`liouville_ten_squares`). (Jacobi's `r₆`, a candidate in 0.3.0, is a headline since 0.4.0.) |
+| Ireland–Rosen 18, Theorem 6 (`L(s, χ)` entire for the two Hecke characters) | not proved (the analytic continuation by Hecke's theta series is not formalized). |
 | The ring of integers, discriminant and decomposition law of `ℚ(√d)` (Ireland–Rosen 13.1.1 to 13.1.4) | proved here (new in 0.4.0); Tau Ceti proves them (`NumberField/Quadratic/RingOfIntegers.lean`, `PrimeDecomposition.lean`), so not a headline. |
 | Theorem 6 of Ireland–Rosen 18 (the analytic continuation of `L(s, χ)` for the two characters) and the Euler factors at the primes dividing `2D` (resp. `6D`) | not proved. |
 | Primes in a progression have Dirichlet density `1/φ(m)` (Ireland–Rosen, Chapter 16, Theorem 1; `NTKB.IrelandRosen.hasDirichletDensity_modEq`) | proved here; Mathlib has the natural-density form of Dirichlet's theorem and the definition of Dirichlet density for number fields, so not a headline. |

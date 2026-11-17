@@ -16,7 +16,11 @@
     "NTKB.Headlines.IrelandRosen.hecke_character_quartic_curve_inert",
     "NTKB.Headlines.IrelandRosen.hecke_character_cubic_curve_split",
     "NTKB.Headlines.IrelandRosen.hecke_character_cubic_curve_inert",
-    "NTKB.Headlines.IrelandRosen.mordell_class_number"
+    "NTKB.Headlines.IrelandRosen.mordell_class_number",
+    "NTKB.Headlines.IrelandRosen.hecke_character_quartic_curve_bad",
+    "NTKB.Headlines.IrelandRosen.hecke_character_cubic_curve_bad",
+    "NTKB.Headlines.IrelandRosen.infinite_points_mordell",
+    "NTKB.Headlines.IrelandRosen.infinite_points_sum_cubes"
   ],
   "definition_names": [],
   "permitted_axioms": [

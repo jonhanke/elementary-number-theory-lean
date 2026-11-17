@@ -13,6 +13,7 @@ import NTKB.Elementary.HardyWright.SumsOfSquares.ThreeSquares.Theorem
 import NTKB.Elementary.HardyWright.SumsOfSquares.Theta.EightSquares
 import NTKB.Elementary.HardyWright.SumsOfSquares.Theta.SixSquares
 import NTKB.Elementary.HardyWright.SumsOfSquares.Theta.TwelveSquares
+import NTKB.Elementary.HardyWright.SumsOfSquares.Theta.TenSquares
 
 /-!
 # Headline statements of elementary-number-theory-lean: Hardy and Wright
@@ -39,10 +40,9 @@ these too:
 
 The first eight statements are those of release 0.1.0; `three_squares` and `jacobi_eight_squares` are new in
 release 0.3.0; `jacobi_six_squares` and `glaisher_twelve_squares` are new in release 0.4.0 (besides `sumSquaresCount`
-they use only Mathlib's definitions: `ZMod.χ₄`, `HasSum`, `tprod`).
-
-Not a headline (stated, not proved): Liouville's formula for `r₁₀(n)` is stated in the library as the proposition
-`NTKB.HardyWright.LiouvilleTenSquares`, assumed nowhere.
+they use only Mathlib's definitions: `ZMod.χ₄`, `HasSum`, `tprod`). New in release 0.4.1:
+`liouville_ten_squares` (Liouville's formula for `r₁₀(n)`, stated as a conjecture of the library in 0.4.0 and now
+proved; besides `sumSquaresCount` it uses only Mathlib's definitions).
 -/
 
 namespace NTKB.Headlines.HardyWright
@@ -141,6 +141,22 @@ theorem glaisher_twelve_squares :
         HasSum (fun n => (a n : ℂ) * q ^ n) (q * ∏' m : ℕ, (1 - q ^ (2 * (m + 1))) ^ 12)) ∧
       ∀ n : ℕ, 0 < n → (NTKB.HardyWright.sumSquaresCount 12 n : ℤ) =
         8 * ∑ d ∈ n.divisors, (-1) ^ (n + d + n / d + 1) * (d : ℤ) ^ 5 + 16 * a n := by
+  sorry
+
+/-- **Liouville's ten-square theorem** (beyond the book, which gives `r₆` and `r₈` in § 20.13; J. Liouville, 1866;
+see E. Grosswald, *Representations of Integers as Sums of Squares*, 1985; new in 0.4.1). For `n ≥ 1`,
+`5 r₁₀(n) = 4 ∑_{d ∣ n} χ(d) d⁴ + 64 ∑_{d ∣ n} χ(n/d) d⁴ + 8 ∑_{a ∈ ℤ[i], N(a) = n} a⁴`, with `χ` the non-principal
+character modulo 4 (Mathlib's `ZMod.χ₄`); the last sum, over `a = x + iy` with `x² + y² = n`, is written as
+`∑ (x⁴ - 6x²y² + y⁴)`. The library proves the transformation law of the weight-5 theta series `∑_{a ∈ ℤ[i]} a⁴ q^{N(a)}`
+under `τ ↦ -1/τ` from Mathlib's functional equation of the two-variable Jacobi theta function, then the identity by
+modular forms of level one, as for `r₆` and `r₁₂`. Neither Mathlib nor Tau Ceti has this count. -/
+theorem liouville_ten_squares {n : ℕ} (hn : 0 < n) :
+    5 * (NTKB.HardyWright.sumSquaresCount 10 n : ℤ) =
+      4 * ∑ d ∈ n.divisors, (ZMod.χ₄ (d : ZMod 4) : ℤ) * (d : ℤ) ^ 4 +
+        64 * ∑ d ∈ n.divisors, (ZMod.χ₄ ((n / d : ℕ) : ZMod 4) : ℤ) * (d : ℤ) ^ 4 +
+        8 * ∑ v ∈ ((Finset.Icc (-(n : ℤ)) n) ×ˢ (Finset.Icc (-(n : ℤ)) n)).filter
+            (fun v : ℤ × ℤ => v.1 ^ 2 + v.2 ^ 2 = n),
+          (v.1 ^ 4 - 6 * v.1 ^ 2 * v.2 ^ 2 + v.2 ^ 4) := by
   sorry
 
 end NTKB.Headlines.HardyWright

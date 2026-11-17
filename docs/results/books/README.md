@@ -4,8 +4,8 @@ For each book of this release, a table from the results of the book to the Lean 
 
 | book | rows | proved | proved in part | conditional | in Mathlib | other | proved here, also elsewhere |
 |---|---|---|---|---|---|---|---|
-| [G. H. Hardy and E. M. Wright, *An Introduction to the Theory of Numbers* (6th ed., 2008)](hardy-wright.md) | 628 | 283 | 13 | 1 | 178 | 153 | 79 |
-| [K. Ireland and M. Rosen, *A Classical Introduction to Modern Number Theory* (2nd ed., 1990), Chapters 1–11, 15, 16 and the results of Chapter 13 §1 and Chapters 17 and 18 proved here](ireland-rosen.md) | 413 | 174 | 8 | 0 | 178 | 53 | 67 |
+| [G. H. Hardy and E. M. Wright, *An Introduction to the Theory of Numbers* (6th ed., 2008)](hardy-wright.md) | 628 | 284 | 13 | 1 | 178 | 152 | 79 |
+| [K. Ireland and M. Rosen, *A Classical Introduction to Modern Number Theory* (2nd ed., 1990), Chapters 1–11, 15, 16 and the results of Chapter 13 §1 and Chapters 17 and 18 proved here](ireland-rosen.md) | 415 | 174 | 8 | 2 | 178 | 53 | 67 |
 | [I. Niven, H. S. Zuckerman and H. L. Montgomery, *An Introduction to the Theory of Numbers* (5th ed., 1991)](niven-zuckerman-montgomery.md) | 406 | 194 | 4 | 0 | 191 | 17 | 84 |
 | [Special values of Dirichlet $L$-functions and Gauss's sign of quadratic Gauss sums](special-values.md) | 25 | 25 | 0 | 0 | 0 | 0 | 3 |
 
