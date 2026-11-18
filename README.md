@@ -519,7 +519,7 @@ Releases are tagged with semantic versions; `main` continues to develop. The DOI
   Hardy–Wright 1), the 40 headlines of 0.1.0 to 0.4.0 unchanged; maps: Ireland–Rosen 415 results (174 proved, 8 in
   part, 2 conditional), Hardy–Wright 628 (284 proved, 13 in part, 1 conditional). The comparator check stays one per
   book (four, run as a matrix in CI); no file imports all of Mathlib.
-- **[v0.5.0](https://github.com/jonhanke/elementary-number-theory-lean/releases/tag/v0.5.0)** (Lean v4.36.0-rc2, Mathlib `1b1ccf4`), archived on Zenodo as [doi:ZENODO-DOI-v0.5.0](https://doi.org/ZENODO-DOI-v0.5.0):
+- **[v0.5.0](https://github.com/jonhanke/elementary-number-theory-lean/releases/tag/v0.5.0)** (Lean v4.36.0-rc2, Mathlib `1b1ccf4`), archived on Zenodo as [doi:10.5281/zenodo.24333712](https://doi.org/10.5281/zenodo.24333712):
   Theorems 7 and 8 of Ireland–Rosen 18 at every prime (one exception for Theorem 8 at 2), the formulas for
   $`r_{14}(n)`$ and $`r_{16}(n)`$, congruent numbers and Hardy–Wright's Theorem 465 (see
   [What's new in 0.5.0](#whats-new-in-050)); 4 new headline statements (Ireland–Rosen 2, Hardy–Wright 2), the 45
