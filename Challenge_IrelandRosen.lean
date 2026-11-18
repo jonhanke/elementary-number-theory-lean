@@ -18,6 +18,7 @@ import NTKB.IrelandRosen.R5.HeckeEisenstein
 import NTKB.IrelandRosen.R5.MordellClassNumber
 import NTKB.IrelandRosen.R5.BadPrimesCM
 import NTKB.IrelandRosen.R5.MordellInfinite
+import NTKB.IrelandRosen.R5.Theorems78
 
 /-!
 # Headline statements of elementary-number-theory-lean: Ireland and Rosen
@@ -295,6 +296,56 @@ Lutz–Nagell theorem, not Fueter's classification). -/
 theorem infinite_points_sum_cubes (hin : CM.MordellTorsionInput) {a : ℤ} (ha : 2 < a)
     (hcf : ∀ d : ℤ, d ^ 3 ∣ a → IsUnit d) {x y : ℚ} (hxy : x ^ 3 + y ^ 3 = a) :
     {p : ℚ × ℚ | p.1 ^ 3 + p.2 ^ 3 = a}.Infinite := by
+  sorry
+
+/-- **Theorem 7 of Chapter 18 at every prime** (§ 5, p. 322; new in 0.5.0). Let `D` be fourth-power free,
+`c ≠ 0`, `E : y² = x³ - c⁴Dx` and `χ = NTKB.IrelandRosen.CM.heckeCharQuartic D`, the Hecke character of `D`. At
+the finite place `v` of every prime `p`, Mathlib's local polynomial of `E` (the factor of `WeierstrassCurve.LFunction`)
+is the Euler factor of `L(s, χ)` at the primes above `p`: `1` if `p ∣ 2D` (where `χ` vanishes),
+`(1 - χ(π) X)(1 - χ(π̄) X)` if `p = π π̄` splits in `ℤ[i]` (`π` primary), and `1 - χ((p)) X²` if `p ≡ 3 (mod 4)` is
+inert. The book compares the factors at the primes `p ∤ 2D` only (the headlines `hecke_character_quartic_curve_split`
+and `_inert` of 0.4.0); this one adds every bad prime and the twist by `c⁴`. The global identity of Dirichlet series
+is not stated (see the README, Known restrictions). Tau Ceti has general facts on the local polynomial (its value `1` at additive
+reduction); neither Mathlib nor Tau Ceti links it to a Hecke character. -/
+theorem hecke_character_quartic_curve_every_prime
+    (v : IsDedekindDomain.HeightOneSpectrum (NumberField.RingOfIntegers ℚ)) {c D : ℤ} (hc : c ≠ 0) (hD : D ≠ 0)
+    (hfree : ∀ p : ℕ, p.Prime → ¬ (p : ℤ) ^ 4 ∣ D) :
+    ((((Rat.HeightOneSpectrum.primesEquiv v : Nat.Primes) : ℕ) : ℤ) ∣ 2 * D → (((⟨0, 0, 0, -(c ^ 4 * D), 0⟩ : WeierstrassCurve ℤ).baseChange ℚ).baseChange (v.adicCompletion ℚ)).localPolynomial
+        (v.adicCompletionIntegers ℚ) = 1) ∧
+    (∀ π : GaussianInt, Gaussian.IsPrimary π → π.norm = ((Rat.HeightOneSpectrum.primesEquiv v : Nat.Primes) : ℕ) → ¬ (((Rat.HeightOneSpectrum.primesEquiv v : Nat.Primes) : ℕ) : ℤ) ∣ 2 * D →
+      ((((⟨0, 0, 0, -(c ^ 4 * D), 0⟩ : WeierstrassCurve ℤ).baseChange ℚ).baseChange (v.adicCompletion ℚ)).localPolynomial
+        (v.adicCompletionIntegers ℚ)).map (Int.castRingHom GaussianInt) =
+        (1 - Polynomial.C (CM.heckeCharQuartic D π) * Polynomial.X) * (1 - Polynomial.C (CM.heckeCharQuartic D (star π)) * Polynomial.X)) ∧
+    (((Rat.HeightOneSpectrum.primesEquiv v : Nat.Primes) : ℕ) % 4 = 3 → ¬ (((Rat.HeightOneSpectrum.primesEquiv v : Nat.Primes) : ℕ) : ℤ) ∣ 2 * D →
+      ((((⟨0, 0, 0, -(c ^ 4 * D), 0⟩ : WeierstrassCurve ℤ).baseChange ℚ).baseChange (v.adicCompletion ℚ)).localPolynomial
+        (v.adicCompletionIntegers ℚ)).map (Int.castRingHom GaussianInt) =
+        1 - Polynomial.C (CM.heckeCharQuartic D (((Rat.HeightOneSpectrum.primesEquiv v : Nat.Primes) : ℕ) : GaussianInt)) * Polynomial.X ^ 2) := by
+  sorry
+
+/-- **Theorem 8 of Chapter 18 at every prime** (§ 5, p. 323; new in 0.5.0). Let `D` be sixth-power free,
+`c ≠ 0`, `E : y² = x³ + c⁶D` and `χ = NTKB.IrelandRosen.CM.heckeCharSextic D`. At the finite place `v` of every prime
+`p`, Mathlib's local polynomial of `E` is the Euler factor of `L(s, χ)` at the primes above `p`: `1` if `p ∣ 6D`
+(where `χ` vanishes), `(1 - χ(π) X)(1 - χ(π̄) X)` if `p = π π̄` splits in `ℤ[ω]` (`π` primary), and `1 - χ((p)) X²`
+if `p ≡ 2 (mod 3)` is inert, with one exception: at `p = 2` for `D ≡ 16 (mod 64)` the curve has good reduction and
+the local polynomial is `1 + 2X²`, while the book's character (defined modulo `12D`) vanishes at `2` (for example
+`D = -432`, the curve `x³ + y³ = 1`; see the README, Known restrictions). Tau Ceti has general facts on the local polynomial (its value `1` at additive
+reduction); neither Mathlib nor Tau Ceti links it to a Hecke character. -/
+theorem hecke_character_cubic_curve_every_prime
+    (v : IsDedekindDomain.HeightOneSpectrum (NumberField.RingOfIntegers ℚ)) {c D : ℤ} (hc : c ≠ 0) (hD : D ≠ 0)
+    (hfree : ∀ p : ℕ, p.Prime → ¬ (p : ℤ) ^ 6 ∣ D) :
+    ((((Rat.HeightOneSpectrum.primesEquiv v : Nat.Primes) : ℕ) : ℤ) ∣ 6 * D → ¬ (((Rat.HeightOneSpectrum.primesEquiv v : Nat.Primes) : ℕ) = 2 ∧ D % 64 = 16) → (((⟨0, 0, 0, 0, c ^ 6 * D⟩ : WeierstrassCurve ℤ).baseChange ℚ).baseChange (v.adicCompletion ℚ)).localPolynomial
+        (v.adicCompletionIntegers ℚ) = 1) ∧
+    (((Rat.HeightOneSpectrum.primesEquiv v : Nat.Primes) : ℕ) = 2 → D % 64 = 16 → (((⟨0, 0, 0, 0, c ^ 6 * D⟩ : WeierstrassCurve ℤ).baseChange ℚ).baseChange (v.adicCompletion ℚ)).localPolynomial
+        (v.adicCompletionIntegers ℚ) = 1 + Polynomial.C 2 * Polynomial.X ^ 2) ∧
+    (∀ π : NTKB.HardyWright.ZRho, Eisenstein.IsPrimary π → QuadraticAlgebra.norm π = ((Rat.HeightOneSpectrum.primesEquiv v : Nat.Primes) : ℕ) →
+      ¬ (((Rat.HeightOneSpectrum.primesEquiv v : Nat.Primes) : ℕ) : ℤ) ∣ 6 * D →
+      ((((⟨0, 0, 0, 0, c ^ 6 * D⟩ : WeierstrassCurve ℤ).baseChange ℚ).baseChange (v.adicCompletion ℚ)).localPolynomial
+        (v.adicCompletionIntegers ℚ)).map (Int.castRingHom NTKB.HardyWright.ZRho) =
+        (1 - Polynomial.C (CM.heckeCharSextic D π) * Polynomial.X) * (1 - Polynomial.C (CM.heckeCharSextic D (star π)) * Polynomial.X)) ∧
+    (((Rat.HeightOneSpectrum.primesEquiv v : Nat.Primes) : ℕ) % 3 = 2 → ¬ (((Rat.HeightOneSpectrum.primesEquiv v : Nat.Primes) : ℕ) : ℤ) ∣ 6 * D →
+      ((((⟨0, 0, 0, 0, c ^ 6 * D⟩ : WeierstrassCurve ℤ).baseChange ℚ).baseChange (v.adicCompletion ℚ)).localPolynomial
+        (v.adicCompletionIntegers ℚ)).map (Int.castRingHom NTKB.HardyWright.ZRho) =
+        1 - Polynomial.C (CM.heckeCharSextic D (((Rat.HeightOneSpectrum.primesEquiv v : Nat.Primes) : ℕ) : NTKB.HardyWright.ZRho)) * Polynomial.X ^ 2) := by
   sorry
 
 end NTKB.Headlines.IrelandRosen

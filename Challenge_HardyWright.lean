@@ -14,6 +14,8 @@ import NTKB.Elementary.HardyWright.SumsOfSquares.Theta.EightSquares
 import NTKB.Elementary.HardyWright.SumsOfSquares.Theta.SixSquares
 import NTKB.Elementary.HardyWright.SumsOfSquares.Theta.TwelveSquares
 import NTKB.Elementary.HardyWright.SumsOfSquares.Theta.TenSquares
+import NTKB.Elementary.HardyWright.SumsOfSquares.Theta.FourteenSquares
+import NTKB.Elementary.HardyWright.SumsOfSquares.Theta.SixteenSquares
 
 /-!
 # Headline statements of elementary-number-theory-lean: Hardy and Wright
@@ -157,6 +159,36 @@ theorem liouville_ten_squares {n : ℕ} (hn : 0 < n) :
         8 * ∑ v ∈ ((Finset.Icc (-(n : ℤ)) n) ×ˢ (Finset.Icc (-(n : ℤ)) n)).filter
             (fun v : ℤ × ℤ => v.1 ^ 2 + v.2 ^ 2 = n),
           (v.1 ^ 4 - 6 * v.1 ^ 2 * v.2 ^ 2 + v.2 ^ 4) := by
+  sorry
+
+/-- **The fourteen-square formula** (beyond the book, which gives `r₆` and `r₈` in § 20.13; Glaisher, 1907; see
+E. Grosswald, *Representations of Integers as Sums of Squares*, 1985, Chapter 9; new in 0.5.0). Let `a(n)` be the
+coefficients of `q ∏_{m ≥ 1} (1 - q^{2m})¹² = η(τ)¹²` (`q = e^{πiτ}`), as in `glaisher_twelve_squares`, and
+`c(n) = ∑_{i ≤ n} r₂(i) a(n - i)` the coefficients of `θ² η¹²`, a cusp form of weight 7 on `Γ₀(4)`. Then for `n ≥ 1`,
+`61 r₁₄(n) = 4 (64 ∑_{d ∣ n} χ(n/d) d⁶ - ∑_{d ∣ n} χ(d) d⁶) + 1456 c(n)`, with `χ` the non-principal character modulo
+4 (Mathlib's `ZMod.χ₄`). The constants were derived by the library's authors from the theta series (not compared
+with Grosswald's text; see the README, Known restrictions). The proof is the level-one method of `r₁₀` and `r₁₂`.
+UPSTREAM_HW_R14 -/
+theorem glaisher_fourteen_squares :
+    ∃ a : ℕ → ℤ, (∀ q : ℂ, ‖q‖ < 1 →
+        HasSum (fun n => (a n : ℂ) * q ^ n) (q * ∏' m : ℕ, (1 - q ^ (2 * (m + 1))) ^ 12)) ∧
+      ∀ n : ℕ, 0 < n → 61 * (NTKB.HardyWright.sumSquaresCount 14 n : ℤ) =
+        4 * (64 * ∑ d ∈ n.divisors, (ZMod.χ₄ ((n / d : ℕ) : ZMod 4) : ℤ) * (d : ℤ) ^ 6 -
+          ∑ d ∈ n.divisors, (ZMod.χ₄ (d : ZMod 4) : ℤ) * (d : ℤ) ^ 6) +
+        1456 * ∑ i ∈ Finset.range (n + 1), (NTKB.HardyWright.sumSquaresCount 2 i : ℤ) * a (n - i) := by
+  sorry
+
+/-- **The sixteen-square formula** (beyond the book; Glaisher, 1907; see E. Grosswald, *Representations of
+Integers as Sums of Squares*, 1985, Chapter 9; new in 0.5.0). With `a(n)` as in `glaisher_fourteen_squares` and
+`c(n) = ∑_{i ≤ n} r₄(i) a(n - i)` the coefficients of `θ⁴ η¹²`, a cusp form of weight 8 on `Γ₀(4)`, for `n ≥ 1`
+`17 r₁₆(n) = 32 ∑_{d ∣ n} (-1)^{n+d} d⁷ + 512 c(n)`. As for `r₁₄`, the constants are the library's derivation (see
+the README, Known restrictions). Neither Mathlib nor Tau Ceti has this count. -/
+theorem glaisher_sixteen_squares :
+    ∃ a : ℕ → ℤ, (∀ q : ℂ, ‖q‖ < 1 →
+        HasSum (fun n => (a n : ℂ) * q ^ n) (q * ∏' m : ℕ, (1 - q ^ (2 * (m + 1))) ^ 12)) ∧
+      ∀ n : ℕ, 0 < n → 17 * (NTKB.HardyWright.sumSquaresCount 16 n : ℤ) =
+        32 * ∑ d ∈ n.divisors, (-1) ^ (n + d) * (d : ℤ) ^ 7 +
+        512 * ∑ i ∈ Finset.range (n + 1), (NTKB.HardyWright.sumSquaresCount 4 i : ℤ) * a (n - i) := by
   sorry
 
 end NTKB.Headlines.HardyWright

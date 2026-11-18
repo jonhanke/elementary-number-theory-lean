@@ -18,6 +18,7 @@ import NTKB.IrelandRosen.R5.HeckeEisenstein
 import NTKB.IrelandRosen.R5.MordellClassNumber
 import NTKB.IrelandRosen.R5.BadPrimesCM
 import NTKB.IrelandRosen.R5.MordellInfinite
+import NTKB.IrelandRosen.R5.Theorems78
 
 /-!
 # Proofs of the Ireland–Rosen headline statements
@@ -153,5 +154,38 @@ theorem infinite_points_sum_cubes (hin : CM.MordellTorsionInput) {a : ℤ} (ha :
     (hcf : ∀ d : ℤ, d ^ 3 ∣ a → IsUnit d) {x y : ℚ} (hxy : x ^ 3 + y ^ 3 = a) :
     {p : ℚ × ℚ | p.1 ^ 3 + p.2 ^ 3 = a}.Infinite :=
   CM.infinite_points_sum_cubes_of_input hin ha hcf hxy
+
+theorem hecke_character_quartic_curve_every_prime
+    (v : IsDedekindDomain.HeightOneSpectrum (NumberField.RingOfIntegers ℚ)) {c D : ℤ} (hc : c ≠ 0) (hD : D ≠ 0)
+    (hfree : ∀ p : ℕ, p.Prime → ¬ (p : ℤ) ^ 4 ∣ D) :
+    ((((Rat.HeightOneSpectrum.primesEquiv v : Nat.Primes) : ℕ) : ℤ) ∣ 2 * D → (((⟨0, 0, 0, -(c ^ 4 * D), 0⟩ : WeierstrassCurve ℤ).baseChange ℚ).baseChange (v.adicCompletion ℚ)).localPolynomial
+        (v.adicCompletionIntegers ℚ) = 1) ∧
+    (∀ π : GaussianInt, Gaussian.IsPrimary π → π.norm = ((Rat.HeightOneSpectrum.primesEquiv v : Nat.Primes) : ℕ) → ¬ (((Rat.HeightOneSpectrum.primesEquiv v : Nat.Primes) : ℕ) : ℤ) ∣ 2 * D →
+      ((((⟨0, 0, 0, -(c ^ 4 * D), 0⟩ : WeierstrassCurve ℤ).baseChange ℚ).baseChange (v.adicCompletion ℚ)).localPolynomial
+        (v.adicCompletionIntegers ℚ)).map (Int.castRingHom GaussianInt) =
+        (1 - Polynomial.C (CM.heckeCharQuartic D π) * Polynomial.X) * (1 - Polynomial.C (CM.heckeCharQuartic D (star π)) * Polynomial.X)) ∧
+    (((Rat.HeightOneSpectrum.primesEquiv v : Nat.Primes) : ℕ) % 4 = 3 → ¬ (((Rat.HeightOneSpectrum.primesEquiv v : Nat.Primes) : ℕ) : ℤ) ∣ 2 * D →
+      ((((⟨0, 0, 0, -(c ^ 4 * D), 0⟩ : WeierstrassCurve ℤ).baseChange ℚ).baseChange (v.adicCompletion ℚ)).localPolynomial
+        (v.adicCompletionIntegers ℚ)).map (Int.castRingHom GaussianInt) =
+        1 - Polynomial.C (CM.heckeCharQuartic D (((Rat.HeightOneSpectrum.primesEquiv v : Nat.Primes) : ℕ) : GaussianInt)) * Polynomial.X ^ 2) :=
+  CM.theorem7_localPolynomial_everyPrime v hc hD hfree
+
+theorem hecke_character_cubic_curve_every_prime
+    (v : IsDedekindDomain.HeightOneSpectrum (NumberField.RingOfIntegers ℚ)) {c D : ℤ} (hc : c ≠ 0) (hD : D ≠ 0)
+    (hfree : ∀ p : ℕ, p.Prime → ¬ (p : ℤ) ^ 6 ∣ D) :
+    ((((Rat.HeightOneSpectrum.primesEquiv v : Nat.Primes) : ℕ) : ℤ) ∣ 6 * D → ¬ (((Rat.HeightOneSpectrum.primesEquiv v : Nat.Primes) : ℕ) = 2 ∧ D % 64 = 16) → (((⟨0, 0, 0, 0, c ^ 6 * D⟩ : WeierstrassCurve ℤ).baseChange ℚ).baseChange (v.adicCompletion ℚ)).localPolynomial
+        (v.adicCompletionIntegers ℚ) = 1) ∧
+    (((Rat.HeightOneSpectrum.primesEquiv v : Nat.Primes) : ℕ) = 2 → D % 64 = 16 → (((⟨0, 0, 0, 0, c ^ 6 * D⟩ : WeierstrassCurve ℤ).baseChange ℚ).baseChange (v.adicCompletion ℚ)).localPolynomial
+        (v.adicCompletionIntegers ℚ) = 1 + Polynomial.C 2 * Polynomial.X ^ 2) ∧
+    (∀ π : NTKB.HardyWright.ZRho, Eisenstein.IsPrimary π → QuadraticAlgebra.norm π = ((Rat.HeightOneSpectrum.primesEquiv v : Nat.Primes) : ℕ) →
+      ¬ (((Rat.HeightOneSpectrum.primesEquiv v : Nat.Primes) : ℕ) : ℤ) ∣ 6 * D →
+      ((((⟨0, 0, 0, 0, c ^ 6 * D⟩ : WeierstrassCurve ℤ).baseChange ℚ).baseChange (v.adicCompletion ℚ)).localPolynomial
+        (v.adicCompletionIntegers ℚ)).map (Int.castRingHom NTKB.HardyWright.ZRho) =
+        (1 - Polynomial.C (CM.heckeCharSextic D π) * Polynomial.X) * (1 - Polynomial.C (CM.heckeCharSextic D (star π)) * Polynomial.X)) ∧
+    (((Rat.HeightOneSpectrum.primesEquiv v : Nat.Primes) : ℕ) % 3 = 2 → ¬ (((Rat.HeightOneSpectrum.primesEquiv v : Nat.Primes) : ℕ) : ℤ) ∣ 6 * D →
+      ((((⟨0, 0, 0, 0, c ^ 6 * D⟩ : WeierstrassCurve ℤ).baseChange ℚ).baseChange (v.adicCompletion ℚ)).localPolynomial
+        (v.adicCompletionIntegers ℚ)).map (Int.castRingHom NTKB.HardyWright.ZRho) =
+        1 - Polynomial.C (CM.heckeCharSextic D (((Rat.HeightOneSpectrum.primesEquiv v : Nat.Primes) : ℕ) : NTKB.HardyWright.ZRho)) * Polynomial.X ^ 2) :=
+  CM.theorem8_localPolynomial_everyPrime v hc hD hfree
 
 end NTKB.Headlines.IrelandRosen
