@@ -16,6 +16,7 @@ import NTKB.Elementary.HardyWright.SumsOfSquares.Theta.TwelveSquares
 import NTKB.Elementary.HardyWright.SumsOfSquares.Theta.TenSquares
 import NTKB.Elementary.HardyWright.SumsOfSquares.Theta.FourteenSquares
 import NTKB.Elementary.HardyWright.SumsOfSquares.Theta.SixteenSquares
+import NTKB.Elementary.HardyWright.SumsOfSquares.Theta.EighteenSquares
 
 /-!
 # Headline statements of elementary-number-theory-lean: Hardy and Wright
@@ -189,6 +190,27 @@ theorem glaisher_sixteen_squares :
       ∀ n : ℕ, 0 < n → 17 * (NTKB.HardyWright.sumSquaresCount 16 n : ℤ) =
         32 * ∑ d ∈ n.divisors, (-1) ^ (n + d) * (d : ℤ) ^ 7 +
         512 * ∑ i ∈ Finset.range (n + 1), (NTKB.HardyWright.sumSquaresCount 4 i : ℤ) * a (n - i) := by
+  sorry
+
+/-- **The eighteen-square formula** (beyond the book, which gives `r₆` and `r₈` in § 20.13; new in 0.6.0). Let
+`a(n)` be the coefficients of `q ∏_{m ≥ 1} (1 - q^{2m})¹² = η(τ)¹²` (`q = e^{πiτ}`), as in `glaisher_twelve_squares`,
+`c₁₈(n) = ∑_{i ≤ n} r₆(i) a(n - i)` the coefficients of `θ⁶ η¹²`, and `c₈(n) = ∑_{x² + y² = n} Re (x + iy)⁸` the
+coefficients of `∑_{x, y ∈ ℤ} (x + iy)⁸ q^{x² + y²}`; both are cusp forms of weight 9 on `Γ₀(4)` with the
+transformation laws of `θ¹⁸`, and they span the cusp space. Then for `n ≥ 1`,
+`1385 r₁₈(n) = 4 (∑_{d ∣ n} χ(d) d⁸ + 256 ∑_{d ∣ n} χ(n/d) d⁸) + 48960 c₁₈(n) - 32 c₈(n)`, with `χ` the non-principal
+character modulo 4 (Mathlib's `ZMod.χ₄`). The shape and the constants were derived by the library's authors from the
+theta series (not compared with the literature; see the README, Known restrictions). The proof is the level-one
+method of `r₁₀` to `r₁₆`. Neither Mathlib nor Tau Ceti has this count. -/
+theorem eighteen_squares :
+    ∃ a : ℕ → ℤ, (∀ q : ℂ, ‖q‖ < 1 →
+        HasSum (fun n => (a n : ℂ) * q ^ n) (q * ∏' m : ℕ, (1 - q ^ (2 * (m + 1))) ^ 12)) ∧
+      ∀ n : ℕ, 0 < n → 1385 * (NTKB.HardyWright.sumSquaresCount 18 n : ℤ) =
+        4 * (∑ d ∈ n.divisors, (ZMod.χ₄ (d : ZMod 4) : ℤ) * (d : ℤ) ^ 8 +
+          256 * ∑ d ∈ n.divisors, (ZMod.χ₄ ((n / d : ℕ) : ZMod 4) : ℤ) * (d : ℤ) ^ 8) +
+        48960 * ∑ i ∈ Finset.range (n + 1), (NTKB.HardyWright.sumSquaresCount 6 i : ℤ) * a (n - i) -
+        32 * ∑ v ∈ (Finset.Icc (-(n : ℤ)) n ×ˢ Finset.Icc (-(n : ℤ)) n).filter
+            (fun v : ℤ × ℤ => v.1 ^ 2 + v.2 ^ 2 = n),
+          (v.1 ^ 8 - 28 * v.1 ^ 6 * v.2 ^ 2 + 70 * v.1 ^ 4 * v.2 ^ 4 - 28 * v.1 ^ 2 * v.2 ^ 6 + v.2 ^ 8) := by
   sorry
 
 end NTKB.Headlines.HardyWright

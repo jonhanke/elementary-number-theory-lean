@@ -19,6 +19,7 @@ import NTKB.IrelandRosen.R5.MordellClassNumber
 import NTKB.IrelandRosen.R5.BadPrimesCM
 import NTKB.IrelandRosen.R5.MordellInfinite
 import NTKB.IrelandRosen.R5.Theorems78
+import NTKB.IrelandRosen.R5.Theorems78Global
 
 /-!
 # Proofs of the Ireland–Rosen headline statements
@@ -187,5 +188,33 @@ theorem hecke_character_cubic_curve_every_prime
         (v.adicCompletionIntegers ℚ)).map (Int.castRingHom NTKB.HardyWright.ZRho) =
         1 - Polynomial.C (CM.heckeCharSextic D (((Rat.HeightOneSpectrum.primesEquiv v : Nat.Primes) : ℕ) : NTKB.HardyWright.ZRho)) * Polynomial.X ^ 2) :=
   CM.theorem8_localPolynomial_everyPrime v hc hD hfree
+
+theorem hecke_L_function_quartic_curve {c D : ℤ} (hc : c ≠ 0) (hD : D ≠ 0)
+    (hfree : ∀ p : ℕ, p.Prime → ¬ (p : ℤ) ^ 4 ∣ D) (n : ℕ) (s : Finset GaussianInt)
+    (hs : ∀ α : GaussianInt, α ∈ s ↔ α.norm = n) :
+    (4 : GaussianInt) * ((((⟨0, 0, 0, -(c ^ 4 * D), 0⟩ : WeierstrassCurve ℤ).baseChange ℚ).LFunction n : ℤ) : GaussianInt) = ∑ α ∈ s, CM.heckeCharQuartic D α :=
+  by
+    rw [show s = (NTKB.HardyWright.normSet_finite n).toFinset from
+      Finset.ext fun α => by rw [hs, CM.mem_normSet_finset]]
+    exact CM.theorem7_LFunction hc hD hfree n
+
+theorem hecke_L_function_cubic_curve {c D : ℤ} (hc : c ≠ 0) (hD : D ≠ 0)
+    (hfree : ∀ p : ℕ, p.Prime → ¬ (p : ℤ) ^ 6 ∣ D) (h16 : D % 64 ≠ 16) (n : ℕ) (s : Finset NTKB.HardyWright.ZRho)
+    (hs : ∀ α : NTKB.HardyWright.ZRho, α ∈ s ↔ QuadraticAlgebra.norm α = n) :
+    (6 : NTKB.HardyWright.ZRho) * ((((⟨0, 0, 0, 0, c ^ 6 * D⟩ : WeierstrassCurve ℤ).baseChange ℚ).LFunction n : ℤ) : NTKB.HardyWright.ZRho) = ∑ α ∈ s, CM.heckeCharSextic D α :=
+  by
+    rw [show s = (CM.normSetω_finite n).toFinset from
+      Finset.ext fun α => by rw [hs, CM.mem_normSetω_finite_toFinset]]
+    exact CM.theorem8_LFunction hc hD hfree h16 n
+
+theorem hecke_L_function_cubic_curve_sixteen {c D : ℤ} (hc : c ≠ 0) (hD : D ≠ 0)
+    (hfree : ∀ p : ℕ, p.Prime → ¬ (p : ℤ) ^ 6 ∣ D) (h16 : D % 64 = 16) (j : ℕ) {m : ℕ} (hm : Odd m)
+    (s : Finset NTKB.HardyWright.ZRho) (hs : ∀ α : NTKB.HardyWright.ZRho, α ∈ s ↔ QuadraticAlgebra.norm α = m) :
+    (6 : NTKB.HardyWright.ZRho) * ((((⟨0, 0, 0, 0, c ^ 6 * D⟩ : WeierstrassCurve ℤ).baseChange ℚ).LFunction (4 ^ j * m) : ℤ) : NTKB.HardyWright.ZRho) = (-2) ^ j * ∑ α ∈ s, CM.heckeCharSextic D α ∧
+      (((⟨0, 0, 0, 0, c ^ 6 * D⟩ : WeierstrassCurve ℤ).baseChange ℚ).LFunction (2 * 4 ^ j * m) : ℤ) = 0 :=
+  by
+    rw [show s = (CM.normSetω_finite m).toFinset from
+      Finset.ext fun α => by rw [hs, CM.mem_normSetω_finite_toFinset]]
+    exact CM.theorem8_LFunction_sixteen hc hD hfree h16 j hm
 
 end NTKB.Headlines.IrelandRosen

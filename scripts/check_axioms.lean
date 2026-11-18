@@ -21,6 +21,7 @@ import Solution_NivenZuckermanMontgomery
 #print axioms NTKB.Headlines.HardyWright.liouville_ten_squares
 #print axioms NTKB.Headlines.HardyWright.glaisher_fourteen_squares
 #print axioms NTKB.Headlines.HardyWright.glaisher_sixteen_squares
+#print axioms NTKB.Headlines.HardyWright.eighteen_squares
 #print axioms NTKB.Headlines.IrelandRosen.hasse_davenport
 #print axioms NTKB.Headlines.IrelandRosen.biquadratic_reciprocity
 #print axioms NTKB.Headlines.IrelandRosen.gauss_last_entry
@@ -42,6 +43,9 @@ import Solution_NivenZuckermanMontgomery
 #print axioms NTKB.Headlines.IrelandRosen.infinite_points_sum_cubes
 #print axioms NTKB.Headlines.IrelandRosen.hecke_character_quartic_curve_every_prime
 #print axioms NTKB.Headlines.IrelandRosen.hecke_character_cubic_curve_every_prime
+#print axioms NTKB.Headlines.IrelandRosen.hecke_L_function_quartic_curve
+#print axioms NTKB.Headlines.IrelandRosen.hecke_L_function_cubic_curve
+#print axioms NTKB.Headlines.IrelandRosen.hecke_L_function_cubic_curve_sixteen
 #print axioms NTKB.Headlines.SpecialValues.LFunction_one_sub_nat
 #print axioms NTKB.Headlines.SpecialValues.LFunction_natCast
 #print axioms NTKB.Headlines.SpecialValues.gaussSum_kroneckerChar

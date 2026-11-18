@@ -19,6 +19,7 @@ import NTKB.IrelandRosen.R5.MordellClassNumber
 import NTKB.IrelandRosen.R5.BadPrimesCM
 import NTKB.IrelandRosen.R5.MordellInfinite
 import NTKB.IrelandRosen.R5.Theorems78
+import NTKB.IrelandRosen.R5.Theorems78Global
 
 /-!
 # Headline statements of elementary-number-theory-lean: Ireland and Rosen
@@ -305,7 +306,7 @@ is the Euler factor of `L(s, χ)` at the primes above `p`: `1` if `p ∣ 2D` (wh
 `(1 - χ(π) X)(1 - χ(π̄) X)` if `p = π π̄` splits in `ℤ[i]` (`π` primary), and `1 - χ((p)) X²` if `p ≡ 3 (mod 4)` is
 inert. The book compares the factors at the primes `p ∤ 2D` only (the headlines `hecke_character_quartic_curve_split`
 and `_inert` of 0.4.0); this one adds every bad prime and the twist by `c⁴`. The global identity of Dirichlet series
-is not stated (see the README, Known restrictions). Tau Ceti has general facts on the local polynomial (its value `1` at additive
+is the headline `hecke_L_function_quartic_curve` of 0.6.0. Tau Ceti has general facts on the local polynomial (its value `1` at additive
 reduction); neither Mathlib nor Tau Ceti links it to a Hecke character. -/
 theorem hecke_character_quartic_curve_every_prime
     (v : IsDedekindDomain.HeightOneSpectrum (NumberField.RingOfIntegers ℚ)) {c D : ℤ} (hc : c ≠ 0) (hD : D ≠ 0)
@@ -328,7 +329,8 @@ theorem hecke_character_quartic_curve_every_prime
 (where `χ` vanishes), `(1 - χ(π) X)(1 - χ(π̄) X)` if `p = π π̄` splits in `ℤ[ω]` (`π` primary), and `1 - χ((p)) X²`
 if `p ≡ 2 (mod 3)` is inert, with one exception: at `p = 2` for `D ≡ 16 (mod 64)` the curve has good reduction and
 the local polynomial is `1 + 2X²`, while the book's character (defined modulo `12D`) vanishes at `2` (for example
-`D = -432`, the curve `x³ + y³ = 1`; see the README, Known restrictions). Tau Ceti has general facts on the local polynomial (its value `1` at additive
+`D = -432`, the curve `x³ + y³ = 1`; the headline `hecke_L_function_cubic_curve_sixteen` of 0.6.0 gives the exact
+factor at `2`). Tau Ceti has general facts on the local polynomial (its value `1` at additive
 reduction); neither Mathlib nor Tau Ceti links it to a Hecke character. -/
 theorem hecke_character_cubic_curve_every_prime
     (v : IsDedekindDomain.HeightOneSpectrum (NumberField.RingOfIntegers ℚ)) {c D : ℤ} (hc : c ≠ 0) (hD : D ≠ 0)
@@ -346,6 +348,49 @@ theorem hecke_character_cubic_curve_every_prime
       ((((⟨0, 0, 0, 0, c ^ 6 * D⟩ : WeierstrassCurve ℤ).baseChange ℚ).baseChange (v.adicCompletion ℚ)).localPolynomial
         (v.adicCompletionIntegers ℚ)).map (Int.castRingHom NTKB.HardyWright.ZRho) =
         1 - Polynomial.C (CM.heckeCharSextic D (((Rat.HeightOneSpectrum.primesEquiv v : Nat.Primes) : ℕ) : NTKB.HardyWright.ZRho)) * Polynomial.X ^ 2) := by
+  sorry
+
+/-- **Theorem 7 of Chapter 18: `L(E, s) = L(s, χ)` for `y² = x³ - Dx`** (§ 5, p. 322; new in 0.6.0). Let `D` be
+fourth-power free, `c ≠ 0`, `E : y² = x³ - c⁴Dx` and `χ = NTKB.IrelandRosen.CM.heckeCharQuartic D`, the Hecke
+character of `D` on `ℤ[i]`. Then `L(E, s) = L(s, χ)` as Dirichlet series: for every `n`, with `a_E(n)` the `n`-th
+coefficient of Mathlib's `WeierstrassCurve.LFunction` (the Euler product over all primes, the bad ones included) and
+`s` the finite set of Gaussian integers of norm `n`, `4 a_E(n) = ∑_{α ∈ s} χ(α)`; the right side is four times the
+`n`-th coefficient of `∑_A χ(A) N(A)^{-s}` over the ideals `A`, since each ideal has four generators. The proof
+compares the recursions of the two sides at every prime (the local factors are the headline
+`hecke_character_quartic_curve_every_prime` of 0.5.0). Mathlib and Tau Ceti define Hecke characters and their `L`-functions, and
+Mathlib the `L`-function of an elliptic curve over `ℚ`; neither links the two. -/
+theorem hecke_L_function_quartic_curve {c D : ℤ} (hc : c ≠ 0) (hD : D ≠ 0)
+    (hfree : ∀ p : ℕ, p.Prime → ¬ (p : ℤ) ^ 4 ∣ D) (n : ℕ) (s : Finset GaussianInt)
+    (hs : ∀ α : GaussianInt, α ∈ s ↔ α.norm = n) :
+    (4 : GaussianInt) * ((((⟨0, 0, 0, -(c ^ 4 * D), 0⟩ : WeierstrassCurve ℤ).baseChange ℚ).LFunction n : ℤ) : GaussianInt) = ∑ α ∈ s, CM.heckeCharQuartic D α := by
+  sorry
+
+/-- **Theorem 8 of Chapter 18: `L(E, s) = L(s, χ)` for `y² = x³ + D`** (§ 5, p. 324; new in 0.6.0). Let `D` be
+sixth-power free with `D ≢ 16 (mod 64)`, `c ≠ 0`, `E : y² = x³ + c⁶D` and
+`χ = NTKB.IrelandRosen.CM.heckeCharSextic D`, the Hecke character of `D` on `ℤ[ω]` (`ω = (-1 + √-3)/2`,
+`NTKB.HardyWright.ZRho`). Then for every `n`, with `s` the finite set of elements of `ℤ[ω]` of norm `n`,
+`6 a_E(n) = ∑_{α ∈ s} χ(α)` (each ideal has six generators). For `D ≡ 16 (mod 64)` see
+`hecke_L_function_cubic_curve_sixteen`. Mathlib and Tau Ceti define Hecke characters and their `L`-functions, and
+Mathlib the `L`-function of an elliptic curve over `ℚ`; neither links the two. -/
+theorem hecke_L_function_cubic_curve {c D : ℤ} (hc : c ≠ 0) (hD : D ≠ 0)
+    (hfree : ∀ p : ℕ, p.Prime → ¬ (p : ℤ) ^ 6 ∣ D) (h16 : D % 64 ≠ 16) (n : ℕ) (s : Finset NTKB.HardyWright.ZRho)
+    (hs : ∀ α : NTKB.HardyWright.ZRho, α ∈ s ↔ QuadraticAlgebra.norm α = n) :
+    (6 : NTKB.HardyWright.ZRho) * ((((⟨0, 0, 0, 0, c ^ 6 * D⟩ : WeierstrassCurve ℤ).baseChange ℚ).LFunction n : ℤ) : NTKB.HardyWright.ZRho) = ∑ α ∈ s, CM.heckeCharSextic D α := by
+  sorry
+
+/-- **Theorem 8 of Chapter 18 for `D ≡ 16 (mod 64)`: the exact factor at `2`** (§ 5, p. 324; new in 0.6.0). Here
+`E : y² = x³ + c⁶D` has good reduction at `2` with local polynomial `1 + 2X²` (headline
+`hecke_character_cubic_curve_every_prime`), while the book's character `χ` (defined modulo `12D`) vanishes on the
+prime above `2`. The identity of Dirichlet series holds with the Euler factor `1/(1 + 2 · 4^{-s})` at `2`, the factor
+of the inert prime `2` for a character with value `-2` on the ideal `(2)`: for odd `m`, with `s` the elements of
+`ℤ[ω]` of norm `m`, `6 a_E(4ʲ m) = (-2)ʲ ∑_{α ∈ s} χ(α)` and `a_E(2 · 4ʲ m) = 0`. For example `D = -432`, the curve
+`x³ + y³ = 1`. Mathlib and Tau Ceti define Hecke characters and their `L`-functions, and
+Mathlib the `L`-function of an elliptic curve over `ℚ`; neither links the two. -/
+theorem hecke_L_function_cubic_curve_sixteen {c D : ℤ} (hc : c ≠ 0) (hD : D ≠ 0)
+    (hfree : ∀ p : ℕ, p.Prime → ¬ (p : ℤ) ^ 6 ∣ D) (h16 : D % 64 = 16) (j : ℕ) {m : ℕ} (hm : Odd m)
+    (s : Finset NTKB.HardyWright.ZRho) (hs : ∀ α : NTKB.HardyWright.ZRho, α ∈ s ↔ QuadraticAlgebra.norm α = m) :
+    (6 : NTKB.HardyWright.ZRho) * ((((⟨0, 0, 0, 0, c ^ 6 * D⟩ : WeierstrassCurve ℤ).baseChange ℚ).LFunction (4 ^ j * m) : ℤ) : NTKB.HardyWright.ZRho) = (-2) ^ j * ∑ α ∈ s, CM.heckeCharSextic D α ∧
+      (((⟨0, 0, 0, 0, c ^ 6 * D⟩ : WeierstrassCurve ℤ).baseChange ℚ).LFunction (2 * 4 ^ j * m) : ℤ) = 0 := by
   sorry
 
 end NTKB.Headlines.IrelandRosen

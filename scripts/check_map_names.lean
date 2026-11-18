@@ -25,6 +25,10 @@ import NTKB
 #check @NTKB.Davenport.isFundamentalDiscriminant_iff_forall_primitive
 #check @NTKB.Davenport.torsionOrder_eq_two_of_discr
 #check @NTKB.Davenport.torsionOrder_eq_two_or_four_or_six
+#check @NTKB.HardyWright.ArithmeticFunction.formal_euler_product
+#check @NTKB.HardyWright.ArithmeticFunction.localFactor
+#check @NTKB.HardyWright.ArithmeticFunction.localFactor_prod_primesBelow
+#check @NTKB.HardyWright.ArithmeticFunction.zeta_pow_apply
 #check @NTKB.HardyWright.C_dvd_or_C_dvd_of_C_dvd_mul
 #check @NTKB.HardyWright.C_pow_dvd_of_C_pow_dvd_mul
 #check @NTKB.HardyWright.CubeDescent.not_sol
@@ -32,6 +36,9 @@ import NTKB
 #check @NTKB.HardyWright.CubeDescent.sol_descent
 #check @NTKB.HardyWright.Durfee.qBinom_two_mul_eq_sum
 #check @NTKB.HardyWright.EightSquares.jacobiTheta_pow_eight
+#check @NTKB.HardyWright.EighteenSquares.kappa_mul_theta_pow_eighteen
+#check @NTKB.HardyWright.EighteenSquares.octC_S
+#check @NTKB.HardyWright.EighteenSquaresFormula
 #check @NTKB.HardyWright.ExtremalOrder.eventually_sigma_div_mul_log_log_le
 #check @NTKB.HardyWright.ExtremalOrder.eventually_totient_mul_log_log_div_ge
 #check @NTKB.HardyWright.ExtremalOrder.frequently_sigma_div_mul_log_log_ge
@@ -59,11 +66,15 @@ import NTKB
 #check @NTKB.HardyWright.IsSignedSumOfPowers
 #check @NTKB.HardyWright.JacobiSixSquares
 #check @NTKB.HardyWright.LSeries_card_divisors_sq
+#check @NTKB.HardyWright.LSeries_card_finMulAntidiag
 #check @NTKB.HardyWright.LSeries_liouville
 #check @NTKB.HardyWright.LSeries_powerFreeIndicator
 #check @NTKB.HardyWright.LSeries_ramanujanSum
 #check @NTKB.HardyWright.LSeries_sigma_mul_sigma
+#check @NTKB.HardyWright.LSeries_sigma_one
 #check @NTKB.HardyWright.LSeries_sumTwoSquaresCount
+#check @NTKB.HardyWright.LSeries_totient
+#check @NTKB.HardyWright.LSeries_two_pow_cardDistinctFactors
 #check @NTKB.HardyWright.Landau.bigPi_le_factorial_mul_card
 #check @NTKB.HardyWright.Landau.card_almostPrime_le
 #check @NTKB.HardyWright.Landau.fRem_small
@@ -80,6 +91,8 @@ import NTKB
 #check @NTKB.HardyWright.TwelveSquares.etaTwelveCoeff
 #check @NTKB.HardyWright.TwelveSquares.hasSum_etaTwelveCoeff
 #check @NTKB.HardyWright.TwelveSquares.kappa_mul_theta_pow_twelve
+#check @NTKB.HardyWright.TwentySquares.kappa_mul_theta_pow_twenty
+#check @NTKB.HardyWright.TwentySquaresFormula
 #check @NTKB.HardyWright.abs_convs_sub_lt
 #check @NTKB.HardyWright.abs_convs_sub_lt_or
 #check @NTKB.HardyWright.abs_convs_sub_lt_sqrt_five
@@ -160,10 +173,15 @@ import NTKB
 #check @NTKB.HardyWright.cube_examples
 #check @NTKB.HardyWright.cubesEquivMordell
 #check @NTKB.HardyWright.cubesEquivMordell_apply
+#check @NTKB.HardyWright.cuspEighteenCoeff
 #check @NTKB.HardyWright.cuspFourteenCoeff
 #check @NTKB.HardyWright.cuspSixteenCoeff
+#check @NTKB.HardyWright.cuspTwentyCoeff
 #check @NTKB.HardyWright.dvd_mersenne_and_not_prime
 #check @NTKB.HardyWright.dvd_re_im_of_dvd_norm
+#check @NTKB.HardyWright.eighteenSquaresFormula
+#check @NTKB.HardyWright.eighteenSumA
+#check @NTKB.HardyWright.eighteenSumB
 #check @NTKB.HardyWright.eq_convergent_of_pell
 #check @NTKB.HardyWright.eq_two_pow_mul_mersenne_of_even_perfect
 #check @NTKB.HardyWright.eq_zero_of_cube_add_cube_eq_three_mul_cube
@@ -354,6 +372,7 @@ import NTKB
 #check @NTKB.HardyWright.nth_prime_order
 #check @NTKB.HardyWright.numLifts_eq_one
 #check @NTKB.HardyWright.numLifts_of_dvd_derivative
+#check @NTKB.HardyWright.octicCoeff
 #check @NTKB.HardyWright.oddDistinctCount
 #check @NTKB.HardyWright.pell_period
 #check @NTKB.HardyWright.pentagonalSeries_pow_three
@@ -513,6 +532,8 @@ import NTKB
 #check @NTKB.HardyWright.tsum_lambertU_mul_one_add
 #check @NTKB.HardyWright.tsum_neg_one_pow_lambertU
 #check @NTKB.HardyWright.tsum_ramanujanSum_div_sq
+#check @NTKB.HardyWright.twentySquaresFormula
+#check @NTKB.HardyWright.twentySum
 #check @NTKB.HardyWright.two_pow_1092_modEq_one
 #check @NTKB.HardyWright.two_pow_3510_modEq_one
 #check @NTKB.HardyWright.two_pow_add_le_of_forall_isSumOfPowers
@@ -541,6 +562,8 @@ import NTKB
 #check @NTKB.IrelandRosen.CM.heckeCharSextic_mul
 #check @NTKB.IrelandRosen.CM.heckeCharSextic_of_associated
 #check @NTKB.IrelandRosen.CM.heckeCharSextic_of_isPrimary
+#check @NTKB.IrelandRosen.CM.heckeSumQuartic
+#check @NTKB.IrelandRosen.CM.heckeSumSextic
 #check @NTKB.IrelandRosen.CM.infinite_points_mordell_of_input
 #check @NTKB.IrelandRosen.CM.infinite_points_of_not_isOfFinAddOrder
 #check @NTKB.IrelandRosen.CM.infinite_points_sum_cubes_of_input
@@ -571,7 +594,11 @@ import NTKB
 #check @NTKB.IrelandRosen.CM.norm_heckeCharQuartic
 #check @NTKB.IrelandRosen.CM.norm_heckeCharSextic
 #check @NTKB.IrelandRosen.CM.norm_toComplex_heckeCharQuartic
+#check @NTKB.IrelandRosen.CM.theorem7_LFunction
 #check @NTKB.IrelandRosen.CM.theorem7_localPolynomial_everyPrime
+#check @NTKB.IrelandRosen.CM.theorem8_LFunction
+#check @NTKB.IrelandRosen.CM.theorem8_LFunction_odd
+#check @NTKB.IrelandRosen.CM.theorem8_LFunction_sixteen
 #check @NTKB.IrelandRosen.CM.theorem8_localPolynomial_everyPrime
 #check @NTKB.IrelandRosen.Constructible.IsConstructible
 #check @NTKB.IrelandRosen.Constructible.isConstructible_exp_of_fermat
@@ -589,6 +616,7 @@ import NTKB
 #check @NTKB.IrelandRosen.Eisenstein.cubicChar_natCast_star
 #check @NTKB.IrelandRosen.Eisenstein.cubicChar_neg_one
 #check @NTKB.IrelandRosen.Eisenstein.cubicChar_omega
+#check @NTKB.IrelandRosen.Eisenstein.cubicChar_one_sub_omega_of_isPrimary
 #check @NTKB.IrelandRosen.Eisenstein.cubicChar_spec
 #check @NTKB.IrelandRosen.Eisenstein.cubicChar_star
 #check @NTKB.IrelandRosen.Eisenstein.cubicMulChar
@@ -1140,6 +1168,8 @@ import NTKB
 #check @NTKB.gaussSum_legendreChar_eq_sum_sq
 #check @NTKB.gaussSum_mul_gaussSum_inv_eq_neg_one_mul_card_of_isPrimitive
 #check @NTKB.gaussSum_mul_tsum_inv_pow_eq_generalizedBernoulli
+#check @NTKB.generalizedBernoulli
+#check @NTKB.generalizedBernoulli_def
 #check @NTKB.generalizedBernoulli_eq_zero_of_apply_neg_one_eq_neg
 #check @NTKB.generalizedBernoulli_generating_function
 #check @NTKB.generalizedBernoulli_modOne

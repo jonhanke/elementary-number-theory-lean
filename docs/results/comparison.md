@@ -12,7 +12,9 @@ Mathlib master `a8754b1`, Tau Ceti main `726e93ef` and PrimeNumberTheoremAnd `a4
 release 0.4.1 were searched on 2026-11-17 in Mathlib master `d9a73ae1` and Tau Ceti main `7b4d5f70`
 (PrimeNumberTheoremAnd, which has no curves and no sums of squares, was not searched again). The four headlines new in release 0.5.0 were searched on
 2026-11-18 in Mathlib master `5198cccb` and Tau Ceti main `6532c340` (PrimeNumberTheoremAnd, as for 0.4.1, not
-searched).
+searched). The four headlines new in release 0.6.0 were searched on 2026-11-18 in Mathlib master `1ddfaa95`, Tau
+Ceti main `91942aa9` and PrimeNumberTheoremAnd main (by name and content: Hecke characters and L-functions of
+curves, sums of squares).
 
 ## Headlines
 
@@ -58,7 +60,9 @@ searched).
 | `IrelandRosen.hecke_character_quartic_curve_bad`, `hecke_character_cubic_curve_bad` (Chapter 18, Theorems 7 and 8 at the primes of additive reduction; new in 0.4.1) | `WeierstrassCurve.localPolynomial` (a definition; its value `1` at a prime of additive reduction is only a comment), the reduction types of a minimal model (`HasAdditiveReduction`); no theorem on the local polynomial | as for the 0.4.0 forms; no link | — |
 | `IrelandRosen.infinite_points_mordell`, `infinite_points_sum_cubes` (Propositions 17.10.1 and 17.9.1, conditional on `MordellTorsionInput`; new in 0.4.1) | the group of points of a Weierstrass curve; no infinitude statement | the Lutz–Nagell theorem (`WeierstrassCurve.lutz_nagell`), worked examples of curves of positive rank; not Fueter's classification, not these statements | — |
 | `IrelandRosen.hecke_character_quartic_curve_every_prime`, `hecke_character_cubic_curve_every_prime` (Chapter 18, Theorems 7 and 8 at every prime; new in 0.5.0) | `WeierstrassCurve.localPolynomial` (a definition); no value at a bad prime, no Hecke character of a curve | general facts on the local polynomial (`localPolynomial_eq_of_hasGoodReduction`, `localPolynomial_eq_one_of_hasPotentialGoodReduction_of_not_hasGoodReduction`); no link to a Hecke character | — |
+| `IrelandRosen.hecke_L_function_quartic_curve`, `hecke_L_function_cubic_curve`, `hecke_L_function_cubic_curve_sixteen` (Chapter 18, Theorems 7 and 8 as identities of Dirichlet series; new in 0.6.0) | `WeierstrassCurve.LFunction` (the L-function of a curve over ℚ) and Hecke L-functions (`NumberTheory/NumberField/HeckeLFunction.lean`), as definitions; no link between them | Hecke characters (`NumberField/Global/HeckeCharacter/`), Grössencharacters and their L-functions, the zeta function of a curve over a finite field (`Isogeny/Frobenius/Zeta.lean`); no elliptic curve in the Hecke files | — |
 | `HardyWright.glaisher_fourteen_squares`, `glaisher_sixteen_squares` (beyond the book; new in 0.5.0) | modular forms of level one, q-expansions; no `r₁₄`, `r₁₆` | theta series of lattices; no count | — |
+| `HardyWright.eighteen_squares` (beyond the book; new in 0.6.0) | modular forms of level one, q-expansions; no `r₁₈` | theta series of lattices; no count | — |
 
 ## Candidates considered and not chosen
 
