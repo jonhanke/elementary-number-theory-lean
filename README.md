@@ -575,7 +575,7 @@ Releases are tagged with semantic versions; `main` continues to develop. The DOI
   headlines of 0.1.0 to 0.4.1 unchanged; maps: Hardy–Wright 630 results (288 proved, 14 in part, 1
   conditional), Ireland–Rosen 415 (174 proved, 8 in part, 2 conditional). The comparator check stays one per book (four, run as a
   matrix in CI); no file imports all of Mathlib.
-- **[v0.6.0](https://github.com/jonhanke/elementary-number-theory-lean/releases/tag/v0.6.0)** (Lean v4.36.0-rc2, Mathlib `1b1ccf4`), archived on Zenodo as [doi:ZENODO-DOI-v0.6.0](https://doi.org/ZENODO-DOI-v0.6.0):
+- **[v0.6.0](https://github.com/jonhanke/elementary-number-theory-lean/releases/tag/v0.6.0)** (Lean v4.36.0-rc2, Mathlib `1b1ccf4`), archived on Zenodo as [doi:10.5281/zenodo.24353817](https://doi.org/10.5281/zenodo.24353817):
   Theorems 7 and 8 of Ireland–Rosen 18 as identities of $`L`$-functions (including Theorem 8 at 2 for
   $`D \equiv 16 \pmod{64}`$), the formulas for $`r_{18}(n)`$ and $`r_{20}(n)`$, Dirichlet series of Hardy–Wright,
   Chapter 17, and the supplement to cubic reciprocity for every primary prime (see
