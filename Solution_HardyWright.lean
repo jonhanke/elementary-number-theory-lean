@@ -14,6 +14,8 @@ import NTKB.Elementary.HardyWright.SumsOfSquares.Theta.EightSquares
 import NTKB.Elementary.HardyWright.SumsOfSquares.Theta.SixSquares
 import NTKB.Elementary.HardyWright.SumsOfSquares.Theta.TwelveSquares
 import NTKB.Elementary.HardyWright.SumsOfSquares.Theta.TenSquares
+import NTKB.Elementary.HardyWright.SumsOfSquares.Theta.FourteenSquares
+import NTKB.Elementary.HardyWright.SumsOfSquares.Theta.SixteenSquares
 
 /-!
 # Proofs of the Hardy–Wright headline statements
@@ -89,5 +91,26 @@ theorem liouville_ten_squares {n : ℕ} (hn : 0 < n) :
             (fun v : ℤ × ℤ => v.1 ^ 2 + v.2 ^ 2 = n),
           (v.1 ^ 4 - 6 * v.1 ^ 2 * v.2 ^ 2 + v.2 ^ 4) :=
   NTKB.HardyWright.liouvilleTenSquares n hn
+
+theorem glaisher_fourteen_squares :
+    ∃ a : ℕ → ℤ, (∀ q : ℂ, ‖q‖ < 1 →
+        HasSum (fun n => (a n : ℂ) * q ^ n) (q * ∏' m : ℕ, (1 - q ^ (2 * (m + 1))) ^ 12)) ∧
+      ∀ n : ℕ, 0 < n → 61 * (NTKB.HardyWright.sumSquaresCount 14 n : ℤ) =
+        4 * (64 * ∑ d ∈ n.divisors, (ZMod.χ₄ ((n / d : ℕ) : ZMod 4) : ℤ) * (d : ℤ) ^ 6 -
+          ∑ d ∈ n.divisors, (ZMod.χ₄ (d : ZMod 4) : ℤ) * (d : ℤ) ^ 6) +
+        1456 * ∑ i ∈ Finset.range (n + 1), (NTKB.HardyWright.sumSquaresCount 2 i : ℤ) * a (n - i) :=
+  ⟨NTKB.HardyWright.TwelveSquares.etaTwelveCoeff,
+    fun _ hq => NTKB.HardyWright.TwelveSquares.hasSum_etaTwelveCoeff hq,
+    fun n hn => NTKB.HardyWright.glaisherFourteenSquares n hn⟩
+
+theorem glaisher_sixteen_squares :
+    ∃ a : ℕ → ℤ, (∀ q : ℂ, ‖q‖ < 1 →
+        HasSum (fun n => (a n : ℂ) * q ^ n) (q * ∏' m : ℕ, (1 - q ^ (2 * (m + 1))) ^ 12)) ∧
+      ∀ n : ℕ, 0 < n → 17 * (NTKB.HardyWright.sumSquaresCount 16 n : ℤ) =
+        32 * ∑ d ∈ n.divisors, (-1) ^ (n + d) * (d : ℤ) ^ 7 +
+        512 * ∑ i ∈ Finset.range (n + 1), (NTKB.HardyWright.sumSquaresCount 4 i : ℤ) * a (n - i) :=
+  ⟨NTKB.HardyWright.TwelveSquares.etaTwelveCoeff,
+    fun _ hq => NTKB.HardyWright.TwelveSquares.hasSum_etaTwelveCoeff hq,
+    fun n hn => NTKB.HardyWright.glaisherSixteenSquares n hn⟩
 
 end NTKB.Headlines.HardyWright
