@@ -30,6 +30,39 @@ elementary-number-theory-lean.
   [PrimeNumberTheoremAnd](https://github.com/AlexKontorovich/PrimeNumberTheoremAnd) already have and what this library
   adds. This library depends on Mathlib only.
 
+## What's new in 0.6.0
+
+- **A note on sources.** The source books were not available to the work of this release (copies are being
+  obtained again through a university library). The new statements were therefore checked against this project's
+  own earlier book maps and statements, not re-read against the books. All proofs are machine-checked by the Lean
+  kernel. A check of the new statements against the books is planned once the library copies are in hand.
+- **Theorems 7 and 8 of Ireland–Rosen, Chapter 18, as identities of $`L`$-functions:** for $`y^2 = x^3 - c^4Dx`$
+  ($`D`$ fourth-power free) and $`y^2 = x^3 + c^6D`$ ($`D`$ sixth-power free), $`L(E, s) = L(s, \chi)`$ as Dirichlet
+  series. The left side is Mathlib's $`L`$-function of the curve, the Euler product over all primes, the bad ones
+  included. Every coefficient agrees: $`4a_E(n) = \sum_{N(\alpha) = n}\chi(\alpha)`$ over $`\mathbb Z[i]`$, and
+  $`6a_E(n) = \sum_{N(\alpha) = n}\chi(\alpha)`$ over $`\mathbb Z[\omega]`$. The proof checks that both sides satisfy
+  the same recursion at every prime. This closes the restriction of 0.5.0 at $`p = 2`$, $`D \equiv 16 \pmod{64}`$.
+  For these $`D`$ the curve has good reduction at 2, and the identity holds with the exact Euler factor
+  $`1/(1 + 2\cdot 4^{-s})`$ at 2, which is the factor of a character with value $`-2`$ on the ideal $`(2)`$. That
+  character is given by its values in the identity; it is not constructed as a Hecke character. Theorem 6 (the
+  analytic continuation of $`L(s, \chi)`$) is still stated only (see [Known restrictions](#known-restrictions)).
+- **Sums of eighteen and twenty squares** (beyond Hardy–Wright, § 20.13): $`r_{18}(n)`$ and $`r_{20}(n)`$ as an
+  Eisenstein part plus two cusp forms each. For weight 9 these are $`\theta^6\eta^{12}`$ and
+  $`\sum_{x, y}(x + iy)^8q^{x^2 + y^2}`$; for weight 10 they are $`\theta^8\eta^{12}`$ and $`\theta^2`$ times the latter.
+  The cusp spaces have dimension 2. The proof uses modular forms of level one, as for $`r_6`$ to $`r_{16}`$.
+- **Dirichlet series and special values** (Hardy–Wright, Chapter 17; Ireland–Rosen, Chapter 9):
+  - the formal Euler product of a multiplicative function (Theorem 285);
+  - $`\zeta(s-1)/\zeta(s) = \sum\varphi(n)n^{-s}`$ and $`\zeta(s)\zeta(s-1) = \sum\sigma(n)n^{-s}`$ (Theorems 288 and 290);
+  - $`\zeta(s)^k = \sum d_k(n)n^{-s}`$ (Theorem 299);
+  - $`\zeta(s)^2/\zeta(2s) = \sum 2^{\omega(n)}n^{-s}`$ (Theorem 301);
+  - the supplement to cubic reciprocity, $`\chi_\pi(1 - \omega) = \omega^{2m}`$, for every primary prime
+    $`\pi = a + b\omega`$ with $`a = 3m - 1`$. Until 0.5.0 only the rational primes were covered.
+- **Four new headline statements** (three of Ireland–Rosen, one of Hardy–Wright; marked "new in 0.6.0" below). The 49
+  headlines of 0.1.0 to 0.5.0 are unchanged, which makes 53 in all. Maps: Hardy–Wright 632 results (295 proved, 14 in
+  part, 1 conditional; was 630, 288, 14, 1), Ireland–Rosen 415 (176 proved, 7 in part, 2 conditional; was 174, 8, 2).
+- Not published: the library's historical formalizations (results from Dickson's *History* and Gauss's
+  *Disquisitiones*) are not part of this release, as before.
+
 ## What's new in 0.5.0
 
 - **Theorems 7 and 8 of Ireland–Rosen, Chapter 18, at every prime:** for $`y^2 = x^3 - c^4Dx`$ ($`D`$ fourth-power
@@ -106,8 +139,8 @@ elementary-number-theory-lean.
 
 | book | rows | proved | proved in part | conditional | in Mathlib | other | proved here, also elsewhere |
 |---|---|---|---|---|---|---|---|
-| [G. H. Hardy and E. M. Wright, *An Introduction to the Theory of Numbers* (6th ed., 2008)](docs/results/books/hardy-wright.md) | 630 | 288 | 14 | 1 | 178 | 149 | 79 |
-| [K. Ireland and M. Rosen, *A Classical Introduction to Modern Number Theory* (2nd ed., 1990), Chapters 1–11, 15, 16 and the results of Chapter 13 §1 and Chapters 17 and 18 proved here](docs/results/books/ireland-rosen.md) | 415 | 174 | 8 | 2 | 178 | 53 | 67 |
+| [G. H. Hardy and E. M. Wright, *An Introduction to the Theory of Numbers* (6th ed., 2008)](docs/results/books/hardy-wright.md) | 632 | 295 | 14 | 1 | 178 | 144 | 84 |
+| [K. Ireland and M. Rosen, *A Classical Introduction to Modern Number Theory* (2nd ed., 1990), Chapters 1–11, 15, 16 and the results of Chapter 13 §1 and Chapters 17 and 18 proved here](docs/results/books/ireland-rosen.md) | 415 | 176 | 7 | 2 | 178 | 52 | 68 |
 | [I. Niven, H. S. Zuckerman and H. L. Montgomery, *An Introduction to the Theory of Numbers* (5th ed., 1991)](docs/results/books/niven-zuckerman-montgomery.md) | 406 | 194 | 4 | 0 | 191 | 17 | 84 |
 | [Special values of Dirichlet $L$-functions and Gauss's sign of quadratic Gauss sums](docs/results/books/special-values.md) | 25 | 25 | 0 | 0 | 0 | 0 | 3 |
 
@@ -177,6 +210,14 @@ a human** (see Provenance).
   Proved by the level-one method of
   $`r_{10}`$ and $`r_{12}`$. The constants are the library's own derivation (see
   [Known restrictions](#known-restrictions)). Related: neither Mathlib nor Tau Ceti has these counts.
+- **The eighteen-square formula** (new in 0.6.0, beyond the book): for $`n \ge 1`$,
+  $`1385r_{18}(n) = 4\big(\sum_{d \mid n}\chi(d)d^8 + 256\sum_{d \mid n}\chi(n/d)d^8\big) + 48960c_{18}(n) - 32c_8(n)`$.
+  Here $`c_{18}(n) = \sum_{i \le n}r_6(i)a(n-i)`$ are the coefficients of $`\theta^6\eta^{12}`$, and
+  $`c_8(n) = \sum_{x^2 + y^2 = n}\operatorname{Re}(x + iy)^8`$ are those of $`\sum_{x, y}(x + iy)^8q^{x^2+y^2}`$. These
+  are the two cusp forms of weight 9 that span the cusp space (`eighteen_squares`). The library also proves
+  $`31r_{20}(n) = 8\sum_{d \mid n}(-1)^{n+d+n/d+1}d^9 + 1296c_{20}(n) - 16c'_{20}(n)`$
+  (`NTKB.HardyWright.twentySquaresFormula`, not a headline). The constants are the library's own derivation (see
+  [Known restrictions](#known-restrictions)). Related: neither Mathlib nor Tau Ceti has these counts.
 
 **Ireland and Rosen, *A Classical Introduction to Modern Number Theory*** ([`Challenge_IrelandRosen.lean`](Challenge_IrelandRosen.lean))
 
@@ -243,10 +284,21 @@ a human** (see Provenance).
   $`p`$ ($`\chi`$ the Hecke character of $`D`$): $`1`$ for $`p \mid 2D`$, and the split and inert factors above
   (`hecke_character_quartic_curve_every_prime`); the same for $`y^2 = x^3 + c^6D`$ with $`D`$ sixth-power free
   (`hecke_character_cubic_curve_every_prime`), except at $`p = 2`$ for $`D \equiv 16 \pmod{64}`$, where the curve has
-  good reduction and the local polynomial is $`1 + 2X^2`$ while the book's character vanishes at 2 (see
-  [Known restrictions](#known-restrictions)). The book compares the good primes only. Related: Tau Ceti now has general
-  facts on the local polynomial (its value at a prime of additive reduction); neither Mathlib nor Tau Ceti links it to
-  a Hecke character.
+  good reduction and the local polynomial is $`1 + 2X^2`$ while the book's character vanishes at 2 (the identity with
+  the exact factor at 2 is new in 0.6.0, next item). The book compares the good primes only. Related: Tau Ceti now
+  has general facts on the local polynomial (its value at a prime of additive reduction); neither Mathlib nor Tau Ceti
+  links it to a Hecke character.
+- **Theorems 7 and 8: $`L(E, s) = L(s, \chi)`$** (new in 0.6.0): for $`y^2 = x^3 - c^4Dx`$ ($`D`$ fourth-power free,
+  $`c \ne 0`$) and every $`n`$, $`4a_E(n) = \sum_{\alpha \in \mathbb Z[i],\, N(\alpha) = n}\chi(\alpha)`$, with
+  $`a_E(n)`$ the coefficients of Mathlib's `WeierstrassCurve.LFunction` (the Euler product over all primes)
+  (`hecke_L_function_quartic_curve`). The same holds for $`y^2 = x^3 + c^6D`$ ($`D`$ sixth-power free,
+  $`D \not\equiv 16 \pmod{64}`$) with $`6a_E(n)`$ and a sum over $`\mathbb Z[\omega]`$ (`hecke_L_function_cubic_curve`).
+  For $`D \equiv 16 \pmod{64}`$ the identity holds with the Euler factor $`1/(1 + 2\cdot 4^{-s})`$ at 2: for odd
+  $`m`$, $`6a_E(4^jm) = (-2)^j\sum_{N(\alpha) = m}\chi(\alpha)`$ and $`a_E(2\cdot 4^jm) = 0`$
+  (`hecke_L_function_cubic_curve_sixteen`). The right sides are 4 (resp. 6) times the coefficients of
+  $`\sum_A\chi(A)N(A)^{-s}`$ over the ideals. Related: Mathlib has the $`L`$-function of a curve over $`\mathbb Q`$
+  and Hecke $`L`$-functions; Tau Ceti has Hecke characters and the zeta function of a curve over a finite field;
+  neither links the two.
 - **Integral points on $`y^2 = x^3 - d`$** (new in 0.4.0; Proposition 17.10.2): for squarefree $`d > 1`$ with
   $`d \equiv 1, 2 \pmod 4`$ and $`3`$ not dividing the class number of $`\mathbb Q(\sqrt{-d})`$, the equation has an
   integral solution if and only if $`d = 3t^2 \pm 1`$ for an integer $`t`$ (`mordell_class_number`), by the book's
@@ -384,17 +436,15 @@ Liouville's formula for $`r_{10}(n)`$, stated only in 0.4.0, is proved in 0.4.1 
 Results of the books that the library proves only in part, or under a hypothesis that the book does not make. Each
 is marked in the book maps.
 
-- **Ireland–Rosen, Chapter 18, Theorems 7 and 8 (headlines):** since 0.5.0 the Euler factors of $`L(E, s)`$ and
-  $`L(s, \chi)`$ agree at every prime, with one exception: for $`y^2 = x^3 + c^6D`$ at $`p = 2`$ with
-  $`D \equiv 16 \pmod{64}`$ (for example $`D = -432`$, the curve $`x^3 + y^3 = 1`$) the curve has good reduction and
-  the local polynomial is $`1 + 2X^2`$, the Euler factor of a character with $`\chi((2)) = -2`$, while the book's
-  character, defined modulo $`12D`$, vanishes at 2 (the book compares the good primes only). The identity of the
-  $`L`$-functions as Dirichlet series (a sum over the ideals of $`\mathbb Z[i]`$, resp. $`\mathbb Z[\omega]`$) is not
-  assembled from the Euler factors. Theorem 6 of the same section (the analytic continuation of $`L(s, \chi)`$) is
-  not proved.
-- **Sums of fourteen and sixteen squares (headlines, beyond the books):** the formulas were derived by the library's
-  authors from the theta series (and checked numerically for $`n \le 59`$ before being proved); they have not been
-  compared with Grosswald, *Representations of Integers as Sums of Squares* (1985), Chapter 9.
+- **Ireland–Rosen, Chapter 18, Theorem 6** (the analytic continuation of $`L(s, \chi)`$ for the characters of
+  Theorems 7 and 8): stated only, as the named statements `NTKB.IrelandRosen.CM.HeckeLEntireQuartic` and
+  `NTKB.IrelandRosen.CM.HeckeLEntireSextic`, which are assumed nowhere. Theorems 7 and 8 are proved as identities of
+  Dirichlet series (since 0.6.0), and they do not depend on Theorem 6.
+- **Sums of fourteen to twenty squares (headlines for $`r_{14}`$, $`r_{16}`$, $`r_{18}`$, beyond the books):** the
+  shapes and constants were derived by the library's authors from the theta series. They were checked by computer
+  ($`n \le 59`$ for $`r_{14}`$ and $`r_{16}`$, $`n \le 70`$ for $`r_{18}`$ and $`r_{20}`$) before being proved. They have
+  not been compared with Grosswald, *Representations of Integers as Sums of Squares* (1985), Chapter 9, which may
+  write them with other cusp forms.
 - **Hardy–Wright, § 25.2:** the maps $`[i]`$ and $`[\rho]`$ are endomorphisms with the stated relations; that the
   endomorphism rings are exactly $`\mathbb Z[i]`$ and $`\mathbb Z[\rho]`$ (stated without proof in the book) is not
   formalized.
@@ -404,9 +454,8 @@ is marked in the book maps.
 - **Ireland–Rosen, Proposition 17.10.2 (headline):** the library proves the answer $`d = 3t^2 + 1`$ or
   $`d = 3t^2 - 1`$, which the book's proof gives ($`d = 2`$ needs the second form: $`5^2 = 3^3 - 2`$); whether the
   printed statement has both signs was not rechecked against the book.
-- **Ireland–Rosen, Chapter 9, Theorem 1' (the supplement to cubic reciprocity):** proved in the rational case, the
-  case the book proves; the case of a general primary prime (the book's Exercises 24 to 26 of Chapter 9) is not
-  formalized.
+- **Statements new in 0.6.0:** checked against this project's earlier book maps and statements, not re-read against
+  the books (see [What's new in 0.6.0](#whats-new-in-060)).
 
 ## Layout
 
@@ -462,11 +511,11 @@ lake env lean scripts/check_axioms.lean          # axioms of the headline theore
                                                  # NivenZuckermanMontgomery, SpecialValues
 ```
 
-Mathlib comes prebuilt from its cache; this library is built from source (375 modules, about 99,500 lines; no file
+Mathlib comes prebuilt from its cache; this library is built from source (400 modules, about 106,400 lines; no file
 imports all of Mathlib, so only the Mathlib modules it needs are loaded). On 8 cores and 31 GB (2026-11-18), with
-Mathlib's cache in place, `lake build` took about 9 minutes, with at most 7.7 GB of memory in use and a largest
+Mathlib's cache in place, `lake build` took about 10 minutes, with at most 7.6 GB of memory in use and a largest
 single Lean process of 7.1 GB. Each `lake comparator` check (one book: build, export, and the Lean, NanoDa and
-con-ron kernels) took 4 to 14 minutes, with at most 8.1 GB in use and a largest single process of at most 5.3 GB
+con-ron kernels) took 4 to 14 minutes, with at most 8.5 GB in use and a largest single process of at most 5.4 GB
 (`con-ron`).
 
 ## Provenance
@@ -475,7 +524,7 @@ NTKB was written by AI, with Claude Code (Anthropic): almost entirely by Claude 
 Sonnet 5.5, in October and November 2026. Jonathan Hanke designed and directed it: he chose the books, the results,
 the conventions and the proof routes. The files under `NTKB/Port/` and the files of `NTKB/Elementary/SpecialValues/`
 that say so in their headers contain code ported from Tau Ceti (by the Tau Ceti contributors, Apache 2.0). The proofs
-are checked by the Lean kernel, and CI checks that the headline theorems use only the standard axioms. The 45
+are checked by the Lean kernel, and CI checks that the headline theorems use only the standard axioms. The 53
 headline statements of this release in the `Challenge_<book>.lean` files, and the definitions they use, have **not
 yet been reviewed** by a human; that review is planned for a later release. `lake comparator` checks that each
 `Solution_<book>.lean` proves exactly the statements of its `Challenge_<book>.lean`. The rest of the library (its
@@ -526,11 +575,21 @@ Releases are tagged with semantic versions; `main` continues to develop. The DOI
   headlines of 0.1.0 to 0.4.1 unchanged; maps: Hardy–Wright 630 results (288 proved, 14 in part, 1
   conditional), Ireland–Rosen 415 (174 proved, 8 in part, 2 conditional). The comparator check stays one per book (four, run as a
   matrix in CI); no file imports all of Mathlib.
+- **[v0.6.0](https://github.com/jonhanke/elementary-number-theory-lean/releases/tag/v0.6.0)** (Lean v4.36.0-rc2, Mathlib `1b1ccf4`), archived on Zenodo as [doi:ZENODO-DOI-v0.6.0](https://doi.org/ZENODO-DOI-v0.6.0):
+  Theorems 7 and 8 of Ireland–Rosen 18 as identities of $`L`$-functions (including Theorem 8 at 2 for
+  $`D \equiv 16 \pmod{64}`$), the formulas for $`r_{18}(n)`$ and $`r_{20}(n)`$, Dirichlet series of Hardy–Wright,
+  Chapter 17, and the supplement to cubic reciprocity for every primary prime (see
+  [What's new in 0.6.0](#whats-new-in-060)). The source books were not available to this round's work, so the new
+  statements were checked against the project's own earlier maps and statements rather than re-read against the
+  books; all proofs are machine-checked, and a check against the books is planned. 4 new headline statements
+  (Ireland–Rosen 3, Hardy–Wright 1), the 49 headlines of 0.1.0 to 0.5.0 unchanged; maps: Hardy–Wright 632 results
+  (295 proved, 14 in part, 1 conditional), Ireland–Rosen 415 (176 proved, 7 in part, 2 conditional). The comparator
+  check stays one per book (four, run as a matrix in CI); no file imports all of Mathlib.
 
 **Not in this release** (planned for later releases): Chapters 12, 14, 19 and 20 of Ireland–Rosen and the rest of
 Chapter 13 (algebraic number theory, the Stickelberger relation and Eisenstein reciprocity, the arithmetic of
-elliptic curves), and the results of Chapters 17 and 18 not proved here (Theorem 6 of Chapter 18; Propositions 17.9.1
-and 17.10.1 are conditional). The analytic books (Apostol, Davenport) are in the
+elliptic curves), and the results of Chapters 17 and 18 not proved here (Theorem 6 of Chapter 18 is stated only;
+Propositions 17.9.1 and 17.10.1 are conditional). The analytic books (Apostol, Davenport) are in the
 separate library analytic-number-theory-lean. The library's historical formalizations (results from Dickson's
 *History of the Theory of Numbers* and Gauss's *Disquisitiones Arithmeticae*) are a separate Lean
 library and are not published in this repository.

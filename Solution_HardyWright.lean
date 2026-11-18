@@ -16,6 +16,7 @@ import NTKB.Elementary.HardyWright.SumsOfSquares.Theta.TwelveSquares
 import NTKB.Elementary.HardyWright.SumsOfSquares.Theta.TenSquares
 import NTKB.Elementary.HardyWright.SumsOfSquares.Theta.FourteenSquares
 import NTKB.Elementary.HardyWright.SumsOfSquares.Theta.SixteenSquares
+import NTKB.Elementary.HardyWright.SumsOfSquares.Theta.EighteenSquares
 
 /-!
 # Proofs of the Hardy–Wright headline statements
@@ -112,5 +113,19 @@ theorem glaisher_sixteen_squares :
   ⟨NTKB.HardyWright.TwelveSquares.etaTwelveCoeff,
     fun _ hq => NTKB.HardyWright.TwelveSquares.hasSum_etaTwelveCoeff hq,
     fun n hn => NTKB.HardyWright.glaisherSixteenSquares n hn⟩
+
+theorem eighteen_squares :
+    ∃ a : ℕ → ℤ, (∀ q : ℂ, ‖q‖ < 1 →
+        HasSum (fun n => (a n : ℂ) * q ^ n) (q * ∏' m : ℕ, (1 - q ^ (2 * (m + 1))) ^ 12)) ∧
+      ∀ n : ℕ, 0 < n → 1385 * (NTKB.HardyWright.sumSquaresCount 18 n : ℤ) =
+        4 * (∑ d ∈ n.divisors, (ZMod.χ₄ (d : ZMod 4) : ℤ) * (d : ℤ) ^ 8 +
+          256 * ∑ d ∈ n.divisors, (ZMod.χ₄ ((n / d : ℕ) : ZMod 4) : ℤ) * (d : ℤ) ^ 8) +
+        48960 * ∑ i ∈ Finset.range (n + 1), (NTKB.HardyWright.sumSquaresCount 6 i : ℤ) * a (n - i) -
+        32 * ∑ v ∈ (Finset.Icc (-(n : ℤ)) n ×ˢ Finset.Icc (-(n : ℤ)) n).filter
+            (fun v : ℤ × ℤ => v.1 ^ 2 + v.2 ^ 2 = n),
+          (v.1 ^ 8 - 28 * v.1 ^ 6 * v.2 ^ 2 + 70 * v.1 ^ 4 * v.2 ^ 4 - 28 * v.1 ^ 2 * v.2 ^ 6 + v.2 ^ 8) :=
+  ⟨NTKB.HardyWright.TwelveSquares.etaTwelveCoeff,
+    fun _ hq => NTKB.HardyWright.TwelveSquares.hasSum_etaTwelveCoeff hq,
+    fun n hn => NTKB.HardyWright.eighteenSquaresFormula n hn⟩
 
 end NTKB.Headlines.HardyWright

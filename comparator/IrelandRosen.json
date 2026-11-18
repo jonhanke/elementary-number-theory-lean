@@ -22,7 +22,10 @@
     "NTKB.Headlines.IrelandRosen.infinite_points_mordell",
     "NTKB.Headlines.IrelandRosen.infinite_points_sum_cubes",
     "NTKB.Headlines.IrelandRosen.hecke_character_quartic_curve_every_prime",
-    "NTKB.Headlines.IrelandRosen.hecke_character_cubic_curve_every_prime"
+    "NTKB.Headlines.IrelandRosen.hecke_character_cubic_curve_every_prime",
+    "NTKB.Headlines.IrelandRosen.hecke_L_function_quartic_curve",
+    "NTKB.Headlines.IrelandRosen.hecke_L_function_cubic_curve",
+    "NTKB.Headlines.IrelandRosen.hecke_L_function_cubic_curve_sixteen"
   ],
   "definition_names": [],
   "permitted_axioms": [
