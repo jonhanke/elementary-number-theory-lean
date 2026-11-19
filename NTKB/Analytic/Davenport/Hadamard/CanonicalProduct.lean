@@ -69,7 +69,10 @@ lemma norm_weierstrassFactorOne_sub_one_le {w : ℂ} (hw : ‖w‖ ≤ 1) :
         · exact Complex.norm_exp_sub_one_le hw
     _ = 3 * ‖w‖ ^ 2 := by ring
 
-/-- The canonical product of genus one with zeros `a i`: `∏' i, (1 - z / a i) e^{z / a i}`. -/
+/-- The canonical product of genus one with zeros `a i`: `∏' i, (1 - z / a i) e^{z / a i}`.
+  **Restriction:** the product converges under hypotheses on the zeros not enforced by the type (e.g. $\sum_i
+  |a_i|^{-2} < \infty$); where it is not multipliable the value is $1$ by Lean's `tprod` convention, not the intended
+  value. -/
 noncomputable def canonicalProductOne {ι : Type*} (a : ι → ℂ) (z : ℂ) : ℂ :=
   ∏' i, weierstrassFactorOne (z / a i)
 

@@ -32,7 +32,10 @@ open EightSquares (mdiff_of_eqOn coe_TS denom_TS)
 open SixSquares (chiZ chiZ_neg chiZ_of_even chiZ_add_four_mul norm_ite_chiZ_le vmEquiv
   vecMul_SL_inv isOpen_strip)
 
-/-- `L_w(τ) = ∑_{v ∈ ℤ²} w(v) (v₀ τ + v₁)⁻⁹`. -/
+/-- `L_w(τ) = ∑_{v ∈ ℤ²} w(v) (v₀ τ + v₁)⁻⁹`.
+  **Restriction:** the lattice sum converges absolutely when the weight `w` is bounded (a hypothesis not enforced by
+  the type; see `summable_Lsum9`); where it does not converge the value is $0$ by Lean's `tsum` convention, not the
+  intended value. -/
 def Lsum9 (w : (Fin 2 → ℤ) → ℂ) (z : ℍ) : ℂ := ∑' v, w v * eisSummand 9 v z
 
 lemma summable_Lsum9 {w : (Fin 2 → ℤ) → ℂ} {B : ℝ} (hw : ∀ v, ‖w v‖ ≤ B) (z : ℍ) :

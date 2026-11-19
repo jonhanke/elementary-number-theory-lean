@@ -95,7 +95,10 @@ section Thm349
 
 variable {x a : ℂ}
 
-/-- `S_J(a) = ∑_{m ≥ 0} (ax)^m [J+m, m]_x`. -/
+/-- `S_J(a) = ∑_{m ≥ 0} (ax)^m [J+m, m]_x`.
+  **Restriction:** the series converges for $|x| < 1$ and $|a x| < 1$ (hypotheses not enforced by the type; see
+  `summable_eulerS`); where it does not converge the value is $0$ by Lean's `tsum` convention, not an analytic
+  continuation or the intended value. -/
 noncomputable def eulerS (x a : ℂ) (J : ℕ) : ℂ := ∑' m : ℕ, (a * x) ^ m * qBinom x (J + m) m
 
 theorem summable_eulerS (hx : ‖x‖ < 1) (ha : ‖a * x‖ < 1) (J : ℕ) :

@@ -30,7 +30,9 @@ open EightSquares (mdiff_of_eqOn coe_S_smul coe_T_zpow_smul coe_TS_smul ne_zero'
 
 /-! ### The oct form `C₈` and its laws -/
 
-/-- `C(τ) = ∑_{(m, n) ∈ ℤ²} (m + in)⁸ e^{πiτ(m² + n²)}`. -/
+/-- `C(τ) = ∑_{(m, n) ∈ ℤ²} (m + in)⁸ e^{πiτ(m² + n²)}`.
+  **Restriction:** the lattice sum converges (absolutely) only for $\operatorname{Im}\tau > 0$; elsewhere the value
+  is $0$ by Lean's `tsum` convention, not an analytic continuation or the intended value. -/
 def octC (τ : ℂ) : ℂ :=
   ∑' v : ℤ × ℤ, ((v.1 : ℂ) + I * v.2) ^ 8 * cexp (π * I * τ * ((v.1 : ℂ) ^ 2 + (v.2 : ℂ) ^ 2))
 

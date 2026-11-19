@@ -58,7 +58,10 @@ lemma norm_ite_chiZ_le (p : Prop) [Decidable p] (n : ℤ) : ‖(if p then chiZ n
 
 /-! ### Lattice sums -/
 
-/-- `L_w(τ) = ∑_{v ∈ ℤ²} w(v) (v₀ τ + v₁)⁻³`. -/
+/-- `L_w(τ) = ∑_{v ∈ ℤ²} w(v) (v₀ τ + v₁)⁻³`.
+  **Restriction:** the lattice sum converges absolutely when the weight `w` is bounded (a hypothesis not enforced by
+  the type; see `summable_Lsum`); where it does not converge the value is $0$ by Lean's `tsum` convention, not the
+  intended value. -/
 def Lsum (w : (Fin 2 → ℤ) → ℂ) (z : ℍ) : ℂ := ∑' v, w v * eisSummand 3 v z
 
 lemma summable_Lsum {w : (Fin 2 → ℤ) → ℂ} {B : ℝ} (hw : ∀ v, ‖w v‖ ≤ B) (z : ℍ) :

@@ -181,7 +181,9 @@ lemma row_odd (z : ℍ) (k : ℕ) : row z (2 * (k : ℤ) + 1) =
 
 /-! ### The expansion -/
 
-/-- `O(q) = ∑_{k ≥ 0} ∑_r r⁷ q^{r(2k+1)}`. -/
+/-- `O(q) = ∑_{k ≥ 0} ∑_r r⁷ q^{r(2k+1)}`.
+  **Restriction:** the series is the mathematical object only where it converges (absolutely, for $|q| < 1$);
+  elsewhere the value is $0$ by Lean's `tsum` convention, not an analytic continuation or the intended value. -/
 def seriesO (q : ℂ) : ℂ := ∑' k : ℕ, ∑' r : ℕ, (r : ℂ) ^ 7 * q ^ (r * (2 * k + 1))
 
 /-- `E(q) = ∑_{k ≥ 0} ∑_r (-1)^r r⁷ q^{2r(k+1)}`. -/

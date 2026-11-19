@@ -31,7 +31,9 @@ namespace NTKB.IrelandRosen
 
 open Filter Topology ArithmeticFunction
 
-/-- `∑_{p ∈ S, p prime} p^(-s)`. -/
+/-- `∑_{p ∈ S, p prime} p^(-s)`.
+  **Restriction:** the sum converges for $s > 1$ (for every `S`); for $s \le 1$ it generally diverges (e.g. when `S`
+  contains all primes), and then the value is $0$ by Lean's `tsum` convention, not the intended value. -/
 noncomputable def primeSum (S : Set ℕ) (s : ℝ) : ℝ :=
   ∑' p : {p : ℕ // p.Prime ∧ p ∈ S}, ((p : ℕ) : ℝ) ^ (-s)
 

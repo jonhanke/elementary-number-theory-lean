@@ -29,7 +29,10 @@ open SixSquares (vmEquiv vecMul_SL_inv isOpen_strip)
 
 /-! ### Lattice sums of weight `6` -/
 
-/-- `L_w(τ) = ∑_{v ∈ ℤ²} w(v) (v₀ τ + v₁)⁻⁶`. -/
+/-- `L_w(τ) = ∑_{v ∈ ℤ²} w(v) (v₀ τ + v₁)⁻⁶`.
+  **Restriction:** the lattice sum converges absolutely when the weight `w` is bounded (a hypothesis not enforced by
+  the type; see `summable_Lsum6`); where it does not converge the value is $0$ by Lean's `tsum` convention, not the
+  intended value. -/
 def Lsum6 (w : (Fin 2 → ℤ) → ℂ) (z : ℍ) : ℂ := ∑' v, w v * eisSummand 6 v z
 
 lemma summable_Lsum6 {w : (Fin 2 → ℤ) → ℂ} {B : ℝ} (hw : ∀ v, ‖w v‖ ≤ B) (z : ℍ) :

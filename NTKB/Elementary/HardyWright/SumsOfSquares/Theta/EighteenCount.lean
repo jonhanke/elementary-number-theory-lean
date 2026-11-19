@@ -51,7 +51,9 @@ lemma etaTwelveCoeff_three : etaTwelveCoeff 3 = -12 := by
 
 end TwelveSquares
 
-/-- `A(x) = ∑_{k ≥ 1} ∑_{r ≥ 0} χ(r) r⁸ x^{rk}`. -/
+/-- `A(x) = ∑_{k ≥ 1} ∑_{r ≥ 0} χ(r) r⁸ x^{rk}`.
+  **Restriction:** the series is the mathematical object only where it converges (absolutely, for $|x| < 1$);
+  elsewhere the value is $0$ by Lean's `tsum` convention, not an analytic continuation or the intended value. -/
 noncomputable def eighteenSeriesA (x : ℝ) : ℝ :=
   ∑' k : ℕ, ∑' r : ℕ, chi4R r * (r : ℝ) ^ 8 * x ^ (r * (k + 1))
 
@@ -59,7 +61,9 @@ noncomputable def eighteenSeriesA (x : ℝ) : ℝ :=
 noncomputable def eighteenSeriesB (x : ℝ) : ℝ :=
   ∑' m : ℕ, chi4R (m + 1) * ∑' r : ℕ, (r : ℝ) ^ 8 * x ^ (r * (m + 1))
 
-/-- The generating series of the coefficients `c₈(n)`. -/
+/-- The generating series of the coefficients `c₈(n)`.
+  **Restriction:** the series is the mathematical object only where it converges (absolutely, for $|x| < 1$);
+  elsewhere the value is $0$ by Lean's `tsum` convention, not an analytic continuation or the intended value. -/
 noncomputable def octSeriesR (x : ℝ) : ℝ := ∑' n : ℕ, (octicCoeff n : ℝ) * x ^ n
 
 /-- The divisor-sum coefficient `∑_{d ∣ N} χ(d) d⁸`. -/
