@@ -18,7 +18,9 @@ open Finset Filter Topology
 
 namespace NTKB.HardyWright
 
-/-- `O(x) = ∑_{k ≥ 0} ∑_{r ≥ 0} r⁹ x^{r(2k+1)}`. -/
+/-- `O(x) = ∑_{k ≥ 0} ∑_{r ≥ 0} r⁹ x^{r(2k+1)}`.
+  **Restriction:** the series is the mathematical object only where it converges (absolutely, for $|x| < 1$);
+  elsewhere the value is $0$ by Lean's `tsum` convention, not an analytic continuation or the intended value. -/
 noncomputable def twentySeriesO (x : ℝ) : ℝ :=
   ∑' k : ℕ, ∑' r : ℕ, (r : ℝ) ^ 9 * x ^ (r * (2 * k + 1))
 

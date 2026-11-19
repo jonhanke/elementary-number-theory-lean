@@ -220,7 +220,9 @@ lemma row_odd (z : ℍ) (k : ℕ) : row z (2 * (k : ℤ) + 1) =
 
 /-! ### The expansion -/
 
-/-- `A(q) = ∑_{k ≥ 1} ∑_r χ(r) r⁴ q^{rk}`. -/
+/-- `A(q) = ∑_{k ≥ 1} ∑_r χ(r) r⁴ q^{rk}`.
+  **Restriction:** the series is the mathematical object only where it converges (absolutely, for $|q| < 1$);
+  elsewhere the value is $0$ by Lean's `tsum` convention, not an analytic continuation or the intended value. -/
 def seriesA (q : ℂ) : ℂ := ∑' k : ℕ, ∑' r : ℕ, chiZ r * (r : ℂ) ^ 4 * q ^ (r * (k + 1))
 
 /-- `B(q) = ∑_{m ≥ 1 odd} χ(m) ∑_r r⁴ q^{rm}`. -/

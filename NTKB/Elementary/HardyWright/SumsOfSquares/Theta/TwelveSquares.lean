@@ -107,7 +107,9 @@ lemma seriesE_ofReal (x : ℝ) : seriesE (x : ℂ) = (twelveSeriesE x : ℂ) := 
   refine tsum_congr fun r => ?_
   push_cast; ring
 
-/-- The real power series `∑ a(n) xⁿ`. -/
+/-- The real power series `∑ a(n) xⁿ`.
+  **Restriction:** the series is the mathematical object only where it converges (absolutely, for $|x| < 1$);
+  elsewhere the value is $0$ by Lean's `tsum` convention, not an analytic continuation or the intended value. -/
 def etaSeriesR (x : ℝ) : ℝ := ∑' n : ℕ, (etaTwelveCoeff n : ℝ) * x ^ n
 
 lemma hasSum_etaSeriesR {x : ℝ} (hx0 : 0 ≤ x) (hx : x < 1) :

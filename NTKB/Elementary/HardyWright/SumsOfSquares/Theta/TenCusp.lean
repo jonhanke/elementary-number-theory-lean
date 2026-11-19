@@ -223,7 +223,9 @@ lemma theta_prod_fe (w₁ w₂ τ : ℂ) (hτ : 0 < τ.im) :
 
 /-! ### The cusp form `C` and its laws -/
 
-/-- `C(τ) = ∑_{(m, n) ∈ ℤ²} (m + in)⁴ e^{πiτ(m² + n²)}`. -/
+/-- `C(τ) = ∑_{(m, n) ∈ ℤ²} (m + in)⁴ e^{πiτ(m² + n²)}`.
+  **Restriction:** the lattice sum converges (absolutely) only for $\operatorname{Im}\tau > 0$; elsewhere the value
+  is $0$ by Lean's `tsum` convention, not an analytic continuation or the intended value. -/
 def cuspC (τ : ℂ) : ℂ :=
   ∑' v : ℤ × ℤ, ((v.1 : ℂ) + I * v.2) ^ 4 * cexp (π * I * τ * ((v.1 : ℂ) ^ 2 + (v.2 : ℂ) ^ 2))
 

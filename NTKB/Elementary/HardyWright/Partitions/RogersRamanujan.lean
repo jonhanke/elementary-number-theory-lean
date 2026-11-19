@@ -83,7 +83,10 @@ theorem hasSum_mul_inv_qPoch (hx : ‖x‖ < 1) {b : ℂ} (hb : ‖b‖ < 1) :
 
 /-! ### The functions `P_r`, `Q_r(a)`, `H_m(a)`, `G(a)` -/
 
-/-- `Q_r(a) = ∏_{s ≥ r} (1 - a x^s)⁻¹`. -/
+/-- `Q_r(a) = ∏_{s ≥ r} (1 - a x^s)⁻¹`.
+  **Restriction:** the product is the mathematical object only where it converges (absolutely, for $|x| < 1$, any
+  `a`); elsewhere the product is $1$ by Lean's `tprod` convention, so the value is $1^{-1} = 1$, not the intended
+  value. -/
 noncomputable def rrQ (x a : ℂ) (r : ℕ) : ℂ := (∏' k : ℕ, (1 - a * x ^ (k + r)))⁻¹
 
 /-- `λ(r) = r(5r+1)/2`. -/
@@ -94,7 +97,10 @@ noncomputable def rrTerm (x : ℂ) (m : ℕ) (a : ℂ) (r : ℕ) : ℂ :=
   (-1) ^ r * a ^ (2 * r) * x ^ (rrLam r - m * r) * (1 - a ^ m * x ^ (2 * m * r)) *
     (qPoch x r)⁻¹ * rrQ x a r
 
-/-- Rogers' function `H_m(a) = ∑_r (-1)^r a^{2r} x^{λ(r) - mr} (1 - a^m x^{2mr}) P_r Q_r(a)`. -/
+/-- Rogers' function `H_m(a) = ∑_r (-1)^r a^{2r} x^{λ(r) - mr} (1 - a^m x^{2mr}) P_r Q_r(a)`.
+  **Restriction:** the series converges (absolutely) for $|x| < 1$, $|a| < 1$ and $m \le 2$ (hypotheses not enforced
+  by the type; see `summable_rrTerm`); where it does not converge the value is $0$ by Lean's `tsum` convention, not
+  an analytic continuation or the intended value. -/
 noncomputable def rrH (x : ℂ) (m : ℕ) (a : ℂ) : ℂ := ∑' r : ℕ, rrTerm x m a r
 
 /-- The solution `G(a) = ∑_s a^s x^{s(s-1)} P_s` of `G(a) = G(ax) + a G(ax²)`. -/

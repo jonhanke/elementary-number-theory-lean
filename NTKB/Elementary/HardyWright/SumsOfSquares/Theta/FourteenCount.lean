@@ -19,7 +19,9 @@ open Finset Filter Topology
 namespace NTKB.HardyWright
 
 
-/-- `A(x) = ∑_{k ≥ 1} ∑_{r ≥ 0} χ(r) r⁶ x^{rk}`. -/
+/-- `A(x) = ∑_{k ≥ 1} ∑_{r ≥ 0} χ(r) r⁶ x^{rk}`.
+  **Restriction:** the series is the mathematical object only where it converges (absolutely, for $|x| < 1$);
+  elsewhere the value is $0$ by Lean's `tsum` convention, not an analytic continuation or the intended value. -/
 noncomputable def fourteenSeriesA (x : ℝ) : ℝ :=
   ∑' k : ℕ, ∑' r : ℕ, chi4R r * (r : ℝ) ^ 6 * x ^ (r * (k + 1))
 
@@ -27,7 +29,9 @@ noncomputable def fourteenSeriesA (x : ℝ) : ℝ :=
 noncomputable def fourteenSeriesB (x : ℝ) : ℝ :=
   ∑' m : ℕ, chi4R (m + 1) * ∑' r : ℕ, (r : ℝ) ^ 6 * x ^ (r * (m + 1))
 
-/-- The generating series of the cusp coefficients. -/
+/-- The generating series of the cusp coefficients.
+  **Restriction:** the series is the mathematical object only where it converges (absolutely, for $|x| < 1$);
+  elsewhere the value is $0$ by Lean's `tsum` convention, not an analytic continuation or the intended value. -/
 noncomputable def cuspFourteenSeries (x : ℝ) : ℝ := ∑' n : ℕ, (cuspFourteenCoeff n : ℝ) * x ^ n
 
 /-- The divisor-sum coefficient `∑_{d ∣ N} χ(d) d⁴`. -/
